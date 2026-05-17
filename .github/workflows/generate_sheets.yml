@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -24,15 +25,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Prepare Assets
+      - name: Prepare HTML and Make Index
         run: |
           mkdir dist
           cp template.html dist/index.html
 
-      - name: Setup Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload Artifact
+      - name: Upload Finished Web Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
