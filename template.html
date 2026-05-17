@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>المنصة العالمية لأتمتة أوراق العمل التكيفية - مدرسة عاطوف الأساسية</title>
+    <title>المنصة الذكية لأوراق العمل التكيفية - مدرسة عاطوف الأساسية</title>
     <style>
         :root {
             --primary-color: #1b5e20;
@@ -112,7 +112,7 @@
             padding: 45px;
             border-radius: 0px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-            border: 1px solid #e0e0e0;
+            border: 1px solid #111;
             margin-top: 20px;
             display: none;
         }
@@ -120,36 +120,27 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px double black;
+            border-bottom: 3px double #000;
             padding-bottom: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
         .header-item { flex: 1; }
-        .header-item.right { text-align: right; font-size: 11pt; line-height: 1.6; }
+        .header-item.right { text-align: right; font-size: 11pt; line-height: 1.6; color: #000; }
         .header-item.center { text-align: center; }
-        .header-item.left { text-align: left; font-size: 11pt; line-height: 1.6; }
-        .main-title { font-size: 20pt; margin: 0 0 5px 0; font-weight: bold; }
-        .sub-title { font-size: 13pt; margin: 0; color: #222; }
+        .header-item.left { text-align: left; font-size: 11pt; line-height: 1.6; color: #000; }
+        .main-title { font-size: 20pt; margin: 0 0 5px 0; font-weight: bold; color: #000; }
+        .sub-title { font-size: 13pt; margin: 0; font-weight: bold; color: #000; }
         .model-badge {
             display: inline-block;
-            border: 2px solid black;
-            padding: 3px 12px;
+            border: 1.5px solid #000;
+            padding: 2px 10px;
             font-weight: bold;
-            margin-top: 5px;
-            font-size: 11pt;
-            border-radius: 4px;
-        }
-        .progression-indicator {
+            margin-top: 6px;
             font-size: 10pt;
-            color: #555;
-            font-style: italic;
-            margin-bottom: 10px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 3px;
+            border-radius: 3px;
         }
         .question-block {
-            margin-bottom: 35px;
+            margin-bottom: 40px;
             page-break-inside: avoid;
         }
         .question-title {
@@ -157,44 +148,46 @@
             font-weight: bold;
             margin-top: 0;
             margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 1px dashed #666;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed #000;
+            color: #000;
         }
         .question-body {
-            font-size: 12pt;
-            line-height: 2;
-            padding-right: 10px;
+            font-size: 13pt;
+            line-height: 2.2;
+            padding-right: 15px;
+            color: #000;
         }
         .shapes-container {
-            font-size: 24pt;
+            font-size: 26pt;
             margin: 15px 0;
-            letter-spacing: 8px;
+            letter-spacing: 12px;
             user-select: none;
         }
         .blank-space {
-            border-bottom: 1.5px dashed black;
-            width: 70px;
+            border-bottom: 1.5px dashed #000;
+            width: 80px;
             display: inline-block;
             text-align: center;
-            height: 22px;
+            height: 24px;
             margin: 0 5px;
             vertical-align: bottom;
         }
         .blank-space-long {
-            border-bottom: 1.5px dashed black;
-            width: 250px;
+            border-bottom: 1.5px dashed #000;
+            width: 280px;
             display: inline-block;
-            height: 22px;
+            height: 24px;
             margin: 0 5px;
             vertical-align: bottom;
         }
         .math-column-form {
             display: inline-block;
             text-align: center;
-            font-size: 14pt;
-            line-height: 1.5;
-            padding: 10px 20px;
-            border: 1px solid #ccc;
+            font-size: 15pt;
+            line-height: 1.6;
+            padding: 12px 24px;
+            border: 1.5px solid #000;
             border-radius: 6px;
             margin: 10px;
         }
@@ -213,8 +206,9 @@
 <body>
 
     <div class="global-container">
+        
         <div class="control-panel">
-            <h2>⚙️ لوحة قيادة المنظومة الرقمية الشاملة (حتى ٢٠ سؤال) - مدرسة عاطوف</h2>
+            <h2>⚙️ محرك التوليد الرياضي المعياري - مدرسة عاطوف الأساسية</h2>
             <div class="panel-grid">
                 <div class="input-group">
                     <label>اسم المدرسة</label>
@@ -225,7 +219,7 @@
                     <input type="text" id="teacherInput" value="محمد وجيه غنام">
                 </div>
                 <div class="input-group">
-                    <label>النموذج (توليد عشوائي موازٍ)</label>
+                    <label>النموذج المتوازن</label>
                     <select id="modelSelector">
                         <option value="أ">نموذج ( أ )</option>
                         <option value="ب">نموذج ( ب )</option>
@@ -244,12 +238,12 @@
                     </select>
                 </div>
                 <div class="input-group">
-                    <label>المبحث / الدرس / التقييم</label>
+                    <label>المبحث والدرس</label>
                     <select id="lessonSelector">
                         </select>
                 </div>
                 <div class="input-group">
-                    <label>عدد الأسئلة المطلوبة (حتى ٢٠ سؤال)</label>
+                    <label>عدد الأسئلة (١ - ٢٠ سؤالاً)</label>
                     <div class="slider-container">
                         <input type="range" id="countSlider" min="1" max="20" value="5" oninput="updateSliderLabel(this.value)">
                         <span class="slider-val" id="sliderLabel">٥</span>
@@ -258,7 +252,7 @@
             </div>
             
             <div class="actions-row">
-                <button class="btn btn-secondary" onclick="generateWorksheet()">⚡ توليد الورقة</button>
+                <button class="btn btn-secondary" onclick="generateWorksheet()">⚡ توليد المتن النظيف</button>
                 <button class="btn btn-primary" onclick="window.print()">🖨️ طباعة فورية</button>
             </div>
         </div>
@@ -285,6 +279,7 @@
             
             <div id="sheetBody"></div>
         </div>
+
     </div>
 
     <script>
@@ -311,7 +306,7 @@
                 name: "الصف الأول الأساسي",
                 directorate: "مديرية التربية والتعليم - طوباس",
                 items: [
-                    { id: "g1_diag", type: "diagnostic", title: "الاختبار التشخيصي الاستكشافي الشامل" },
+                    { id: "g1_diag", type: "diagnostic", title: "الاختبار التشخيصي الاستكشافي" },
                     { id: "g1_u1_d1", type: "lesson", title: "العدد واحد (١)", digit: 1, shape: "🦁" },
                     { id: "g1_u1_d2", type: "lesson", title: "العدد اثنان (٢)", digit: 2, shape: "🍎" },
                     { id: "g1_u1_d3", type: "lesson", title: "العدد ثلاثة (٣)", digit: 3, shape: "⭐" },
@@ -327,10 +322,10 @@
                 name: "الصف الثاني الأساسي",
                 directorate: "مديرية التربية والتعليم - طوباس",
                 items: [
-                    { id: "g2_diag", type: "diagnostic", title: "الاختبار التشخيصي المعياري لبداية العام" },
+                    { id: "g2_diag", type: "diagnostic", title: "الاختبار التشخيصي المعياري" },
                     { id: "g2_u1_d1", type: "lesson", title: "المقارنة والترتيب الرياضي ضمن ٩٩" },
                     { id: "g2_u1_d3", type: "lesson", title: "الأنماط: الأعداد الزوجية والفردية" },
-                    { id: "g2_u1_end", type: "unit_review", title: "تقييم ختامي: الوحدة الأولى (مراجعة وتأسيس ٩٩)" },
+                    { id: "g2_u1_end", type: "unit_review", title: "تقييم ختامي: الوحدة الأولى (مراجعة ٩٩)" },
                     { id: "g2_u2_d1", type: "lesson", title: "الجمع دون حمل ضمن النطاق ٩٩" },
                     { id: "g2_u2_d2", type: "lesson", title: "الطرح دون استلاف الأفقي والعمودي" },
                     { id: "g2_u6_d3", type: "lesson", title: "حقائق جداول الضرب للعدد ٢ والعدد ٣" }
@@ -383,27 +378,23 @@
 
         function buildAlgorithmicQuestion(index, lesson, seed) {
             const arabicIndex = toEasternArabicDigits(index);
-            let title = ""; let body = ""; let tier = "محسوس بَصري";
-            
-            if (index % 3 === 1) tier = "محسوس بَصري وتتبعي";
-            else if (index % 3 === 2) tier = "شبه محسوس - سياق حياتي لفظي";
-            else tier = "مجرد وعملي مباشر";
+            let title = ""; let body = "";
             
             if (lesson.type === "diagnostic") {
                 if (index % 3 === 1) {
                     const count = getRandomIntSeeded(2, 9, seed);
                     const shapes = ["🍎", "🌟", "🎈", "🦋", "🐟", "⭐"][index % 6];
-                    title = `السؤال ${arabicIndex}: [${tier}] عُدّ الأشكال البَصريّة الموضحة واكتُب العَدَد المناسب:`;
+                    title = `السؤال ${arabicIndex}: عُدّ الأشكال البَصريّة الموضحة واكتُب العَدَد المناسب في الفراغ:`;
                     body = `<div class="shapes-container">${shapes.repeat(count)}</div> عَدَدُ العناصر = <span class="blank-space"></span>`;
                 } else if (index % 3 === 2) {
                     const total = getRandomIntSeeded(6, 12, seed);
                     const lost = getRandomIntSeeded(1, 5, seed);
-                    title = `السؤال ${arabicIndex}: [${tier}] حُلّ المسألة الحياتية الاستنتاجية التالية:`;
-                    body = `مَع فَرِيدٍ ${toEasternArabicDigits(total)} كُرَاتٍ، أَعْطَى أَخَاهُ ${toEasternArabicDigits(lost)} كُرَاتٍ. كَمْ كُرَةً تَبَقَّتْ مَعَهُ؟ <br> البَاقِي = <span class="blank-space"></span> كُرَاتٍ.`;
+                    title = `السؤال ${arabicIndex}: حُلّ المسألة الحياتية الاستنتاجية التالية:`;
+                    body = `مَع فَرِيدٍ ${toEasternArabicDigits(total)} كُرَاتٍ زُجَاجِيّة، أَعْطَى أَخَاهُ مِنْهَا ${toEasternArabicDigits(lost)} كُرَاتٍ. كَمْ كُرَةً تَبَقَّتْ مَعَهُ؟ <br> البَاقِي = <span class="blank-space"></span> كُرَاتٍ.`;
                 } else {
                     const n1 = getRandomIntSeeded(2, 7, seed);
                     const n2 = getRandomIntSeeded(1, 4, seed);
-                    title = `السؤال ${arabicIndex}: [${tier}] أوجِد القيمة الرّياضيّة المجرّدة الصّافية:`;
+                    title = `السؤال ${arabicIndex}: أوجِد ناتج العَمَليّات الحسابية الصّافية فوراً:`;
                     body = `<div class="math-column-form">${toEasternArabicDigits(n1)} + ${toEasternArabicDigits(n2)} = <span class="blank-space"></span></div>
                             <div class="math-column-form">${toEasternArabicDigits(n1+n2)} - ${toEasternArabicDigits(n2)} = <span class="blank-space"></span></div>`;
                 }
@@ -412,52 +403,51 @@
                 if (index % 3 === 1) {
                     const v1 = getRandomIntSeeded(10, 99, seed);
                     const v2 = getRandomIntSeeded(10, 99, seed + "x");
-                    title = `السؤال ${arabicIndex}: [${tier}] مصفوفة التقييم والمقارنة (أضع إشارة > ، < ، =):`;
-                    body = `${toEasternArabicDigits(v1)} <span class="blank-space"></span> ${toEasternArabicDigits(v2)} &nbsp;&nbsp;|&nbsp;&nbsp; ${toEasternArabicDigits(v2)} <span class="blank-space"></span> ${toEasternArabicDigits(v2)}`;
+                    title = `السؤال ${arabicIndex}: قارن بين الأعداد بوضع الإشارة المناسبة ( > ، < ، = ):`;
+                    body = `${toEasternArabicDigits(v1)} <span class="blank-space"></span> ${toEasternArabicDigits(v2)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${toEasternArabicDigits(v2)} <span class="blank-space"></span> ${toEasternArabicDigits(v2)}`;
                 } else if (index % 3 === 2) {
                     const amt = getRandomIntSeeded(50, 99, seed);
                     const cost = getRandomIntSeeded(15, 45, seed);
-                    title = `السؤال ${arabicIndex}: [${tier}] سياق لفظي مالي من واقع بيئة الطالب:`;
-                    body = `اشْتَرَتْ المَدرَسَة جَوَائِزَ بِـ ${toEasternArabicDigits(cost)} دِينَاراً، وَكَانَ مَعَ المُعَلِّمِ ${toEasternArabicDigits(amt)} دِينَاراً. كَمْ دِينَاراً بَقِيَ؟ <br> الحَلّ = <span class="blank-space-long"></span>`;
+                    title = `السؤال ${arabicIndex}: حُلّ المسألة اللفظية التالية واكتب خطوات الحل:`;
+                    body = `اشْتَرَتْ المَدرَسَة جَوَائِزَ لِلطُّلابِ بِـ ${toEasternArabicDigits(cost)} دِينَاراً، وَكَانَ فِي الصُّنْدُوقِ ${toEasternArabicDigits(amt)} دِينَاراً. كَمْ دِينَاراً بَقِيَ؟ <br> الحَلّ = <span class="blank-space-long"></span>`;
                 } else {
                     const start = getRandomIntSeeded(10, 80, seed);
-                    title = `السؤال ${arabicIndex}: [${tier}] أكملِ النّمطَ العَدَدي المُنظّم:`;
-                    body = `${toEasternArabicDigits(start)} ، ${toEasternArabicDigits(start+5)} ، <span class="blank-space"></span> ، <span class="blank-space"></span>`;
+                    title = `السؤال ${arabicIndex}: تتبّع الأعداد المكتوبة ثمّ أكملِ النّمطَ العَدَدي المُنظّم في الفراغ:`;
+                    body = `${toEasternArabicDigits(start)} ، ${toEasternArabicDigits(start+5)} ، <span class="blank-space"></span> ، <span class="blank-space"></span> ، ${toEasternArabicDigits(start+20)}`;
                 }
             }
             else {
                 if (lesson.digit !== undefined) {
                     if (index % 3 === 1) {
-                        title = `السؤال ${arabicIndex}: [${tier}] تتبّع العَدَد البَصري الحقيقي واكتُب الرّمز المشرقي:`;
+                        title = `السؤال ${arabicIndex}: عُدّ العَنَاصِر البصريّة التالية ثمّ اكتُب الرّمز العَدَدي المناسب:`;
                         body = `<div class="shapes-container">${lesson.shape.repeat(lesson.digit || 1)}</div> عَدَدُ العَنَاصِر = <span class="blank-space"></span>`;
                     } else if (index % 3 === 2) {
-                        title = `السؤال ${arabicIndex}: [${tier}] ارسُم عَنَاصِر تُمثّل العَدَد المَطلُوب:`;
-                        body = `المَطلُوب رَسْم العَدَد [ <b>${toEasternArabicDigits(lesson.digit)}</b> ] دَاخِلَ الحَيّز: <br><br> [ ........................................................................................ ]`;
+                        title = `السؤال ${arabicIndex}: ارسُم عَنَاصِر دائرية أو هندسية تُمثّل العَدَد المَطلُوب بدقّة:`;
+                        body = `المَطلُوب رَسْم العَدَد [ <b>${toEasternArabicDigits(lesson.digit)}</b> ] دَاخِلَ الصّندوق النّظيف التالي: <br><br> [ ........................................................................................ ]`;
                     } else {
-                        title = `السؤال ${arabicIndex}: [${tier}] اكتبِ الرَّمز المجرَّد [ ${toEasternArabicDigits(lesson.digit)} ] بِخَطّ سَلِيم:`;
+                        title = `السؤال ${arabicIndex}: تدرّب واكتبِ الرَّمز المجرَّد [ ${toEasternArabicDigits(lesson.digit)} ] بِخَطّ سَلِيم وَمُرتَّب:`;
                         body = `<p style="font-size:16pt; letter-spacing:30px; text-align:center;">${toEasternArabicDigits(lesson.digit)} ${toEasternArabicDigits(lesson.digit)} ${toEasternArabicDigits(lesson.digit)}</p>`;
                     }
                 } else {
                     if (index % 3 === 1) {
                         const baseVal = getRandomIntSeeded(15, 95, seed);
-                        title = `السؤال ${arabicIndex}: [${tier}] التحليل المفهومي لِمنزِلَتَي الآحَاد وَالعَشَرَات:`;
-                        body = `العَدَد [ <b>${toEasternArabicDigits(baseVal)}</b> ] يَتَكوَّن حتماً مِن: <span class="blank-space"></span> آحَاد وَ <span class="blank-space"></span> عَشَرَات.`;
+                        title = `السؤال ${arabicIndex}: حلّل العَدَد التّالي وبيّن مكوّناتِهِ من مَنازِلِ الآحَاد وَالعَشَرَات:`;
+                        body = `العَدَد [ <b>${toEasternArabicDigits(baseVal)}</b> ] يَتَكوَّن مِن: <span class="blank-space"></span> آحَاد وَ <span class="blank-space"></span> عَشَرَات.`;
                     } else if (index % 3 === 2) {
                         const item1 = getRandomIntSeeded(3, 7, seed);
                         const item2 = getRandomIntSeeded(2, 6, seed + "b");
-                        title = `السؤال ${arabicIndex}: [${tier}] مَسألة سياقية لفظية من وحي المنهج:`;
-                        body = `غَرَسَ طُلابُ الصَّفِّ ${toEasternArabicDigits(item1)} أشجارٍ، ثُمَّ غَرَسُوا ${toEasternArabicDigits(item2)} أُخْرَى. مَا عَدَدُ الأَشْجَارِ كُلِّهَا؟ <br> المَجْمُوع = <span class="blank-space"></span> أورادٍ.`;
+                        title = `السؤال ${arabicIndex}: اقرأ المَسألة السياقية التّالية بتمعّن then أوجِد النّاتِج:`;
+                        body = `غَرَسَ طُلابُ الصَّفِّ ${toEasternArabicDigits(item1)} أَشْجَارٍ فِي الحَدِيقَةِ، ثُمَّ غَرَسُوا ${toEasternArabicDigits(item2)} أَشْجَارٍ أُخْرَى. مَا عَدَدُ الأَشْجَارِ كُلِّهَا؟ <br> المَجْمُوع الكُلِّي = <span class="blank-space"></span> أَشْجَارٍ.`;
                     } else {
                         const valA = getRandomIntSeeded(2, 5, seed);
                         const valB = getRandomIntSeeded(2, 4, seed + "c");
-                        title = `السؤال ${arabicIndex}: [${tier}] الحساب المجرّد للعمليات القياسية:`;
+                        title = `السؤال ${arabicIndex}: أوجِد نَاتِج العَمَليّات الحسابيّة المجرّدة التّالية:`;
                         body = `<div class="math-column-form">${toEasternArabicDigits(valA)} × ${toEasternArabicDigits(valB)} = <span class="blank-space"></span></div>
                                 <div class="math-column-form">${toEasternArabicDigits(valA*valB)} ÷ ${toEasternArabicDigits(valB)} = <span class="blank-space"></span></div>`;
                     }
                 }
             }
             return `<div class="question-block">
-                <div class="progression-indicator">المستوى التربوي: ${tier}</div>
                 <div class="question-title">${title}</div>
                 <div class="question-body">${body}</div>
             </div>`;
