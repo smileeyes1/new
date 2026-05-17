@@ -2,17 +2,36 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title }}</title>
+    <title>منظومة أتمتة أوراق العمل المعتمدة</title>
     <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; direction: rtl; background: #f4f7f6; color: black; margin: 0; padding: 20px; }
+        
+        /* لوحة تحكم المعلم - تختفي تلقائياً عند الطباعة */
+        .control-panel { background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); max-width: 800px; margin: 0 auto 30px auto; border: 2px solid #a3e2c9; text-align: center; }
+        .control-panel h2 { color: #2e7d32; margin-top: 0; }
+        select { font-size: 14pt; padding: 10px 20px; border-radius: 8px; border: 2px solid #ccc; width: 80%; max-width: 400px; outline: none; margin-bottom: 15px; }
+        .print-btn { background: #2e7d32; color: white; border: none; padding: 10px 25px; font-size: 14pt; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .print-btn:hover { background: #1b5e20; }
+
+        /* إعدادات ورقة العمل والطباعة */
+        .sheet-container { background: white; max-width: 800px; margin: 0 auto; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); display: none; }
         @page { size: A4; margin: 15mm; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; direction: rtl; background: white; color: black; margin: 0; padding: 0; font-size: 14pt; line-height: 1.6; }
+        
+        /* إخفاء لوحة التحكم أثناء الطباعة الفورية */
+        @media print {
+            body { background: white; padding: 0; }
+            .control-panel { display: none; }
+            .sheet-container { display: block; box-shadow: none; margin: 0; padding: 0; max-width: 100%; }
+        }
+
+        /* تنسيق الترويسة الهندسية المدمجة */
         .flex-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px double black; padding-bottom: 8px; margin-bottom: 30px; }
         .header-item { flex: 1; }
         .header-item.right { text-align: right; font-size: 11pt; }
         .header-item.center { text-align: center; }
         .header-item.left { text-align: left; font-size: 11pt; }
         h1 { font-size: 18pt; margin: 0 0 5px 0; }
-        h2 { font-size: 14pt; margin: 0; font-weight: normal; }
+        h2.sheet-title { font-size: 14pt; margin: 0; font-weight: normal; }
         .content-section { margin-top: 10px; }
         .question-box { margin-bottom: 30px; page-break-inside: avoid; }
         h3 { font-size: 15pt; margin-bottom: 15px; color: #111; }
@@ -23,24 +42,102 @@
     </style>
 </head>
 <body>
-    <div class="flex-header">
-        <div class="header-item right">
-            <div>وزارة التربية والتعليم</div>
-            <div>مديرية التربية والتعليم - طوباس</div>
-            <div>مدرسة عاطوف الأساسية المختلطة</div>
-        </div>
-        <div class="header-item center">
-            <h1>مبحث الرياضيات</h1>
-            <h2>ورقة عمل: {{ title }}</h2>
-        </div>
-        <div class="header-item left">
-            <div>الاسم: .......................................</div>
-            <div>الصف: الأساسي</div>
-            <div>التاريخ: .... / .... / ٢٠٢٦م</div>
-        </div>
+
+    <div class="control-panel">
+        <h2>🛠️ بوابة المعلم الذكية لإنتاج أوراق العمل</h2>
+        <p>اختر الدرس المعتمد من المنهاج لتوليد ورقة العمل فوراً وجاهزة للطباعة:</p>
+        <select id="lessonSelector" onchange="loadLesson()">
+            <option value="">-- اختر الدرس من هنا --</option>
+            <option value="p1_numbers_to_5">الصف الأول: الأعداد من (١) إلى (٥)</option>
+            <option value="p1_components_to_9">الصف الأول: مكونات الأعداد ضمن العدد ٩</option>
+            <option value="p1_addition_to_9">الصف الأول: الجمع ضمن العدد ٩</option>
+            <option value="p1_subtraction_to_9">الصف الأول: الطرح ضمن العدد ٩</option>
+            <option value="p1_addition_10">الصف الأول: الجمع بالإكمال إلى العدد ١٠</option>
+            <option value="p2_numbers_to_99">الصف الثاني: الأعداد ضمن العدد ٩٩</option>
+            <option value="p2_addition_with_carrying">الصف الثاني: الجمع مع الحمل</option>
+            <option value="p2_subtraction_with_borrowing">الصف الثاني: الطرح مع الاستلاف</option>
+            <option value="p2_multiplication">الصف الثاني: مفهوم وجداول الضرب</option>
+        </select>
+        <br>
+        <button class="print-btn" onclick="window.print()">🖨️ طباعة ورقة العمل الحالية</button>
     </div>
-    <div class="content-section">
-        {{ content }}
+
+    <div class="sheet-container" id="sheetContainer">
+        <div class="flex-header">
+            <div class="header-item right">
+                <div>وزارة التربية والتعليم</div>
+                <div>مديرية التربية والتعليم - طوباس</div>
+                <div>مدرسة عاطوف الأساسية المختلطة</div>
+            </div>
+            <div class="header-item center">
+                <h1>مبحث الرياضيات</h1>
+                <h2 class="sheet-title" id="sheetTitle">ورقة عمل</h2>
+            </div>
+            <div class="header-item left">
+                <div>الاسم: .......................................</div>
+                <div>الصف: الأساسي</div>
+                <div>التاريخ: .... / .... / ٢٠٢٦م</div>
+            </div>
+        </div>
+        <div class="content-section" id="sheetContent"></div>
     </div>
+
+    <script>
+        // محرك البحث والحقن الذكي المباشر في المتصفح دون تعقيدات
+        const lessonsData = {
+            "p1_numbers_to_5": {
+                title: "الأعداد من (١) إلى (٥)",
+                content: `<div class="question-box"><h3>السؤال الأول: أعدّ العناصر وأكتب العدد المناسب في الفراغ:</h3><div style="font-size: 20pt; margin: 15px 0;">🍎 🍎 🍎 👈 العدد: <span class="clean-input"></span></div><div style="font-size: 20pt; margin: 15px 0;">🎈 🎈 🎈 🎈 🎈 👈 العدد: <span class="clean-input"></span></div></div><div class="question-box"><h3>السؤال الثاني: أرسم دوائر داخل الصندوق بحسب العدد المطلوب:</h3><p> العدد (٤): [ .................................... ] </p><p> العدد (٢): [ .................................... ] </p></div>`
+            },
+            "p1_components_to_9": {
+                title: "مكونات الأعداد ضمن العدد ٩",
+                content: `<div class="question-box"><h3>السؤال الأول: ألاحظ الأشكال الملونة ثم أكمل مكونات العدد ٥:</h3><div style="font-size: 20pt; margin: 10px 0;">🔴 🔴 | 🔵 🔵 🔵</div><p>العدد ٥ يتكون من: ٢ و <span class="clean-input"></span></p></div><div class="question-box"><h3>السؤال الثاني: حل المسألة اللفظية التالية:</h3><p>في الحديقة ٦ عصافير، طار منها عصفوران. كم عصفوراً بقي على الشجرة؟</p><p>الحل: ٦ يتكون من ٢ و <span class="clean-input"></span></p></div>`
+            },
+            "p1_addition_to_9": {
+                title: "الجمع ضمن العدد ٩",
+                content: `<div class="question-box"><h3>السؤال الأول: أجد ناتج الجمع مستعيناً بالرسومات:</h3><div style="font-size: 18pt; margin: 10px 0;">(⭐ ⭐ ⭐) + (⭐ ⭐) = <span class="clean-input"></span></div></div><div class="question-box"><h3>السؤال الثاني: كم يصبح المجموع الكلي؟</h3><p>مع الفارس كرم ٤ قلمات، وأعطاه والده ٣ قلمات أخرى. كم قلماً أصبح معه?</p><p>الحل: ٤ + ٣ = <span class="clean-input"></span> قلمات.</p></div>`
+            },
+            "p1_subtraction_to_9": {
+                title: "الطرح ضمن العدد ٩",
+                content: `<div class="question-box"><h3>السؤال الأول: أعدّ العناصر المتبقية بعد الشطب وأكتب الناتج:</h3><div style="font-size: 18pt; margin: 10px 0;">🍎 🍎 🍎 <span style="text-decoration: line-through; color: red;">🍎 🍎</span> 👈 ٣ - ٢ = <span class="clean-input"></span></div></div>`
+            },
+            "p1_addition_10": {
+                title: "الجمع بالإكمال إلى العدد ١٠",
+                content: `<div class="question-box"><h3>السؤال الأول: ألاحظ إطارات العشرة ثم أكمل الفراغ برسم العناصر المتبقية:</h3><p>المسألة: ٩ + ٦ = <span class="clean-input"></span></p><div class="ten-frame-container"><div class="ten-frame"><div class="cell">🍎</div><div class="cell">🍎</div><div class="cell">🍎</div><div class="cell">🍎</div><div class="cell">🍎</div><div class="cell">🍎</div><div class="cell">🍎</div><div class="cell">🍎</div><div class="cell">🍎</div><div class="cell" style="background:#f9f9f9;"></div></div><div class="ten-frame"><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div></div></div></div>`
+            },
+            "p2_numbers_to_99": {
+                title: "الأعداد ضمن العدد ٩٩ (الآحاد والعشرات)",
+                content: `<div class="question-box"><h3>السؤال الأول: أكتب عدد الآحاد وعدد العشرات ممثلة بلوحة المنازل:</h3><p> [ 🪵 🪵 🪵 ]  [ 📦 📦 ] 👈 الآحاد: <span class="clean-input"></span> العشرات: <span class="clean-input"></span></p></div>`
+            },
+            "p2_addition_with_carrying": {
+                title: "الجمع مع إعادة التجميع (الحمل)",
+                content: `<div class="question-box"><h3>السؤال الأول: أحل المسألة العمودية التالية مع توضيح الحمل:</h3><p style="font-size: 16pt; letter-spacing: 5px;">  (١)<br>  ٤ ٦<br>+ ٢ ٥<br>-------<br>  <span class="clean-input"></span></p></div>`
+            },
+            "p2_subtraction_with_borrowing": {
+                title: "الطرح مع الاستلاف ضمن العدد ٩٩",
+                content: `<div class="question-box"><h3>السؤال الأول: أجد ناتج الطرح العمودي بعد الاستلاف:</h3><p style="font-size: 16pt; letter-spacing: 5px;">  (١٢) (٤)<br>   ٥  ٢<br>-  ٢  ٤<br>-------<br>   <span class="clean-input"></span></p></div>`
+            },
+            "p2_multiplication": {
+                title: "مفهوم الضرب وجداول الضرب",
+                content: `<div class="question-box"><h3>السؤال الأول: أحول الجمع المتكرر إلى عملية ضرب مستعيناً بالمجموعات:</h3><div style="font-size: 18pt; margin: 10px 0;">(🍒 🍒) + (🍒 🍒) + (🍒 🍒)</div><p>عدد المجموعات: <span class="clean-input"></span> × عدد العناصر: <span class="clean-input"></span> = <span class="clean-input"></span></p></div>`
+            }
+        };
+
+        function loadLesson() {
+            const selector = document.getElementById("lessonSelector");
+            const container = document.getElementById("sheetContainer");
+            const titleElem = document.getElementById("sheetTitle");
+            const contentElem = document.getElementById("sheetContent");
+            
+            if(selector.value && lessonsData[selector.value]) {
+                const lesson = lessonsData[selector.value];
+                titleElem.innerText = "ورقة عمل: " + lesson.title;
+                contentElem.innerHTML = lesson.content;
+                container.style.display = "block";
+            } else {
+                container.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
