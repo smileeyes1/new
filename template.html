@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>المنظومة الرقمية الشاملة لأتمتة أوراق العمل التكيفية - مدرسة عاطوف الأساسية</title>
+    <title>المنظومة الرقمية لأتمتة أوراق العمل التكيفية - مدرسة عاطوف الأساسية</title>
     <style>
         :root {
             --primary-color: #1b5e20;
@@ -265,7 +265,7 @@
                     <div id="outSchool">مدرسة: .........................</div>
                 </div>
                 <div class="header-item center">
-                    <div class="main-title">مبحث الرياضيات المطور</div>
+                    <div class="main-title">مبحث الرياضيات</div>
                     <div class="sub-title" id="outLessonTitle">ورقة عمل منظمة</div>
                     <span class="model-badge" id="outModel">نموذج: أ</span>
                 </div>
@@ -306,51 +306,51 @@
                 name: "الصف الأول الأساسي",
                 directorate: "مديرية التربية والتعليم - طوباس",
                 items: [
-                    { id: "g1_diag", type: "diagnostic", title: "الاختبار التشخيصي المعياري الشامل لبداية العام" },
-                    { id: "g1_u1_d1", type: "lesson", title: "الوحدة ١: الأعداد (١، ٢، ٣)", digit: 2, shape: "🍎" },
-                    { id: "g1_u1_d2", type: "lesson", title: "الوحدة ١: الأعداد (٤، ٥، ٦)", digit: 5, shape: "⭐" },
-                    { id: "g1_u1_d3", type: "lesson", title: "الوحدة ١: الأعداد (٧، ٨، ٩)", digit: 8, shape: "🦋" },
-                    { id: "g1_u1_d4", type: "lesson", title: "الوحدة ١: عدد الصفر (٠) ومفهوم الخلو", digit: 0, shape: "⚪" },
-                    { id: "g1_u1_d5", type: "comparison", title: "الوحدة ١: مقارنة الأعداد ضمن ٩ (أكبر، أصغر، يساوي)" },
-                    { id: "g1_u1_d6", type: "ordering", title: "الوحدة ١: الترتيب التصاعدي والتنازلي ضمن ٩" },
-                    { id: "g1_u1_end", type: "unit_review", title: "تقييم ختامي شامل: الوحدة الأولى كاملة" },
-                    { id: "g1_u2_d1", type: "lesson", title: "الوحدة ٢: مفهوم الجمع البصري ضمن العدد ٩" },
-                    { id: "g1_u2_d2", type: "lesson", title: "الوحدة ٢: مكونات الأعداد (مكونات الأعداد من ٢ إلى ٩)" },
-                    { id: "g1_u2_d3", type: "lesson", title: "الوحدة ٢: مفهوم الطرح بالشطب والمحسوس" },
-                    { id: "g1_u2_d4", type: "lesson", title: "الوحدة ٢: العلاقة المتبادلة بين الجمع والطرح" },
-                    { id: "g1_u2_end", type: "unit_review", title: "تقييم ختامي شامل: الوحدة الثانية كاملة" },
-                    { id: "g1_u3_d1", type: "lesson", title: "الوحدة ٣: الأعداد ضمن النطاق (١٠ إلى ٢٠)", digit: 14, shape: "🎈" },
-                    { id: "g1_u3_d2", type: "lesson", title: "الوحدة ٣: قراءة وكتابة الأعداد حتى ٢٠ وتمثيلها" },
-                    { id: "g1_u3_d3", type: "comparison", title: "الوحدة ٣: مقارنة وترتيب الأعداد ضمن ٢٠" },
-                    { id: "g1_u3_end", type: "unit_review", title: "تقييم ختامي شامل: الوحدة الثالثة كاملة" },
-                    { id: "g1_u4_d1", type: "lesson", title: "الوحدة ٤: الجمع دون حمل ضمن النطاق ٢٠" },
-                    { id: "g1_u4_d2", type: "lesson", title: "الوحدة ٤: الطرح دون استلاف ضمن النطاق ٢٠" },
-                    { id: "g1_u4_end", type: "unit_review", title: "تقييم ختامي شامل: الوحدة الرابعة كاملة" }
+                    { id: "g1_diag", type: "diagnostic", minVal: 1, maxVal: 9, title: "الاختبار التشخيصي المعياري الشامل لبداية العام" },
+                    { id: "g1_u1_d1", type: "lesson", rangeType: "fixed_range", minVal: 1, maxVal: 3, title: "الوحدة ١: الأعداد (١، ٢، ٣)", digit: 2, shape: "🍎" },
+                    { id: "g1_u1_d2", type: "lesson", rangeType: "fixed_range", minVal: 4, maxVal: 6, title: "الوحدة ١: الأعداد (٤، ٥، ٦)", digit: 5, shape: "⭐" },
+                    { id: "g1_u1_d3", type: "lesson", rangeType: "fixed_range", minVal: 7, maxVal: 9, title: "الوحدة ١: الأعداد (٧، ٨، ٩)", digit: 8, shape: "🦋" },
+                    { id: "g1_u1_d4", type: "lesson", rangeType: "fixed_range", minVal: 0, maxVal: 0, title: "الوحدة ١: عدد الصفر (٠) ومفهوم الخلو", digit: 0, shape: "⚪" },
+                    { id: "g1_u1_d5", type: "comparison", minVal: 0, maxVal: 9, title: "الوحدة ١: مقارنة الأعداد ضمن ٩ (أكبر، أصغر، يساوي)" },
+                    { id: "g1_u1_d6", type: "ordering", minVal: 0, maxVal: 9, title: "الوحدة ١: الترتيب التصاعدي والتنازلي ضمن ٩" },
+                    { id: "g1_u1_end", type: "unit_review", minVal: 0, maxVal: 9, title: "تقييم ختامي شامل: الوحدة الأولى كاملة" },
+                    { id: "g1_u2_d1", type: "operation_add", minVal: 1, maxVal: 9, title: "الوحدة ٢: مفهوم الجمع البصري ضمن العدد ٩" },
+                    { id: "g1_u2_d2", type: "components", minVal: 2, maxVal: 9, title: "الوحدة ٢: مكونات الأعداد (مكونات الأعداد من ٢ إلى ٩)" },
+                    { id: "g1_u2_d3", type: "operation_sub", minVal: 1, maxVal: 9, title: "الوحدة ٢: مفهوم الطرح بالشطب والمحسوس" },
+                    { id: "g1_u2_d4", type: "operation_mixed", minVal: 1, maxVal: 9, title: "الوحدة ٢: العلاقة المتبادلة بين الجمع والطرح" },
+                    { id: "g1_u2_end", type: "unit_review", minVal: 0, maxVal: 9, title: "تقييم ختامي شامل: الوحدة الثانية كاملة" },
+                    { id: "g1_u3_d1", type: "lesson", rangeType: "fixed_range", minVal: 10, maxVal: 20, title: "الوحدة ٣: الأعداد ضمن النطاق (١٠ إلى ٢٠)", digit: 14, shape: "🎈" },
+                    { id: "g1_u3_d2", type: "lesson", rangeType: "fixed_range", minVal: 10, maxVal: 20, title: "الوحدة ٣: قراءة وكتابة الأعداد حتى ٢٠ وتمثيلها" },
+                    { id: "g1_u3_d3", type: "comparison", minVal: 10, maxVal: 20, title: "الوحدة ٣: مقارنة وترتيب الأعداد ضمن ٢٠" },
+                    { id: "g1_u3_end", type: "unit_review", minVal: 10, maxVal: 20, title: "تقييم ختامي شامل: الوحدة الثالثة كاملة" },
+                    { id: "g1_u4_d1", type: "operation_add", minVal: 10, maxVal: 20, title: "الوحدة ٤: الجمع دون حمل ضمن النطاق ٢٠" },
+                    { id: "g1_u4_d2", type: "operation_sub", minVal: 10, maxVal: 20, title: "الوحدة ٤: الطرح دون استلاف ضمن النطاق ٢٠" },
+                    { id: "g1_u4_end", type: "unit_review", minVal: 10, maxVal: 20, title: "تقييم ختامي شامل: الوحدة الرابعة كاملة" }
                 ]
             },
             grade2: {
                 name: "الصف الثاني الأساسي",
                 directorate: "مديرية التربية والتعليم - طوباس",
                 items: [
-                    { id: "g2_diag", type: "diagnostic", title: "الاختبار التشخيصي المعياري الشامل لبداية العام" },
-                    { id: "g2_u1_d1", type: "lesson", title: "الوحدة ١: مراجعة وتأسيس الأعداد ضمن النطاق ٩٩" },
-                    { id: "g2_u1_d2", type: "comparison", title: "الوحدة ١: المقارنة والترتيب الرياضي ضمن ٩٩" },
-                    { id: "g2_u1_d3", type: "pattern", title: "الوحدة ١: الأنماط العددية (الأعداد الزوجية والفردية)" },
-                    { id: "g2_u1_end", type: "unit_review", title: "تقييم ختامي شامل: الوحدة الأولى كاملة" },
-                    { id: "g2_u2_d1", type: "lesson", title: "الوحدة ٢: الجمع دون حمل (أفقي وعمودي) ضمن ٩٩" },
-                    { id: "g2_u2_d2", type: "lesson", title: "الوحدة ٢: الجمع مع الحمل ضمن النطاق ٩٩" },
-                    { id: "g2_u2_d3", type: "lesson", title: "الوحدة ٢: الطرح دون استلاف (أفقي وعمودي) ضمن ٩٩" },
-                    { id: "g2_u2_d4", type: "lesson", title: "الوحدة ٢: الطرح مع الاستلاف ضمن النطاق ٩٩" },
-                    { id: "g2_u2_end", type: "unit_review", title: "تقييم ختامي شامل: العمليات الحسابية ضمن ٩٩" },
-                    { id: "g2_u3_d1", type: "lesson", title: "الوحدة ٣: الأعداد وضمن النطاق الشامل ٩٩٩" },
-                    { id: "g2_u3_d2", type: "comparison", title: "الوحدة ٣: القيمة المنزلية والمقارنة ضمن ٩٩٩" },
-                    { id: "g2_u3_end", type: "unit_review", title: "تقييم ختامي شامل: وحدة الأعداد ضمن ٩٩٩" },
-                    { id: "g2_u6_d1", type: "lesson", title: "الوحدة ٦: مفهوم الضرب كجمع متكرر بَصري" },
-                    { id: "g2_u6_d2", type: "lesson", title: "الوحدة ٦: حقائق جدول الضرب للعدد (٢)" },
-                    { id: "g2_u6_d3", type: "lesson", title: "الوحدة ٦: حقائق جدول الضرب للعدد (٣)" },
-                    { id: "g2_u6_d4", type: "lesson", title: "الوحدة ٦: حقائق جدول الضرب للعدد (٤)" },
-                    { id: "g2_u6_d5", type: "lesson", title: "الوحدة ٦: حقائق جدول الضرب للعدد (٥)" },
-                    { id: "g2_u6_end", type: "unit_review", title: "تقييم ختامي شامل: محرك جداول الضرب كاملة" }
+                    { id: "g2_diag", type: "diagnostic", minVal: 10, maxVal: 99, title: "الاختبار التشخيصي المعياري الشامل لبداية العام" },
+                    { id: "g2_u1_d1", type: "lesson", rangeType: "fixed_range", minVal: 10, maxVal: 99, title: "الوحدة ١: مراجعة وتأسيس الأعداد ضمن النطاق ٩٩" },
+                    { id: "g2_u1_d2", type: "comparison", minVal: 10, maxVal: 99, title: "الوحدة ١: المقارنة والترتيب الرياضي ضمن ٩٩" },
+                    { id: "g2_u1_d3", type: "pattern", minVal: 10, maxVal: 99, title: "الوحدة ١: الأنماط العددية (الأعداد الزوجية والفردية)" },
+                    { id: "g2_u1_end", type: "unit_review", minVal: 10, maxVal: 99, title: "تقييم ختامي شامل: الوحدة الأولى كاملة" },
+                    { id: "g2_u2_d1", type: "operation_add", minVal: 10, maxVal: 99, title: "الوحدة ٢: الجمع دون حمل (أفقي وعمودي) ضمن ٩٩" },
+                    { id: "g2_u2_d2", type: "operation_add_carry", minVal: 10, maxVal: 99, title: "الوحدة ٢: الجمع مع الحمل ضمن النطاق ٩٩" },
+                    { id: "g2_u2_d3", type: "operation_sub", minVal: 10, maxVal: 99, title: "الوحدة ٢: الطرح دون استلاف (أفقي وعمودي) ضمن ٩٩" },
+                    { id: "g2_u2_d4", type: "operation_sub_borrow", minVal: 10, maxVal: 99, title: "الوحدة ٢: الطرح مع الاستلاف ضمن النطاق ٩٩" },
+                    { id: "g2_u2_end", type: "unit_review", minVal: 10, maxVal: 99, title: "تقييم ختامي شامل: العمليات الحسابية ضمن ٩٩" },
+                    { id: "g2_u3_d1", type: "lesson", rangeType: "fixed_range", minVal: 100, maxVal: 999, title: "الوحدة ٣: الأعداد وضمن النطاق الشامل ٩٩٩" },
+                    { id: "g2_u3_d2", type: "comparison", minVal: 100, maxVal: 999, title: "الوحدة ٣: القيمة المنزلية والمقارنة ضمن ٩٩٩" },
+                    { id: "g2_u3_end", type: "unit_review", minVal: 100, maxVal: 999, title: "تقييم ختامي شامل: وحدة الأعداد ضمن ٩٩٩" },
+                    { id: "g2_u6_d1", type: "mul_concept", minVal: 2, maxVal: 5, title: "الوحدة ٦: مفهوم الضرب كجمع متكرر بَصري" },
+                    { id: "g2_u6_d2", type: "mul_table", factor: 2, title: "الوحدة ٦: حقائق جدول الضرب للعدد (٢)" },
+                    { id: "g2_u6_d3", type: "mul_table", factor: 3, title: "الوحدة ٦: حقائق جدول الضرب للعدد (٣)" },
+                    { id: "g2_u6_d4", type: "mul_table", factor: 4, title: "الوحدة ٦: حقائق جدول الضرب للعدد (٤)" },
+                    { id: "g2_u6_d5", type: "mul_table", factor: 5, title: "الوحدة ٦: حقائق جدول الضرب للعدد (٥)" },
+                    { id: "g2_u6_end", type: "unit_review", minVal: 2, maxVal: 5, title: "تقييم ختامي شامل: محرك جداول الضرب كاملة" }
                 ]
             }
         };
@@ -362,7 +362,7 @@
             curriculumRepository[grade].items.forEach(item => {
                 const opt = document.createElement("option");
                 opt.value = item.id;
-                opt.text = (item.type === "diagnostic" ? "🔍 " : item.type === "unit_review" ? "🏆 " : "📝 ") + item.title;
+                opt.text = (item.type.includes("diag") ? "🔍 " : item.type.includes("review") ? "🏆 " : "📝 ") + item.title;
                 lessonSelect.appendChild(opt);
             });
         }
@@ -403,71 +403,71 @@
             let title = ""; let body = "";
             const mode = index % 3;
 
-            if (lesson.type === "diagnostic") {
-                if (mode === 1) {
-                    const count = getRandomIntSeeded(3, 9, seed);
-                    const shapes = ["🍎", "🌟", "🎈", "🦋", "⭐"][index % 5];
-                    title = `السؤال ${arabicIndex}: crystalline عُدّ الأشكال الموضحة أمامك ثمّ اكتب العدد الصحيح في الفراغ:`;
-                    body = `<div class="shapes-container">${shapes.repeat(count)}</div> عَدَدُ العناصر = <span class="blank-space"></span>`;
+            // ١. الأنماط العددية المحصورة للدروس الثابتة نطاقياً
+            if (lesson.rangeType === "fixed_range") {
+                const currentVal = getRandomIntSeeded(lesson.minVal, lesson.maxVal, seed);
+                if (mode === 1 && lesson.shape) {
+                    title = `السؤال ${arabicIndex}: عُدّ الأشكال البصرية الموضحة ثم اكتب العدد المناسب:`;
+                    body = `<div class="shapes-container">${lesson.shape.repeat(currentVal || 1)}</div> عَدَدُ العَنَاصِر = <span class="blank-space"></span>`;
                 } else if (mode === 2) {
-                    const total = getRandomIntSeeded(7, 15, seed);
-                    const lost = getRandomIntSeeded(2, 6, seed);
-                    title = `السؤال ${arabicIndex}: اقرأ المسألة الحياتية التالية بتمعن ثم جد الحل الصحيح:`;
-                    body = `مَع سَامِي ${toEasternArabicDigits(total)} قَلَماً، أَعْطَى صَدِيقَهُ مِنْهَا ${toEasternArabicDigits(lost)} أَقْلَامٍ. كَمْ قَلَماً بَقِيَ مَعَهُ؟ <br> البَاقِي المتبقي = <span class="blank-space"></span> أَقْلَامٍ.`;
+                    title = `السؤال ${arabicIndex}: ارسم عناصر هندسية مبسطة (دوائر أو نجوم) تمثل العدد المطلوب تماماً:`;
+                    body = `المطلوب رسم ما يماثل العدد [ <b>${toEasternArabicDigits(currentVal)}</b> ] داخل الحيز المقابل: <br><br> [ ........................................................................................ ]`;
                 } else {
-                    const n1 = getRandomIntSeeded(3, 6, seed);
-                    const n2 = getRandomIntSeeded(1, 3, seed);
-                    title = `السؤال ${arabicIndex}: جِد ناتج العمليات الحسابية المباشرة التالية بدقة:`;
-                    body = `<div class="math-column-form">${toEasternArabicDigits(n1)} + ${toEasternArabicDigits(n2)} = <span class="blank-space"></span></div>
-                            <div class="math-column-form">${toEasternArabicDigits(n1+n2)} - ${toEasternArabicDigits(n2)} = <span class="blank-space"></span></div>`;
-                }
-            } 
-            else if (lesson.type === "unit_review" || lesson.type === "comparison" || lesson.type === "ordering" || lesson.type === "pattern") {
-                if (mode === 1) {
-                    const v1 = getRandomIntSeeded(10, 99, seed);
-                    const v2 = getRandomIntSeeded(10, 99, seed + "u");
-                    title = `السؤال ${arabicIndex}: قارن بين المقادير العددية التالية بوضع الإشارة المناسبة ( > ، < ، = ):`;
-                    body = `${toEasternArabicDigits(v1)} <span class="blank-space"></span> ${toEasternArabicDigits(v2)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${toEasternArabicDigits(v2)} <span class="blank-space"></span> ${toEasternArabicDigits(v2)}`;
-                } else if (mode === 2) {
-                    const amt = getRandomIntSeeded(60, 99, seed);
-                    const cost = getRandomIntSeeded(20, 50, seed);
-                    title = `السؤال ${arabicIndex}: حل المسألة اللفظية التالية واكتب ناتج الطرح الصحيح في الفراغ:`;
-                    body = `كَانَ مَعَ أَحْمَدَ ${toEasternArabicDigits(amt)} دِينَاراً، اشْتَرَى مِنْهَا حَقِيبَةً بِـ ${toEasternArabicDigits(cost)} دِينَاراً. كَمْ دِينَاراً بَقِيَ مَعَهُ؟ <br> المَبْلَغُ البَاقِي = <span class="blank-space-long"></span>`;
-                } else {
-                    const start = getRandomIntSeeded(20, 70, seed);
-                    title = `السؤال ${arabicIndex}: تتبع القيمة العددية ثم أكمل النمط المنتظم في الفراغات المخصصة:`;
-                    body = `${toEasternArabicDigits(start)} ، ${toEasternArabicDigits(start+5)} ، <span class="blank-space"></span> ، <span class="blank-space"></span> ، ${toEasternArabicDigits(start+20)}`;
+                    title = `السؤال ${arabicIndex}: اكتب الرمز العددي للعدد [ ${toEasternArabicDigits(currentVal)} ] بخط سليم ومكرر ثلاث مرات:`;
+                    body = `<p style="font-size:16pt; letter-spacing:35px; text-align:center;">${toEasternArabicDigits(currentVal)} ${toEasternArabicDigits(currentVal)} ${toEasternArabicDigits(currentVal)}</p>`;
                 }
             }
-            else {
-                if (lesson.digit !== undefined) {
-                    if (mode === 1) {
-                        title = `السؤال ${arabicIndex}: عُدّ الأشكال البصرية الموضحة ثم اكتب الرمز العددي المناسب:`;
-                        body = `<div class="shapes-container">${lesson.shape.repeat(lesson.digit || 1)}</div> عَدَدُ العَنَاصِر = <span class="blank-space"></span>`;
-                    } else if (mode === 2) {
-                        title = `السؤال ${arabicIndex}: ارسم عناصر هندسية مبسطة (دوائر أو نجوم) تمثل العدد المطلوب تماماً:`;
-                        body = `المطلوب رسم ما يماثل العدد [ <b>${toEasternArabicDigits(lesson.digit)}</b> ] داخل الحيز المقابل: <br><br> [ ........................................................................................ ]`;
-                    } else {
-                        title = `السؤال ${arabicIndex}: اكتب الرمز المجرّد للعدد [ ${toEasternArabicDigits(lesson.digit)} ] بخط سليم ومكرر ثلاث مرات:`;
-                        body = `<p style="font-size:16pt; letter-spacing:35px; text-align:center;">${toEasternArabicDigits(lesson.digit)} ${toEasternArabicDigits(lesson.digit)} ${toEasternArabicDigits(lesson.digit)}</p>`;
-                    }
+            // ٢. عمليات الجمع المنضبطة تماماً ضمن النطاق المحدد للدرس دون تخطي
+            else if (lesson.type === "operation_add") {
+                const totalMax = lesson.maxVal;
+                const n1 = getRandomIntSeeded(1, totalMax - 1, seed);
+                const n2 = getRandomIntSeeded(0, totalMax - n1, seed + "add");
+                if (mode === 1) {
+                    title = `السؤال ${arabicIndex}: جِد ناتج عملية الجمع الأفقي الصافية التالية بدقة:`;
+                    body = `<div class="math-column-form">${toEasternArabicDigits(n1)} + ${toEasternArabicDigits(n2)} = <span class="blank-space"></span></div>`;
                 } else {
-                    if (mode === 1) {
-                        const baseVal = getRandomIntSeeded(21, 99, seed);
-                        title = `السؤال ${arabicIndex}: حلّل المقدار العددي المكتوب إلى مكوناته الأساسية من الآحاد والعشرات:`;
-                        body = `العَدَد المشرقي [ <b>${toEasternArabicDigits(baseVal)}</b> ] يَتَكوَّن حتماً مِن: <span class="blank-space"></span> آحَاد وَ <span class="blank-space"></span> عَشَرَات.`;
-                    } else if (mode === 2) {
-                        const item1 = getRandomIntSeeded(4, 9, seed);
-                        const item2 = getRandomIntSeeded(3, 8, seed + "w");
-                        title = `السؤال ${arabicIndex}: اقرأ المسألة الحسابية السياقية التالية بتمعن ثم اكتب مجموع العناصر الكلي:`;
-                        body = `جَمَعَ طُلابُ الصَّفِّ ${toEasternArabicDigits(item1)} عُلَبٍ زُجَاجِيّةٍ، ثُمَّ جَمَعُوا ${toEasternArabicDigits(item2)} عُلَبٍ أُخْرَى لإعَادَةِ التَّدْوِيرِ. مَا مَجْمُوعُ العُلَبِ كُلِّهَا؟ <br> المَجْمُوعُ النِّهَائِي = <span class="blank-space"></span> عُلَبٍ.`;
-                    } else {
-                        const valA = getRandomIntSeeded(2, 5, seed);
-                        const valB = getRandomIntSeeded(2, 5, seed + "z");
-                        title = `السؤال ${arabicIndex}: أوجد القيمة الحسابية المجرّدة الصافية للعمليات الموضحة أدناه:`;
-                        body = `<div class="math-column-form">${toEasternArabicDigits(valA)} × ${toEasternArabicDigits(valB)} = <span class="blank-space"></span></div>
-                                <div class="math-column-form">${toEasternArabicDigits(valA*valB)} ÷ ${toEasternArabicDigits(valB)} = <span class="blank-space"></span></div>`;
-                    }
+                    title = `السؤال ${arabicIndex}: اقرأ المسألة الحياتية المنضبطة التالية ثم جد المجموع الكلي:`;
+                    body = `مَع أَحْمَدَ ${toEasternArabicDigits(n1)} قِطَعِ حَلْوَى، وَمَع سَعِيدٍ ${toEasternArabicDigits(n2)} قِطَعٍ. كَمْ قِطْعَةً مَعَ الِاثْنَيْنِ مَعاً؟ <br> المَجْمُوعُ = <span class="blank-space"></span> حَلْوَى.`;
+                }
+            }
+            // ٣. عمليات الطرح المنضبطة تماماً ضمن النطاق المحدود للدرس
+            else if (lesson.type === "operation_sub") {
+                const n1 = getRandomIntSeeded(lesson.minVal, lesson.maxVal, seed);
+                const n2 = getRandomIntSeeded(0, n1 - lesson.minVal, seed + "sub");
+                if (mode === 1) {
+                    title = `السؤال ${arabicIndex}: جِد ناتج عملية الطرح العمودي أو الأفقي الصافية التالية:`;
+                    body = `<div class="math-column-form">${toEasternArabicDigits(n1)} - ${toEasternArabicDigits(n2)} = <span class="blank-space"></span></div>`;
+                } else {
+                    title = `السؤال ${arabicIndex}: اقرأ المسألة اللفظية التالية بعناية ثم جد الباقي الصحيح:`;
+                    body = `كَانَ فِي الحَقْلِ ${toEasternArabicDigits(n1)} عَصَافِيرَ، طَارَ مِنْهَا ${toEasternArabicDigits(n2)} عَصَافِيرَ. كَمْ عُصْفُوراً بَقِيَ فِي الحَقْلِ؟ <br> البَاقِي = <span class="blank-space"></span> عَصَافِيرَ.`;
+                }
+            }
+            // ٤. جداول وحقائق الضرب المرتبطة بالدرس حصراً
+            else if (lesson.type === "mul_table") {
+                const multiplier = getRandomIntSeeded(1, 10, seed);
+                if (mode === 1) {
+                    title = `السؤال ${arabicIndex}: أوجد حقيقة الضرب المباشرة المحددة لجدول العدد (${toEasternArabicDigits(lesson.factor)}):`;
+                    body = `<div class="math-column-form">${toEasternArabicDigits(multiplier)} × ${toEasternArabicDigits(lesson.factor)} = <span class="blank-space"></span></div>`;
+                } else {
+                    title = `السؤال ${arabicIndex}: عبر عن مسألة المجموعات المتساوية التالية مستخدماً عملية الضرب:`;
+                    body = `لَدَى لَيْلَى ${toEasternArabicDigits(multiplier)} صناديق، فِي كُلِّ صُنْدُوقٍ ${toEasternArabicDigits(lesson.factor)} كُرَاتٍ. كَمْ كُرَةً مَعَهَا؟ <br> عَدَدُ الكُرَاتِ الكُلِّي = <span class="blank-space"></span> × <span class="blank-space"></span> = <span class="blank-space"></span> كُرَاتٍ.`;
+                }
+            }
+            // ٥. المقارنة والترتيب والأنماط ضمن النطاق المستهدف للدرس
+            else {
+                const v1 = getRandomIntSeeded(lesson.minVal, lesson.maxVal, seed);
+                const v2 = getRandomIntSeeded(lesson.minVal, lesson.maxVal, seed + "v2");
+                if (mode === 1) {
+                    title = `السؤال ${arabicIndex}: قارن بين الأعداد التالية بوضع الإشارة المناسبة ( > ، < ، = ) داخل الفراغ:`;
+                    body = `${toEasternArabicDigits(v1)} <span class="blank-space"></span> ${toEasternArabicDigits(v2)}`;
+                } else if (mode === 2) {
+                    title = `السؤال ${arabicIndex}: حلّل المقدار الرياضي المقابل بدقة إلى آحاد وعشرات:`;
+                    const singleDigit = v1 % 10;
+                    const tensDigit = Math.floor(v1 / 10);
+                    body = `العَدَد [ <b>${toEasternArabicDigits(v1)}</b> ] يَتَكوَّن مِن: <span class="blank-space"></span> آحَاد وَ <span class="blank-space"></span> عَشَرَات.`;
+                } else {
+                    title = `السؤال ${arabicIndex}: تتبع قيم الأعداد التالية ثم أكمل النمط المنتظم الصارم في الفراغ:`;
+                    body = `${toEasternArabicDigits(lesson.minVal)} ، ${toEasternArabicDigits(lesson.minVal + 2)} ، <span class="blank-space"></span> ، <span class="blank-space"></span>`;
                 }
             }
             return `<div class="question-block">
