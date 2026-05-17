@@ -2,7 +2,6 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المنظومة الرقمية لأتمتة أوراق العمل التكيفية</title>
     <style>
         :root {
@@ -268,7 +267,7 @@
 
     <div class="global-container">
         
-        <div class="control-panel no-print">
+        <div class="control-panel">
             <h2>⚙️ محرك التوليد الرياضي الصارم (مطابقة تامة للمنهاج الفلسطيني وتعمل دون إنترنت)</h2>
             <div class="panel-grid">
                 <div class="input-group">
@@ -385,9 +384,7 @@
         }
 
         function formatEasternInput(element) {
-            let val = element.value.replace(/[^0-9٠-٩]/g, '');
-            if(!val) val = "5";
-            element.value = toEasternArabicDigits(val);
+            element.value = toEasternArabicDigits(element.value);
         }
 
         function seededRandom(seedStr) {
@@ -515,7 +512,7 @@
             
             let rawCount = document.getElementById("countInput").value;
             let parsedCount = parseInt(fromEasternArabicDigits(rawCount));
-            let questionsCount = isNaN(parsedCount) || parsedCount <= 0 ? 5 : parsedCount;
+            let questionsCount = isNaN(parsedCount) ? 5 : parsedCount;
             
             const levelMode = document.getElementById("levelSelector").value;
             const gradeData = curriculumRepository[gradeKey];
@@ -783,7 +780,7 @@
                         if(!arr.includes(r)) arr.push(r);
                         attempts++;
                     }
-                    while(arr.length < 3) arr.push(arr.length + 1); 
+                    while(arr.length < 3) arr.push(arr.length + 1); // منع حلقة مفرغة بحال النطاق ضيق
                     
                     if (mode === 0 || mode === 2) {
                         title += ` رَتِّبِ المَجْمُوعَةَ العَدَدِيَّةَ التَّالِيَةَ تَرْتِيباً تَصَاعُدِيًّا صَحِيحاً (مِنَ الأَصْغَرِ إِلَى الأَكْبَرِ):`;
@@ -796,19 +793,9 @@
 
                 case "operation_add":
                 case "operation_add_carry":
-                    let a1, a2;
-                    if (lesson.id.includes("carry") && lesson.maxVal >= 20) {
-                        let u1 = getRandomIntSeeded(5, 9, seed);
-                        let u2 = getRandomIntSeeded(10 - u1, 9, seed + "carry_u");
-                        let t1 = getRandomIntSeeded(1, Math.floor(lesson.maxVal/10) - 2, seed + "carry_t");
-                        let t2 = getRandomIntSeeded(1, Math.floor(lesson.maxVal/10) - 1 - t1, seed + "carry_t2");
-                        a1 = (t1 * 10) + u1;
-                        a2 = (t2 * 10) + u2;
-                    } else {
-                        a1 = getRandomIntSeeded(lesson.minVal, lesson.maxVal - 1, seed);
-                        a2 = getRandomIntSeeded(0, lesson.maxVal - a1, seed + "add_c");
-                    }
-                    
+                    const totalMax = lesson.maxVal;
+                    const a1 = getRandomIntSeeded(lesson.minVal, totalMax - 1, seed);
+                    const a2 = getRandomIntSeeded(0, totalMax - a1, seed + "add_c");
                     if (mode === 0) {
                         title += ` جِدْ نَاتِجَ عَمَلِيَّةِ الجَمْعِ الأُفُقِيِّ الصَّافِيَةِ التَّالِيَةِ بِدِقَّةٍ:`;
                         body = `<div class="math-column-form">${toEasternArabicDigits(a1)} + ${toEasternArabicDigits(a2)} = <span class="blank-space"></span></div>`;
@@ -823,19 +810,8 @@
 
                 case "operation_sub":
                 case "operation_sub_borrow":
-                    let s1, s2;
-                    if (lesson.id.includes("borrow") && lesson.maxVal >= 20) {
-                        let u1 = getRandomIntSeeded(0, 8, seed);
-                        let u2 = getRandomIntSeeded(u1 + 1, 9, seed + "borrow_u");
-                        let t1 = getRandomIntSeeded(2, Math.floor(lesson.maxVal/10), seed + "borrow_t");
-                        let t2 = getRandomIntSeeded(1, t1 - 1, seed + "borrow_t2");
-                        s1 = (t1 * 10) + u1;
-                        s2 = (t2 * 10) + u2;
-                    } else {
-                        s1 = getRandomIntSeeded(Math.floor((lesson.maxVal + lesson.minVal) / 2), lesson.maxVal, seed);
-                        s2 = getRandomIntSeeded(lesson.minVal, s1, seed + "sub_c");
-                    }
-                    
+                    const s1 = getRandomIntSeeded(Math.floor((lesson.maxVal + lesson.minVal) / 2), lesson.maxVal, seed);
+                    const s2 = getRandomIntSeeded(lesson.minVal, s1, seed + "sub_c");
                     if (mode === 0) {
                         title += ` جِدْ نَاتِجَ عَمَلِيَّةِ الطَّرْحِ الأُفُقِيِّ الصَّافِيَةِ التَّالِيَةِ بِدِقَّةٍ:`;
                         body = `<div class="math-column-form">${toEasternArabicDigits(s1)} - ${toEasternArabicDigits(s2)} = <span class="blank-space"></span></div>`;
