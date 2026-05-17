@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المنظومة الرقمية لأتمتة أوراق العمل التكيفية والتشخيصية - الصف الأول</title>
+    <title>المنظومة الرقمية لأتمتة أوراق العمل التكيفية والتشخيصية - الصف الأول الأساسي</title>
     <style>
         :root {
             --primary-color: #1b5e20;
@@ -237,7 +237,7 @@
             border: 2px solid #000;
             border-radius: 8px;
             margin: 10px;
-            direction: ltr;
+            direction: rtl;
         }
         .custom-writing-area {
             margin-top: 15px;
@@ -355,7 +355,7 @@
             </div>
 
             <div style="margin-top: 20px; padding: 20px; background: #fafafa; border: 1px dashed var(--teacher-color); border-radius: 12px;">
-                <h3 style="margin-top:0; color: var(--teacher-color); font-size: 13pt;">🧠 نافذة أفكار المعلم الذكية (تحكم ميكانيكي مرن فوري)</h3>
+                <h3 style="margin-top:0; color: var(--teacher-color); font-size: 13pt;">🧠 نافذة أفكار المعلم الذكية (تحكم ميكانيكية مرنة فورية)</h3>
                 <div class="panel-grid">
                     <div class="input-group" style="grid-column: span 2;">
                         <label>نص منطوق السؤال المعدل (اترك فارغاً للاعتماد على المولد التلقائي)</label>
@@ -372,10 +372,11 @@
                 </div>
                 <div class="panel-grid">
                     <div class="input-group">
-                        <label>نوع الهيكل الميكانيكي الحسابي</label>
+                        <label>نوع الهيكل الميكانيكية الحسابية</label>
                         <select id="customStructureType">
                             <option value="auto">اعتماد الهيكل التلقائي للدرس المختَار</option>
-                            <option value="horizontal">معادلة أفقية مستقيمة ( __ = __ + __ )</option>
+                            <option value="horizontal_add">معادلة جمع أفقية ( __ = __ + __ )</option>
+                            <option value="horizontal_sub">معادلة طرح أفقية ( __ = __ - __ )</option>
                             <option value="vertical">قالب حساب عمودي منظم</option>
                             <option value="comparison">مقارنة ومنزلة منطقية ( [  ]  ___  [  ] )</option>
                             <option value="visual_boxes">صناديق منازل بصرية فارغة للطلاب</option>
@@ -482,15 +483,15 @@
                 name: "الوحدة الأولى: الأعداد (١-٩) والمفاهيم",
                 items: [
                     { id: "u1_all", type: "unit_diagnostic", title: "ورقة تشخيصية شاملة: الوحدة الأولى كاملة" },
-                    { id: "u1_d1", type: "number_concept", val: 1, title: "الدرس الأول: العدد واحد" },
-                    { id: "u1_d2", type: "number_concept", val: 2, title: "الدرس الثاني: العدد اثنان" },
-                    { id: "u1_d3", type: "number_concept", val: 3, title: "الدرس الثالث: العدد ثلاثة" },
-                    { id: "u1_d4", type: "number_concept", val: 4, title: "الدرس الرابع: العدد أربعة" },
-                    { id: "u1_d5", type: "number_concept", val: 5, title: "الدرس الخامس: العدد خمسة" },
-                    { id: "u1_d6", type: "number_concept", val: 6, title: "الدرس السادس: العدد ستة" },
-                    { id: "u1_d7", type: "number_concept", val: 7, title: "الدرس السابع: العدد سبعة" },
-                    { id: "u1_d8", type: "number_concept", val: 8, title: "الدرس الثامن: العدد ثمانية" },
-                    { id: "u1_d9", type: "number_concept", val: 9, title: "الدرس التاسع: العدد تسعة" },
+                    { id: "u1_d1", type: "number_concept", val: 1, title: "الدرس الأول: العدد واحد (١)" },
+                    { id: "u1_d2", type: "number_concept", val: 2, title: "الدرس الثاني: العدد اثنان (٢)" },
+                    { id: "u1_d3", type: "number_concept", val: 3, title: "الدرس الثالث: العدد ثلاثة (٣)" },
+                    { id: "u1_d4", type: "number_concept", val: 4, title: "الدرس الرابع: العدد أربعة (٤)" },
+                    { id: "u1_d5", type: "number_concept", val: 5, title: "الدرس الخامس: العدد خمسة (٥)" },
+                    { id: "u1_d6", type: "number_concept", val: 6, title: "الدرس السادس: العدد ستة (٦)" },
+                    { id: "u1_d7", type: "number_concept", val: 7, title: "الدرس السابع: العدد سبعة (٧)" },
+                    { id: "u1_d8", type: "number_concept", val: 8, title: "الدرس الثامن: العدد ثمانية (٨)" },
+                    { id: "u1_d9", type: "number_concept", val: 9, title: "الدرس التاسع: العدد تسعة (٩)" },
                     { id: "u1_d10", type: "comparison", minVal: 1, maxVal: 9, title: "الدرس العاشر: مقارنة عددين ضمن ٩" },
                     { id: "u1_d11", type: "ordering_asc", minVal: 1, maxVal: 9, title: "الدرس الحادي عشر: الترتيب التصاعدي" },
                     { id: "u1_d12", type: "ordering_desc", minVal: 1, maxVal: 9, title: "الدرس الثاني عشر: الترتيب التنازلي" },
@@ -743,27 +744,35 @@
             let rawN1 = num1Input ? parseInt(fromEasternArabicDigits(num1Input)) : getRandomIntSeeded(lessonObj.minVal || 1, lessonObj.maxVal || 9, seed + "x");
             let rawN2 = num2Input ? parseInt(fromEasternArabicDigits(num2Input)) : getRandomIntSeeded(1, 5, seed + "y");
 
+            if(isNaN(rawN1)) rawN1 = 5;
+            if(isNaN(rawN2)) rawN2 = 3;
+
             let finalTitle = customTitleInput ? toEasternArabicDigits(customTitleInput) : `أَجِدُ نَاتِجَ المَسْأَلَةِ التَّالِيَةِ بِعِنَايَةٍ:`;
             let finalBody = "";
 
             if (structure === "auto") {
                 if (lessonObj.type === "comparison" || lessonObj.type === "place_value") structure = "comparison";
                 else if (lessonObj.type && (lessonObj.type.includes("geometry") || lessonObj.type.includes("parts"))) structure = "pure_text";
-                else structure = "horizontal";
+                else structure = "horizontal_add";
             }
 
-            if (structure === "horizontal") {
-                finalBody = `<div class="math-column-form">${toEasternArabicDigits(rawN1)} + ${toEasternArabicDigits(rawN2)} = <span class="blank-space"></span></div>`;
+            if (structure === "horizontal_add") {
+                finalBody = `<div class="math-column-form" style="direction: rtl;">${toEasternArabicDigits(rawN1)} + ${toEasternArabicDigits(rawN2)} = <span class="blank-space"></span></div>`;
+            } else if (structure === "horizontal_sub") {
+                if (rawN1 < rawN2) { let t = rawN1; rawN1 = rawN2; rawN2 = t; }
+                finalBody = `<div class="math-column-form" style="direction: rtl;">${toEasternArabicDigits(rawN1)} - ${toEasternArabicDigits(rawN2)} = <span class="blank-space"></span></div>`;
             } else if (structure === "vertical") {
                 finalBody = `
-                    <div style="display:inline-block; font-size:18pt; text-align:center; padding:10px 30px; border:2px solid #000; direction:ltr; line-height:1.4;">
-                        &nbsp;&nbsp;${toEasternArabicDigits(rawN1)}<br>+&nbsp;${toEasternArabicDigits(rawN2)}<br><div style="border-top:2px solid #000; margin-top:4px; padding-top:4px; direction:rtl;"><span class="blank-space" style="width:70px;"></span></div>
+                    <div style="display:inline-block; font-size:18pt; text-align:center; padding:10px 30px; border:2px solid #000; border-radius:8px; direction:rtl; line-height:1.5;">
+                        <span style="display:block; text-align:left; padding-left:10px;">${toEasternArabicDigits(rawN1)}</span>
+                        <span style="display:block; text-align:left; border-bottom:2px solid #000; padding-bottom:4px; padding-left:10px;">+ ${toEasternArabicDigits(rawN2)}</span>
+                        <span class="blank-space" style="width:70px; margin-top:10px;"></span>
                     </div>`;
             } else if (structure === "comparison") {
-                finalBody = `<p style="text-align:center; font-size:16pt; direction: rtl;">${toEasternArabicDigits(rawN1)} <span class="blank-space"></span> ${toEasternArabicDigits(rawN2)}</p>`;
+                finalBody = `<p style="text-align:center; font-size:16pt; direction: rtl;">${toEasternArabicDigits(rawN1)} <span class="blank-space" style="width:60px;"></span> ${toEasternArabicDigits(rawN2)}</p>`;
             } else if (structure === "visual_boxes") {
                 finalBody = `
-                    <div>قُمْ بِتَمْثِيلِ العَدَدِ [ <b>${toEasternArabicDigits(rawN1)}</b> ] دَاخِلَ صَنَادِيقِ المَنَازِلِ المُنَاسِبَةِ:</div>
+                    <div>قُمْ بِتَمْثِيلِ العَدَدِ [ <b>${toEasternArabicDigits(rawN1)}</b> ] دَاخِلَ صَنَادِيقِ المَنَازِلِ Mُنَاسِبَةِ:</div>
                     <div class="visual-box-container">
                         <div class="visual-box"> آحَاد <span>................</span></div>
                         <div class="visual-box"> عَشَرَات <span>................</span></div>
@@ -851,17 +860,19 @@
                     let vTarget = lesson.val !== undefined ? lesson.val : getRandomIntSeeded(1, 9, seed);
                     if (currentLevel === "concrete") {
                         title += ` عُدَّ الأَشْكَالَ البَصَرِيَّةَ ثُمَّ اكْتُبِ العَدَدَ المُنَاسِبَ دَاخِلَ الصَّنْدُوقِ:`;
-                        body = `<div style="text-align:center; font-size:16pt;"><span class="concrete-shapes">${"★".repeat(vTarget === 0 ? 0 : vTarget)}</span> $\leftarrow$ العَدَدُ هُوَ: [ <span class="blank-space" style="width:50px;"></span> ]</div>`;
+                        let safeCount = vTarget > 0 ? vTarget : 1;
+                        let shapesStr = "★".repeat(safeCount);
+                        body = `<div style="text-align:center; font-size:16pt; direction: rtl;"><span class="concrete-shapes">${shapesStr}</span> &nbsp;&larr;&nbsp; العَدَدُ هُوَ: [ <span class="blank-space" style="width:50px;"></span> ]</div>`;
                     } else {
                         title += ` اكْتُبِ العَدَدَ التَّالِيَ بِالرُّمُوزِ الرِّيَاضِيَّةِ الصَّحِيحَةِ دَاخِلَ الفَرَاغِ:`;
-                        body = `<p style="text-align:center; font-size:16pt;">العَدَدُ [ <b>${toEasternArabicDigits(vTarget)}</b> ] يُكْتَبُ: <span class="blank-space"></span></p>`;
+                        body = `<p style="text-align:center; font-size:16pt; direction: rtl;">العَدَدُ [ <b>${toEasternArabicDigits(vTarget)}</b> ] يُكْتَبُ: <span class="blank-space"></span></p>`;
                     }
                     break;
 
                 case "number_concept_range":
                     let vr = getRandomIntSeeded(lesson.minVal || 11, lesson.maxVal || 19, seed);
                     title += ` اقْرَأِ العَدَدَ ثُمَّ مَثِّلْهُ بِالأَسْطُرِ أَوِ الكِتَابَةِ الرَّقْمِيَّةِ الدَّقِيقَةِ:`;
-                    body = `<p style="text-align:center; font-size:16pt;">العَدَدُ [ <b>${toEasternArabicDigits(vr)}</b> ] $\leftarrow$ مَكَانُ الإِجَابَةِ: <span class="blank-space-long"></span></p>`;
+                    body = `<p style="text-align:center; font-size:16pt; direction: rtl;">العَدَدُ [ <b>${toEasternArabicDigits(vr)}</b> ] &nbsp;&larr;&nbsp; مَكَانُ الإِجَابَةِ: <span class="blank-space-long"></span></p>`;
                     break;
 
                 case "comparison":
@@ -870,11 +881,13 @@
                     if (c1 === c2) c2 = c2 + 1 > (lesson.maxVal || 9) ? c2 - 1 : c2 + 1;
 
                     if (currentLevel === "concrete") {
-                        title += ` ضَعْ إِشَارَةَ ( > ، < ، = ) فِي المُرَبَّعِ بَعْدَ عَدِّ المَجْمُوعَاتِ:`;
-                        body = `<div style="text-align:center; font-size:16pt;"><span class="concrete-shapes">${"●".repeat(c1 % 6 + 1)}</span> [ ${toEasternArabicDigits(c1)} ] <span class="blank-space" style="width:50px;"></span> [ ${toEasternArabicDigits(c2)} ] <span class="concrete-shapes">${"●".repeat(c2 % 6 + 1)}</span></div>`;
+                        title += ` ضَعْ إِشَارَةَ ( > ، < ، = ) فِي Mُرَبَّعِ بَعْدَ عَدِّ Mَجْمُوعَاتِ:`;
+                        let s1 = c1 > 0 ? "●".repeat(c1) : "●";
+                        let s2 = c2 > 0 ? "●".repeat(c2) : "●";
+                        body = `<div style="text-align:center; font-size:16pt; direction: rtl;"><span class="concrete-shapes">${s1}</span> [ ${toEasternArabicDigits(c1)} ] <span class="blank-space" style="width:60px;"></span> [ ${toEasternArabicDigits(c2)} ] <span class="concrete-shapes">${s2}</span></div>`;
                     } else {
                         title += ` ضَعْ إِشَارَةَ ( > ، < ، = ) دَاخِلَ الفَرَاغِ لِتَكُونَ الجُمْلَةُ صَحِيحَةً:`;
-                        body = `<p style="text-align:center; font-size:18pt;">${toEasternArabicDigits(c1)} <span class="blank-space"></span> ${toEasternArabicDigits(c2)}</p> `;
+                        body = `<p style="text-align:center; font-size:18pt; direction: rtl;">${toEasternArabicDigits(c1)} <span class="blank-space" style="width:60px;"></span> ${toEasternArabicDigits(c2)}</p> `;
                     }
                     break;
 
@@ -883,7 +896,7 @@
                     let o2 = o1 + 1;
                     let o3 = o1 + 2;
                     title += ` رَتِّبِ الأَعْدَادَ التَّالِيَةَ تَرْتِيباً تَصَاعُدِيّاً مِنَ الأَصْغَرِ إِلَى الأَكْبَرِ:`;
-                    body = `<p style="text-align:center; font-size:16pt;">${toEasternArabicDigits(o2)} ، ${toEasternArabicDigits(o3)} ، ${toEasternArabicDigits(o1)}</p>التَّرْتِيبُ مِنَ اليَمِينِ: <span class="blank-space-long"></span>`;
+                    body = `<p style="text-align:center; font-size:16pt; direction: rtl;">${toEasternArabicDigits(o2)} ، ${toEasternArabicDigits(o3)} ، ${toEasternArabicDigits(o1)}</p><div style="direction: rtl; text-align:center;">التَّرْتِيبُ مِنَ اليَمِينِ: <span class="blank-space-long"></span></div>`;
                     break;
 
                 case "ordering_desc":
@@ -891,25 +904,25 @@
                     let od2 = od1 + 1;
                     let od3 = od1 + 2;
                     title += ` رَتِّبِ الأَعْدَادَ التَّالِيَةَ تَرْتِيباً تَنَازُلِيّاً مِنَ الأَكْبَرِ إِلَى الأَصْغَرِ:`;
-                    body = `<p style="text-align:center; font-size:16pt;">${toEasternArabicDigits(od2)} ، ${toEasternArabicDigits(od1)} ، ${toEasternArabicDigits(od3)}</p>التَّرْتِيبُ مِنَ اليَمِينِ: <span class="blank-space-long"></span>`;
+                    body = `<p style="text-align:center; font-size:16pt; direction: rtl;">${toEasternArabicDigits(od2)} ، ${toEasternArabicDigits(od1)} ، ${toEasternArabicDigits(od3)}</p><div style="direction: rtl; text-align:center;">التَّرْتِيبُ مِنَ اليَمِينِ: <span class="blank-space-long"></span></div>`;
                     break;
 
                 case "next_num":
                     let nx = getRandomIntSeeded(lesson.minVal || 1, lesson.maxVal || 8, seed);
-                    title += ` اكْتُبِ العَدَدَ التَّالِيَ مُبَاشَرَةً لِلْعَدَدِ مَعْرُوضِ:`;
-                    body = `<p style="text-align:center; font-size:16pt;">العَدَدُ التَّالِي لِلْعَدَدِ [ <b>${toEasternArabicDigits(nx)}</b> ] هُوَ: <span class="blank-space"></span></p>`;
+                    title += ` اكْتُبِ العَدَدَ التَّالِيَ مُبَاشَرَةً لِلْعَدَدِ Mَعْرُوضِ:`;
+                    body = `<p style="text-align:center; font-size:16pt; direction: rtl;">العَدَدُ التَّالِي لِلْعَدَدِ [ <b>${toEasternArabicDigits(nx)}</b> ] هُوَ: <span class="blank-space"></span></p>`;
                     break;
 
                 case "prev_num":
                     let pr = getRandomIntSeeded(lesson.minVal || 2, lesson.maxVal || 9, seed);
-                    title += ` اكْتُبِ العَدَدَ السَّابِقَ مُبَاشَرَةً لِلْعَدَدِ مَعْرُوضِ:`;
-                    body = `<p style="text-align:center; font-size:16pt;">العَدَدُ السَّابِقُ لِلْعَدَدِ [ <b>${toEasternArabicDigits(pr)}</b> ] هُوَ: <span class="blank-space"></span></p>`;
+                    title += ` اكْتُبِ العَدَدَ السَّابِقَ مُبَاشَرَةً لِلْعَدَدِ Mَعْرُوضِ:`;
+                    body = `<p style="text-align:center; font-size:16pt; direction: rtl;">العَدَدُ السَّابِقُ لِلْعَدَدِ [ <b>${toEasternArabicDigits(pr)}</b> ] هُوَ: <span class="blank-space"></span></p>`;
                     break;
 
                 case "components":
                     let compMax = lesson.maxVal || 5;
-                    title += ` أَكْمِلْ فَرَاغَاتِ مُكَوِّنَاتِ الأَعْدَادِ التَّالِيَةِ لِتَحْصُلَ عَلَى العَدَدِ مَطْلُوبِ:`;
-                    body = `<p style="text-align:center; font-size:16pt;">العَدَدُ [ <b>${toEasternArabicDigits(compMax)}</b> ] هُوَ عِبَارَةٌ عَنْ: <span class="blank-space" style="width:60px;"></span> + <span class="blank-space" style="width:60px;"></span></p>`;
+                    title += ` أَكْمِلْ فَرَاغَاتِ مُكَوِّنَاتِ الأَعْدَادِ التَّالِيَةِ لِتَحْصُلَ عَلَى العَدَدِ Mَطْلُوبِ:`;
+                    body = `<p style="text-align:center; font-size:16pt; direction: rtl;">العَدَدُ [ <b>${toEasternArabicDigits(compMax)}</b> ] هُوَ عِبَارَةٌ عَنْ: <span class="blank-space" style="width:60px;"></span> + <span class="blank-space" style="width:60px;"></span></p>`;
                     break;
 
                 case "operation_add":
@@ -919,13 +932,13 @@
                     
                     if (currentLevel === "concrete") {
                         title += ` جِدْ نَاتِجَ الجَمْعِ مُسْتَعِيناً بِالعَدِّ البَصَرِيِّ لِلرُّسُومِ:`;
-                        body = `<div style="text-align:center;"><span class="concrete-shapes">${"●".repeat(add1)}</span> + <span class="concrete-shapes">${"●".repeat(add2)}</span> = <span class="blank-space"></span></div>`;
+                        body = `<div style="text-align:center; font-size: 16pt; direction: rtl;"><span class="concrete-shapes">${"●".repeat(add1)}</span> &nbsp;+&nbsp; <span class="concrete-shapes">${"●".repeat(add2)}</span> &nbsp;=&nbsp; <span class="blank-space"></span></div>`;
                     } else if (currentLevel === "semi_concrete") {
-                        title += ` مَعَ رَامِي ${toEasternArabicDigits(add1)} دَنَانِيرَ، وَأَعْطَاهُ أَبُوهُ ${toEasternArabicDigits(add2)} دَنَانِيرَ أُخْرَى. كَمْ مَعَهُ الآنَ؟`;
-                        body = `<div class="math-column-form">${toEasternArabicDigits(add1)} + ${toEasternArabicDigits(add2)} = <span class="blank-space"></span></div>`;
+                        title += ` Mَعَ رَامِي ${toEasternArabicDigits(add1)} دَنَانِيرَ، وَأَعْطَاهُ أَبُوهُ ${toEasternArabicDigits(add2)} دَنَانِيرَ أُخْرَى. كَمْ مَعَهُ الآنَ؟`;
+                        body = `<div style="text-align:center; margin-top:10px;"><div class="math-column-form">${toEasternArabicDigits(add1)} + ${toEasternArabicDigits(add2)} = <span class="blank-space"></span></div></div>`;
                     } else {
                         title += ` جِدْ نَاتِجَ عَمَلِيَّةِ الجَمْعِ الأُفُقِيَّةِ الصَّحِيحَةِ:`;
-                        body = `<div class="math-column-form">${toEasternArabicDigits(add1)} + ${toEasternArabicDigits(add2)} = <span class="blank-space"></span></div>`;
+                        body = `<div style="text-align:center;"><div class="math-column-form">${toEasternArabicDigits(add1)} + ${toEasternArabicDigits(add2)} = <span class="blank-space"></span></div></div>`;
                     }
                     break;
 
@@ -937,33 +950,33 @@
                     
                     if (currentLevel === "concrete") {
                         title += ` جِدْ نَاتِجَ الطَّرْحِ عَنْ طَرِيقِ شَطْبِ الرُّسُومَاتِ البَصَرِيَّةِ:`;
-                        body = `<div style="text-align:center;"><span class="concrete-shapes">${"■".repeat(sub1)}</span> (اقْطَعْ مِنْهَا ${toEasternArabicDigits(sub2)}) $\leftarrow$ البَاقِي: <span class="blank-space"></span></div>`;
+                        body = `<div style="text-align:center; font-size: 16pt; direction: rtl;"><span class="concrete-shapes">${"■".repeat(sub1)}</span> (اقْطَعْ مِنْهَا ${toEasternArabicDigits(sub2)}) &nbsp;&larr;&nbsp; البَاقِي: <span class="blank-space"></span></div>`;
                     } else {
                         title += ` أَوْجِدْ نَاتِجَ عَمَلِيَّةِ الطَّرْحِ التَّالِيَةِ:`;
-                        body = `<div class="math-column-form">${toEasternArabicDigits(sub1)} - ${toEasternArabicDigits(sub2)} = <span class="blank-space"></span></div>`;
+                        body = `<div style="text-align:center;"><div class="math-column-form">${toEasternArabicDigits(sub1)} - ${toEasternArabicDigits(sub2)} = <span class="blank-space"></span></div></div>`;
                     }
                     break;
 
                 case "place_value":
                     let pNum = getRandomIntSeeded(lesson.minVal || 10, lesson.maxVal || 20, seed);
                     title += ` حَلِّلِ العَدَدَ التَّالِيَ إِلَى مُكَوِّنَاتِهِ مِنَ الآحَادِ وَالعَشَرَاتِ:`;
-                    body = `<p style="text-align:center; font-size:16pt;">العَدَدُ [ <b>${toEasternArabicDigits(pNum)}</b> ] = <span class="blank-space" style="width:60px;"></span> آحَاد وَ <span class="blank-space" style="width:60px;"></span> عَشَرَات</p>`;
+                    body = `<p style="text-align:center; font-size:16pt; direction: rtl;">العَدَدُ [ <b>${toEasternArabicDigits(pNum)}</b> ] = <span class="blank-space" style="width:60px;"></span> آحَاد وَ <span class="blank-space" style="width:60px;"></span> عَشَرَات</p>`;
                     break;
 
                 case "expanded_form":
                     let exNum = getRandomIntSeeded(10, 20, seed);
                     title += ` اكْتُبِ العَدَدَ التَّالِيَ بِالصُّورَةِ المُوَسَّعَةِ التَّحْلِيلِيَّةِ:`;
-                    body = `<p style="text-align:center; font-size:16pt;">${toEasternArabicDigits(exNum)} = <span class="blank-space" style="width:70px;"></span> + <span class="blank-space" style="width:70px;"></span></p>`;
+                    body = `<p style="text-align:center; font-size:16pt; direction: rtl;">${toEasternArabicDigits(exNum)} = <span class="blank-space" style="width:70px;"></span> + <span class="blank-space" style="width:70px;"></span></p>`;
                     break;
 
                 case "geometry_flat":
-                    title += ` تَعَرَّفْ عَلَى الهَنْدَسَةِ: كَمْ عَدَدُ أَضْلَاعِ الشَّكْلِ مَذْكُورِ؟`;
-                    body = `<p style="text-align:center; font-size:15pt;">شَكْلُ ( <b>المُثَلَّث</b> ) لَهُ عَدَدُ <span class="blank-space"></span> أَضْلَاعٍ مُسْتَقِيمَةٍ.</p>`;
+                    title += ` تَعَرَّفْ عَلَى الهَنْدَسَةِ: كَمْ عَدَدُ أَضْلَاعِ الشَّكْلِ Mَذْكُورِ؟`;
+                    body = `<p style="text-align:center; font-size:15pt; direction: rtl;">شَكْلُ ( <b>المُثَلَّث</b> ) لَهُ عَدَدُ <span class="blank-space"></span> أَضْلَاعٍ مُسْتَقِيمَةٍ.</p>`;
                     break;
 
                 default:
                     title += ` اقْرَأِ مَسْأَلَةَ الرِّيَاضِيَّةَ التَّالِيَةَ ثُمَّ أَجِبْ دَاخِلَ الفَرَاغِ:`;
-                    body = `<div class="custom-writing-area">مَكَانُ خَطِّ الطَّالِبِ مُنَظَّمِ:<br>........................................................................................................................................</div>`;
+                    body = `<div class="custom-writing-area">مَكَانُ خَطِّ الطَّالِبِ Mُنَظَّمِ:<br>........................................................................................................................................</div>`;
                     break;
             }
 
