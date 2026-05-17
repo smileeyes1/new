@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المنظومة الرقمية لأتمتة أوراق العمل التكيفية والتشخيصية - الصف الأول الأساسي</title>
+    <title>المنظومة الرقمية الشاملة لأتمتة أوراق العمل التكيفية - الصف الأول الأساسي</title>
     <style>
         :root {
             --primary-color: #1b5e20;
@@ -680,7 +680,8 @@
                 bodyContainer.appendChild(block);
             });
 
-            const runTimestamp = Math.floor(Math.random() * 999999);
+            // سد ثغرة تكرار الـ Seed عند الاستدعاء السريع بإدخال الوقت الحالي بالملي ثانية
+            const runTimestamp = Date.now() + Math.floor(Math.random() * 1000);
             const baseSeed = lessonId + "_" + modelLetter + "_" + runTimestamp + "_";
             
             let questionsNeeded = targetCount - lockedCount;
@@ -772,7 +773,7 @@
                 finalBody = `<p style="text-align:center; font-size:16pt; direction: rtl;">${toEasternArabicDigits(rawN1)} <span class="blank-space" style="width:60px;"></span> ${toEasternArabicDigits(rawN2)}</p>`;
             } else if (structure === "visual_boxes") {
                 finalBody = `
-                    <div>قُمْ بِتَمْثِيلِ العَدَدِ [ <b>${toEasternArabicDigits(rawN1)}</b> ] دَاخِلَ صَنَادِيقِ المَنَازِلِ Mُنَاسِبَةِ:</div>
+                    <div>قُمْ بِتَمْثِيلِ العَدَدِ [ <b>${toEasternArabicDigits(rawN1)}</b> ] دَاخِلَ صَنَادِيقِ المَنَازِلِ المُنَاسِبَةِ:</div>
                     <div class="visual-box-container">
                         <div class="visual-box"> آحَاد <span>................</span></div>
                         <div class="visual-box"> عَشَرَات <span>................</span></div>
@@ -881,7 +882,7 @@
                     if (c1 === c2) c2 = c2 + 1 > (lesson.maxVal || 9) ? c2 - 1 : c2 + 1;
 
                     if (currentLevel === "concrete") {
-                        title += ` ضَعْ إِشَارَةَ ( > ، < ، = ) فِي Mُرَبَّعِ بَعْدَ عَدِّ Mَجْمُوعَاتِ:`;
+                        title += ` ضَعْ إِشَارَةَ ( > ، < ، = ) فِي المُرَبَّعِ بَعْدَ عَدِّ المَجْمُوعَاتِ:`;
                         let s1 = c1 > 0 ? "●".repeat(c1) : "●";
                         let s2 = c2 > 0 ? "●".repeat(c2) : "●";
                         body = `<div style="text-align:center; font-size:16pt; direction: rtl;"><span class="concrete-shapes">${s1}</span> [ ${toEasternArabicDigits(c1)} ] <span class="blank-space" style="width:60px;"></span> [ ${toEasternArabicDigits(c2)} ] <span class="concrete-shapes">${s2}</span></div>`;
@@ -909,19 +910,19 @@
 
                 case "next_num":
                     let nx = getRandomIntSeeded(lesson.minVal || 1, lesson.maxVal || 8, seed);
-                    title += ` اكْتُبِ العَدَدَ التَّالِيَ مُبَاشَرَةً لِلْعَدَدِ Mَعْرُوضِ:`;
+                    title += ` اكْتُبِ العَدَدَ التَّالِيَ مُبَاشَرَةً لِلْعَدَدِ المَعْرُوضِ:`;
                     body = `<p style="text-align:center; font-size:16pt; direction: rtl;">العَدَدُ التَّالِي لِلْعَدَدِ [ <b>${toEasternArabicDigits(nx)}</b> ] هُوَ: <span class="blank-space"></span></p>`;
                     break;
 
                 case "prev_num":
                     let pr = getRandomIntSeeded(lesson.minVal || 2, lesson.maxVal || 9, seed);
-                    title += ` اكْتُبِ العَدَدَ السَّابِقَ مُبَاشَرَةً لِلْعَدَدِ Mَعْرُوضِ:`;
+                    title += ` اكْتُبِ العَدَدَ السَّابِقَ مُبَاشَرَةً لِلْعَدَدِ المَعْرُوضِ:`;
                     body = `<p style="text-align:center; font-size:16pt; direction: rtl;">العَدَدُ السَّابِقُ لِلْعَدَدِ [ <b>${toEasternArabicDigits(pr)}</b> ] هُوَ: <span class="blank-space"></span></p>`;
                     break;
 
                 case "components":
                     let compMax = lesson.maxVal || 5;
-                    title += ` أَكْمِلْ فَرَاغَاتِ مُكَوِّنَاتِ الأَعْدَادِ التَّالِيَةِ لِتَحْصُلَ عَلَى العَدَدِ Mَطْلُوبِ:`;
+                    title += ` أَكْمِلْ فَرَاغَاتِ مُكَوِّنَاتِ الأَعْدَادِ التَّالِيَةِ لِتَحْصُلَ عَلَى العَدَدِ المَطْلُوبِ:`;
                     body = `<p style="text-align:center; font-size:16pt; direction: rtl;">العَدَدُ [ <b>${toEasternArabicDigits(compMax)}</b> ] هُوَ عِبَارَةٌ عَنْ: <span class="blank-space" style="width:60px;"></span> + <span class="blank-space" style="width:60px;"></span></p>`;
                     break;
 
@@ -934,7 +935,7 @@
                         title += ` جِدْ نَاتِجَ الجَمْعِ مُسْتَعِيناً بِالعَدِّ البَصَرِيِّ لِلرُّسُومِ:`;
                         body = `<div style="text-align:center; font-size: 16pt; direction: rtl;"><span class="concrete-shapes">${"●".repeat(add1)}</span> &nbsp;+&nbsp; <span class="concrete-shapes">${"●".repeat(add2)}</span> &nbsp;=&nbsp; <span class="blank-space"></span></div>`;
                     } else if (currentLevel === "semi_concrete") {
-                        title += ` Mَعَ رَامِي ${toEasternArabicDigits(add1)} دَنَانِيرَ، وَأَعْطَاهُ أَبُوهُ ${toEasternArabicDigits(add2)} دَنَانِيرَ أُخْرَى. كَمْ مَعَهُ الآنَ؟`;
+                        title += ` مَعَ رَامِي ${toEasternArabicDigits(add1)} دَنَانِيرَ، وَأَعْطَاهُ أَبُوهُ ${toEasternArabicDigits(add2)} دَنَانِيرَ أُخْرَى. كَمْ مَعَهُ الآنَ؟`;
                         body = `<div style="text-align:center; margin-top:10px;"><div class="math-column-form">${toEasternArabicDigits(add1)} + ${toEasternArabicDigits(add2)} = <span class="blank-space"></span></div></div>`;
                     } else {
                         title += ` جِدْ نَاتِجَ عَمَلِيَّةِ الجَمْعِ الأُفُقِيَّةِ الصَّحِيحَةِ:`;
@@ -970,13 +971,13 @@
                     break;
 
                 case "geometry_flat":
-                    title += ` تَعَرَّفْ عَلَى الهَنْدَسَةِ: كَمْ عَدَدُ أَضْلَاعِ الشَّكْلِ Mَذْكُورِ؟`;
+                    title += ` تَعَرَّفْ عَلَى الهَنْدَسَةِ: كَمْ عَدَدُ أَضْلَاعِ الشَّكْلِ المَذْكُورِ؟`;
                     body = `<p style="text-align:center; font-size:15pt; direction: rtl;">شَكْلُ ( <b>المُثَلَّث</b> ) لَهُ عَدَدُ <span class="blank-space"></span> أَضْلَاعٍ مُسْتَقِيمَةٍ.</p>`;
                     break;
 
                 default:
                     title += ` اقْرَأِ مَسْأَلَةَ الرِّيَاضِيَّةَ التَّالِيَةَ ثُمَّ أَجِبْ دَاخِلَ الفَرَاغِ:`;
-                    body = `<div class="custom-writing-area">مَكَانُ خَطِّ الطَّالِبِ Mُنَظَّمِ:<br>........................................................................................................................................</div>`;
+                    body = `<div class="custom-writing-area">مَكَانُ خَطِّ الطَّالِبِ المُنَظَّمِ:<br>........................................................................................................................................</div>`;
                     break;
             }
 
