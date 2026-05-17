@@ -11,6 +11,8 @@
             --text-dark: #111111;
             --beauty-border: 1.5px solid #111111;
             --beauty-bg: #ffffff;
+            --teacher-color: #00796b;
+            --teacher-light: #e0f2f1;
         }
         * { box-sizing: border-box; }
         body {
@@ -63,6 +65,10 @@
             border-radius: 8px;
             outline: none;
             font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--primary-color);
         }
         .actions-row {
             display: flex;
@@ -88,12 +94,15 @@
         .btn-primary { background-color: var(--primary-color); color: white; }
         .btn-primary:hover { background-color: #113f15; }
         .btn-secondary { background-color: #34495e; color: white; }
+        .btn-secondary:hover { background-color: #2c3e50; }
         .btn-innovation { background-color: #d35400; color: white; }
         .btn-innovation:hover { background-color: #b34700; }
         .btn-creativity { background-color: #27ae60; color: white; }
         .btn-creativity:hover { background-color: #1e8449; }
         .btn-beauty { background-color: #8e44ad; color: white; }
         .btn-beauty:hover { background-color: #732d91; }
+        .btn-teacher { background-color: var(--teacher-color); color: white; }
+        .btn-teacher:hover { background-color: #004d40; }
         
         .sheet-wrapper {
             background: var(--beauty-bg);
@@ -102,7 +111,7 @@
             margin-top: 20px;
             display: none;
             position: relative;
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
         }
         .sheet-wrapper.enhanced-beauty {
             border: 6px double #1b5e20;
@@ -141,11 +150,6 @@
             padding: 15px;
             border: 1px solid transparent;
             border-radius: 6px;
-            transition: all 0.2s;
-        }
-        .question-block:hover {
-            background: #fdfefe;
-            border-color: #ddd;
         }
         .question-title {
             font-size: 13pt;
@@ -305,9 +309,17 @@
                     <input type="number" id="countInput" min="1" max="100" value="5">
                 </div>
             </div>
+
+            <div class="panel-grid" style="border-top: 1px dashed #e0e0e0; padding-top: 15px;">
+                <div class="input-group" style="grid-column: 1 / -1;">
+                    <label style="color: var(--teacher-color);">💡 فكرة المعلم التربوية المخصصة (سيتم صياغتها برمجياً فوراً بالنظام المشرقي للأرقام)</label>
+                    <input type="text" id="teacherCustomIdeaInput" placeholder="اكتب سؤالاً مخصصاً أو فكرة تربوية تريد دمجها في الورقة (مثال: اشترت ليلى ٥ حبات تفاح ثم أكلت حبتين...)">
+                </div>
+            </div>
             
             <div class="actions-row">
                 <button class="btn btn-secondary" onclick="generateWorksheet()">⚡ توليد المتن النظيف</button>
+                <button class="btn btn-teacher" onclick="injectTeacherCustomIdea()">🧠 إدراج فكرة المعلم</button>
                 <button class="btn btn-innovation" onclick="injectInnovativeQuestion()">💡 زر الابتكار</button>
                 <button class="btn btn-creativity" onclick="activateCreativityMode()">🎨 زر الإبداع</button>
                 <button class="btn btn-beauty" onclick="toggleBeautyTheme()">✨ زر الجمال</button>
@@ -345,6 +357,7 @@
         let creativityActive = false;
 
         function toEasternArabicDigits(num) {
+            if (num === null || num === undefined) return '';
             const id = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
             return num.toString().replace(/[0-9]/g, function(w){ return id[+w]; });
         }
@@ -463,7 +476,6 @@
             document.getElementById("outModel").innerText = "نموذج: " + modelLetter;
             document.getElementById("outLessonTitle").innerText = lessonObj.title;
             
-            // إضافة عامل عشوائي زمني حقيقي لضمان التغير اللانهائي عند كل نقرة
             const runTimestamp = Math.floor(Math.random() * 999999);
             const baseSeed = lessonId + "_" + modelLetter + "_" + runTimestamp + "_";
             
@@ -476,11 +488,58 @@
             innovationCounter = questionsCount + 1;
         }
 
+        function injectTeacherCustomIdea() {
+            const rawIdea = document.getElementById("teacherCustomIdeaInput").value.trim();
+            if (!rawIdea) {
+                alert("يرجى كتابة الفكرة التربوية أو نص السؤال في الحقل المخصص أولاً.");
+                return;
+            }
+            
+            // تحويل الأرقام تلقائياً للنظام المشرقي لضمان ثبات الهوية البصرية للورقة
+            const formattedIdea = toEasternArabicDigits(rawIdea);
+            const bodyContainer = document.getElementById("sheetBody");
+            
+            // إذا كانت الصفحة فارغة، تفعيل البنية الأساسية للترويسة تلقائياً
+            if (!bodyContainer.innerHTML) {
+                generateWorksheet();
+            }
+
+            const currentIdx = document.querySelectorAll('#sheetBody .question-block').length + 1;
+            const qBlock = document.createElement("div");
+            qBlock.className = "question-block";
+            qBlock.innerHTML = `
+                <div class="question-title">
+                    <span class="question-title-text">السؤال ${toEasternArabicDigits(currentIdx)}:</span>
+                    <button class="delete-action no-print" onclick="removeQuestion(this)">❌ استبعاد</button>
+                </div>
+                <div class="question-body">
+                    <b>سُؤالٌ مُخَصَّصٌ مِنَ المُعَلِّمِ:</b> ${formattedIdea}
+                </div>
+            `;
+
+            const masterBox = document.getElementById("masterCreativeBox");
+            if (masterBox) {
+                bodyContainer.insertBefore(qBlock, masterBox);
+            } else {
+                bodyContainer.appendChild(qBlock);
+            }
+
+            if (creativityActive) {
+                const creativePrompt = document.createElement("div");
+                creativePrompt.className = "creative-addition";
+                creativePrompt.innerText = "🎨 ارسُمْ رَسْمَةً صَغِيرَةً فِي جَانِبِ الصَّفْحَةِ تُعَبِّرُ عَنْ حَلِّكَ الذَّكِيِّ.";
+                qBlock.appendChild(creativePrompt);
+            }
+
+            renumberQuestions();
+            document.getElementById("sheetOutput").style.display = "block";
+            document.getElementById("teacherCustomIdeaInput").value = ""; // تفريغ الحقل
+        }
+
         function activateCreativityMode() {
             if (!document.getElementById("sheetBody").innerHTML) return;
             creativityActive = true;
             
-            // تأثير حقيقي: تتبع جميع الأسئلة وإدراج بند مهارات تفكير عليا مفتوح ومخصص للأطفال لكل سؤال
             const blocks = document.querySelectorAll('#sheetBody .question-block');
             blocks.forEach((block, idx) => {
                 if (block.querySelector('.creative-addition')) return;
@@ -499,7 +558,6 @@
                 block.appendChild(creativePrompt);
             });
 
-            // إدراج صندوق التحدي الأكبر لزيتونة الذكية في نهاية الورقة
             if (!document.getElementById("masterCreativeBox")) {
                 const masterBox = document.createElement("div");
                 masterBox.id = "masterCreativeBox";
@@ -507,7 +565,7 @@
                 masterBox.innerHTML = `
                     <div class="creative-box-title">🏆 صُنْدُوقُ العَبَاقِرَةِ الأذْكِيَاءِ (مَشْرُوعُ زَيْتُونَةَ التَّكَيُّفِيِّ)</div>
                     <div style="font-size:12pt; line-height:1.8; color:#000;">
-                        فَكِّرْ ثُمَّ تَخَيَّلْ: إِذَا زَارَنَا طَالِبٌ جَدِيدٌ فِي الصَّفِّ وَلَا يَعْرِفُ مَوْضُوعَ اليَوْمِ، كَيْفَ تُسَاعِدُهُ بِرَسْمَةٍ وَاحِدَةٍ لِيَفْهَمَ هَذَا الدَّرْسَ تَمَاماً؟
+                        فَكِّرْ ثُمَّ تَخَيَّل|: إِذَا زَارَنَا طَالِبٌ جَدِيدٌ فِي الصَّفِّ وَلَا يَعْرِفُ مَوْضُوعَ اليَوْمِ، كَيْفَ تُسَاعِدُهُ بِرَسْمَةٍ وَاحِدَةٍ لِيَفْهَمَ هَذَا الدَّرْسَ تَمَاماً؟
                         <br><br>[ ........................................................................................................................................ ]
                     </div>
                 `;
@@ -522,8 +580,13 @@
             const lessonObj = gradeData.items.find(i => i.id === lessonId);
             const bodyContainer = document.getElementById("sheetBody");
             
-            const seed = "innovative_" + innovationCounter + "_" + Math.random();
-            let title = `<span class="question-title-text">السؤال ${toEasternArabicDigits(innovationCounter)}:</span>`;
+            if (!bodyContainer.innerHTML) {
+                generateWorksheet();
+            }
+
+            const currentIdx = document.querySelectorAll('#sheetBody .question-block').length + 1;
+            const seed = "innovative_" + currentIdx + "_" + Math.random();
+            let title = `<span class="question-title-text">السؤال ${toEasternArabicDigits(currentIdx)}:</span>`;
             let body = "";
             
             switch(lessonObj.type) {
@@ -537,7 +600,7 @@
                     body = `<b>سُؤالُ الِابْتِكَارِ:</b> اكْتُبْ كَلِمَةً أَوْ ارْسُمْ رَسْمَةً مَبْنِيَّةً عَلَى خَيَالِكَ التَّامِّ تُعَبِّرُ عَنْ تَمْثِيلِ العَدَدِ المُنْضَبِطِ [ <b>${toEasternArabicDigits(v)}</b> ]: <br><br> [ ........................................................................................ ]`;
                     break;
                 case "comparison":
-                    body = `<b>فَكِّرْ ثُمَّ أَجِبْ:</b> اكْتُبْ عَدَدًا مَفْقُودًا فِي الفَرَاغِ Lِتَكُونَ الجُمْلَةُ الرِّيَاضِيَّةُ صَحِيحَةً تَمَامًا: <br><p style="text-align:center; font-size:14pt;"><span class="blank-space"></span> &gt; ${toEasternArabicDigits(lessonObj.minVal + 1)}</p>`;
+                    body = `<b>فَكِّرْ ثُمَّ أَجِبْ:</b> اكْتُبْ عَدَدًا مَفْقُودًا فِي الفَرَاغِ لِتَكُونَ الجُمْلَةُ الرِّيَاضِيَّةُ صَحِيحَةً تَمَامًا: <br><p style="text-align:center; font-size:14pt;"><span class="blank-space"></span> &gt; ${toEasternArabicDigits(lessonObj.minVal + 1)}</p>`;
                     break;
                 case "ordering":
                     body = `<b>تحدّي التَّرْتِيبِ:</b> اكْتُبْ ثَلَاثَةَ أَعْدَادٍ مُخْتَلِفَةٍ مِنْ عِنْدِكَ تَقَعُ تَمَامًا بَيْنَ العَدَدِ [ ${toEasternArabicDigits(lessonObj.minVal)} ] وَالعَدَدِ [ ${toEasternArabicDigits(lessonObj.maxVal)} ] مُرَتَّبَةً تَصَاعُدِيًّا: <br><br> <span class="blank-space"></span> ، <span class="blank-space"></span> ، <span class="blank-space"></span>`;
@@ -562,7 +625,7 @@
                 case "mul_concept":
                 case "mul_table":
                     const fact = lessonObj.factor ? lessonObj.factor : 2;
-                    body = `<b>التَّحَدِّي الرَّقْمِيُّ للضَّرْبِ:</b> ارْسَمْ شَبَكَةً مَبْنِيَّةً عَلَى المَصْفُوفَاتِ البَصَرِيَّةِ تُوَضِّحُ حَقِيقَةَ جُمْلَةِ الضَّرْبِ التَّالِيَةِ: [ <b>${toEasternArabicDigits(3)} × ${toEasternArabicDigits(fact)}</b> ] <br><br> [ ........................................................................................ ]`;
+                    body = `<b>التَّحَدِّي الرَّقْمِيُّ للضَّرْبِ:</b> ارْسَمْ شَبَكَةً مَبْنِيَّةً عَلَى Mَصْفُوفَاتِ البَصَرِيَّةِ تُوَضِّحُ حَقِيقَةَ جُمْلَةِ الضَّرْبِ التَّالِيَةِ: [ <b>${toEasternArabicDigits(3)} × ${toEasternArabicDigits(fact)}</b> ] <br><br> [ ........................................................................................ ]`;
                     break;
             }
 
@@ -576,7 +639,6 @@
                 <div class="question-body">${body}</div>
             `;
             
-            // المحافظة على وجود صندوق التحدي في النهاية إن وجد
             const masterBox = document.getElementById("masterCreativeBox");
             if (masterBox) {
                 bodyContainer.insertBefore(qBlock, masterBox);
@@ -591,7 +653,7 @@
                 qBlock.appendChild(creativePrompt);
             }
             
-            innovationCounter++;
+            renumberQuestions();
             document.getElementById("sheetOutput").style.display = "block";
         }
 
@@ -600,7 +662,6 @@
             let title = `<span class="question-title-text">السؤال ${arabicIndex}:</span>`; 
             let body = "";
             
-            // تحديد نمط السؤال بناء على مستوى التدرج المختار أو التناوب التكيفي
             let mode = index % 3;
             if (levelMode === "concrete") mode = 0;
             if (levelMode === "semi_concrete") mode = 2;
@@ -677,7 +738,7 @@
                         body = `<div style="font-size:15pt; text-align:center; width:80px; margin:10px auto; border:1px solid #000; padding:10px; line-height:1.5;">${toEasternArabicDigits(a1)}<br>+<br>${toEasternArabicDigits(a2)}<br><hr></div>`;
                     } else {
                         title += ` حل المسألة اللفظية والسياقية التالية الخاصة بمفهوم الجمع المشروط:`;
-                        body = `مَع طَالِبٍ ${toEasternArabicDigits(a1)} قِطَعٍ، وَأَعْطَاهُ والِدُهُ ${toEasternArabicDigits(a2)} قِطَعٍ إِضَافِيَّةٍ. كَمْ قِطْعَةً أَصْبَحَتْ مَعَهُ؟ <br> المَجْمُوعُ المُنْضَبِطُ = <span class="blank-space"></span> قِطَعٍ.`;
+                        body = `مَع طَالِبٍ ${toEasternArabicDigits(a1)} قِطَعٍ، وَأَعْطَاهُ وَالِدُهُ ${toEasternArabicDigits(a2)} قِطَعٍ إِضَافِيَّةٍ. كَمْ قِطْعَةً أَصْبَحَتْ مَعَهُ؟ <br> المَجْمُوعُ المُنْضَبِطُ = <span class="blank-space"></span> قِطَعٍ.`;
                     }
                     break;
 
@@ -693,7 +754,7 @@
                         body = `<div style="font-size:15pt; text-align:center; width:80px; margin:10px auto; border:1px solid #000; padding:10px; line-height:1.5;">${toEasternArabicDigits(s1)}<br>-<br>${toEasternArabicDigits(s2)}<br><hr></div>`;
                     } else {
                         title += ` اقرأ المسألة اللفظية الحياتية المنضبطة التالية ثم أوجد ناتج الطرح (الباقي):`;
-                        body = `كَانَ فِي Mَزْرَعَةِ ${toEasternArabicDigits(s1)} خِرَافٍ، خَرَجَ مِنْهَا ${toEasternArabicDigits(s2)} خِرَافٍ. كَمْ خَرُوفاً بَقِيَ فِي المَزْرَعَةِ؟ <br> البَاقِي الفِعْلِي = <span class="blank-space"></span> خِرَافٍ.`;
+                        body = `كَانَ فِي مَزْرَعَةِ ${toEasternArabicDigits(s1)} خِرَافٍ، خَرَجَ مِنْهَا ${toEasternArabicDigits(s2)} خِرَافٍ. كَمْ خَرُوفاً بَقِيَ فِي المَزْرَعَةِ؟ <br> البَاقِي الفِعْلِي = <span class="blank-space"></span> خِرَافٍ.`;
                     }
                     break;
 
