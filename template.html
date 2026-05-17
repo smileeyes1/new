@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المنظومة الرقمية لأتمتة أوراق العمل التكيفية مع خاصية تجميد الأسئلة</title>
+    <title>المنظومة الرقمية لأتمتة أوراق العمل التكيفية والتشخيصية - الصف الأول</title>
     <style>
         :root {
             --primary-color: #1b5e20;
@@ -61,7 +61,7 @@
             font-size: 11pt;
             color: #34495e;
         }
-        .input-group input, .input-group select, .input-group textarea {
+        .input-group input, .input-group select {
             padding: 10px 14px;
             font-size: 11pt;
             border: 2px solid #e0e0e0;
@@ -71,7 +71,7 @@
             transition: border-color 0.2s;
             direction: rtl;
         }
-        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+        .input-group input:focus, .input-group select:focus {
             border-color: var(--primary-color);
         }
         .actions-row {
@@ -106,7 +106,6 @@
         .btn-beauty { background-color: #8e44ad; color: white; }
         .btn-beauty:hover { background-color: #732d91; }
         .btn-teacher { background-color: var(--teacher-color); color: white; }
-        .btn-teacher:hover { background-color: #004d40; }
         
         .sheet-wrapper {
             background: var(--beauty-bg);
@@ -188,10 +187,6 @@
             direction: rtl;
             outline: none;
         }
-        .question-body:focus {
-            background-color: #fffde7;
-            border-bottom: 2px solid var(--primary-color);
-        }
         .creative-addition {
             margin-top: 15px;
             padding: 10px 14px;
@@ -213,7 +208,6 @@
             color: white;
         }
         .delete-action { background: #c0392b; }
-        .delete-action:hover { background: #962d22; }
         .lock-action { background: #7f8c8d; }
         .lock-action.locked { background: var(--lock-color); }
         
@@ -261,8 +255,8 @@
         }
         .visual-box {
             border: 2px solid #000;
-            width: 80px;
-            height: 60px;
+            width: 90px;
+            height: 70px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -309,7 +303,7 @@
     <div class="global-container">
         
         <div class="control-panel no-print">
-            <h2>⚙️ محرك التوليد الرياضي الصارم (تحديث التحكم وقفل استقرار الأسئلة)</h2>
+            <h2>⚙️ المحرك الرقمي الشامل لترسانة الصف الأول (المنهاج الفلسطيني الكامل)</h2>
             <div class="panel-grid">
                 <div class="input-group">
                     <label>اسم المدرسة</label>
@@ -332,23 +326,26 @@
             
             <div class="panel-grid">
                 <div class="input-group">
-                    <label>الصف الدراسي</label>
-                    <select id="gradeSelector" onchange="populateLessons()">
-                        <option value="grade2">الصف الثاني الأساسي</option>
-                        <option value="grade1">الصف الأول الأساسي</option>
+                    <label>الوحدة المستهدفة للعمل أو التشخيص</label>
+                    <select id="unitSelector" onchange="populateLessonsByUnit()">
+                        <option value="u1">الوحدة الأولى: الأعداد (١ - ٩) والمفاهيم الأساسية</option>
+                        <option value="u2">الوحدة الثانية: العدد (٠) ومكونات الأعداد والعمليات والعدد ١٠ إلى ٢٠</option>
+                        <option value="u3">الوحدة الثالثة: المنازل والقيمة والجمع ضمن (١٨)</option>
+                        <option value="u4">الوحدة الرابعة: الطرح ضمن (١٨) والأعداد لـ ٩٩ والهندسة</option>
+                        <option value="diagnostic">📊 تقييم تشخيصي فتراتي شامل للمنهاج</option>
                     </select>
                 </div>
                 <div class="input-group">
-                    <label>المبحث والدرس التفصيلي الشامل</label>
+                    <label>الدرس التفصيلي الشامل</label>
                     <select id="lessonSelector" onchange="syncTeacherPanelWithLesson()"></select>
                 </div>
                 <div class="input-group">
                     <label>مستوى التدرج التربوي</label>
                     <select id="levelSelector">
-                        <option value="adaptive">متوازن وتكيفي متدرج</option>
-                        <option value="concrete">المستوى المحسوس (رسومات وبصريات)</option>
-                        <option value="semi_concrete">المستوى شبه المحسوس (مسائل لفظية)</option>
-                        <option value="abstract">المستوى المجرد (رموز ومعادلات)</option>
+                        <option value="adaptive">متوازن وتكيفي متدرج (محسوس ➔ شبه محسوس ➔ مجرد)</option>
+                        <option value="concrete">المستوى المحسوس (رسومات وبصريات وشطب)</option>
+                        <option value="semi_concrete">المستوى شبه المحسوس (سياقات ومسائل لفظية)</option>
+                        <option value="abstract">المستوى المجرد (رموز وعلامات منطقية)</option>
                     </select>
                 </div>
                 <div class="input-group">
@@ -358,19 +355,19 @@
             </div>
 
             <div style="margin-top: 20px; padding: 20px; background: #fafafa; border: 1px dashed var(--teacher-color); border-radius: 12px;">
-                <h3 style="margin-top:0; color: var(--teacher-color); font-size: 13pt;">🧠 نافذة أفكار المعلم الذكية (أقصى تحكم ميكانيكي مرن دون كود)</h3>
+                <h3 style="margin-top:0; color: var(--teacher-color); font-size: 13pt;">🧠 نافذة أفكار المعلم الذكية (تحكم ميكانيكي مرن فوري)</h3>
                 <div class="panel-grid">
                     <div class="input-group" style="grid-column: span 2;">
                         <label>نص منطوق السؤال المعدل (اترك فارغاً للاعتماد على المولد التلقائي)</label>
-                        <input type="text" id="customQuestionTitle" placeholder="مثال: مستعيناً بالرسومات البصرية المجاورة، جِدْ ناتج...">
+                        <input type="text" id="customQuestionTitle" placeholder="مثال: مستعيناً بالرسومات البصرية المجاورة...">
                     </div>
                     <div class="input-group">
-                        <label>العنصر الرقمي الأول (الأساسي)</label>
-                        <input type="text" id="customNum1" placeholder="تلقائي إن تُرِك فارغاً" oninput="formatEasternInput(this)">
+                        <label>العنصر الرقمي الأول</label>
+                        <input type="text" id="customNum1" placeholder="تلقائي" oninput="formatEasternInput(this)">
                     </div>
                     <div class="input-group">
-                        <label>العنصر الرقمي الثاني (الفرعي)</label>
-                        <input type="text" id="customNum2" placeholder="تلقائي إن تُرِك فارغاً" oninput="formatEasternInput(this)">
+                        <label>العنصر الرقمي الثاني</label>
+                        <input type="text" id="customNum2" placeholder="تلقائي" oninput="formatEasternInput(this)">
                     </div>
                 </div>
                 <div class="panel-grid">
@@ -381,13 +378,13 @@
                             <option value="horizontal">معادلة أفقية مستقيمة ( __ = __ + __ )</option>
                             <option value="vertical">قالب حساب عمودي منظم</option>
                             <option value="comparison">مقارنة ومنزلة منطقية ( [  ]  ___  [  ] )</option>
-                            <option value="visual_boxes">صناديق رسوم بصرية فارغة للطلاب</option>
+                            <option value="visual_boxes">صناديق منازل بصرية فارغة للطلاب</option>
                             <option value="pure_text">مساحة كتابة نصية حرة الأسطر</option>
                         </select>
                     </div>
                     <div class="input-group" style="grid-column: span 2; justify-content: flex-end; display: flex; flex-direction: column;">
                         <label>&nbsp;</label>
-                        <button class="btn btn-teacher" style="width: 100%; justify-content: center;" onclick="injectTeacherCustomIdea()">✨ إدراج وصياغة فكرة المعلم المخصصة فوراً</button>
+                        <button class="btn btn-teacher" style="width: 100%; justify-content: center; font-weight: bold; color:white;" onclick="injectTeacherCustomIdea()">✨ إدراج وصياغة فكرة المعلم المخصصة فوراً</button>
                     </div>
                 </div>
             </div>
@@ -415,7 +412,7 @@
                 </div>
                 <div class="header-item left">
                     <div>الاسم: ............................................</div>
-                    <div id="outGrade">الصف: .......................................</div>
+                    <div id="outGrade">الصف: الأول الأساسي</div>
                     <div id="outTeacher">المعلم: ....................................</div>
                     <div id="outDate">التاريخ: ...... / ...... / ٢٠٢٦ م</div>
                 </div>
@@ -469,95 +466,117 @@
         }
 
         function saveMetadata() {
-            localStorage.setItem('math_schoolName', document.getElementById("schoolInput").value);
-            localStorage.setItem('math_teacherName', document.getElementById("teacherInput").value);
-            localStorage.setItem('math_modelLetter', document.getElementById("modelSelector").value);
+            localStorage.setItem('math_schoolName_g1', document.getElementById("schoolInput").value);
+            localStorage.setItem('math_teacherName_g1', document.getElementById("teacherInput").value);
+            localStorage.setItem('math_modelLetter_g1', document.getElementById("modelSelector").value);
         }
 
         function loadMetadata() {
-            if(localStorage.getItem('math_schoolName')) document.getElementById("schoolInput").value = localStorage.getItem('math_schoolName');
-            if(localStorage.getItem('math_teacherName')) document.getElementById("teacherInput").value = localStorage.getItem('math_teacherName');
-            if(localStorage.getItem('math_modelLetter')) document.getElementById("modelSelector").value = localStorage.getItem('math_modelLetter');
+            if(localStorage.getItem('math_schoolName_g1')) document.getElementById("schoolInput").value = localStorage.getItem('math_schoolName_g1');
+            if(localStorage.getItem('math_teacherName_g1')) document.getElementById("teacherInput").value = localStorage.getItem('math_teacherName_g1');
+            if(localStorage.getItem('math_modelLetter_g1')) document.getElementById("modelSelector").value = localStorage.getItem('math_modelLetter_g1');
         }
 
         const curriculumRepository = {
-            grade2: {
-                name: "الصف الثاني الأساسي",
-                directorate: "مديرية التربية والتعليم - طوباس",
+            u1: {
+                name: "الوحدة الأولى: الأعداد (١-٩) والمفاهيم",
                 items: [
-                    { id: "g2_u1_d1", type: "comparison", minVal: 10, maxVal: 99, title: "المقارنة بين عددين ضمن ٩٩" },
-                    { id: "g2_u1_d2", type: "ordering", minVal: 10, maxVal: 99, title: "ترتيب الأعداد ضمن ٩٩" },
-                    { id: "g2_u1_d3", type: "place_value", minVal: 10, maxVal: 99, title: "القيمة المنزلية للأعداد ضمن ٩٩" },
-                    { id: "g2_u1_d4", type: "even_odd", minVal: 10, maxVal: 99, title: "العدد الزوجي والعدد الفردي ضمن ٩٩" },
-                    { id: "g2_u1_review", type: "unit_review", minVal: 10, maxVal: 99, title: "مراجعة وحدة الأعداد ضمن ٩٩" },
-                    { id: "g2_u2_d1", type: "operation_add", minVal: 10, maxVal: 99, title: "الجمع دون حمل ضمن ٩٩" },
-                    { id: "g2_u2_d2", type: "operation_sub", minVal: 10, maxVal: 99, title: "طرح عددين ضمن ٩٩ دون استلاف" },
-                    { id: "g2_u2_review", type: "unit_review", minVal: 10, maxVal: 99, title: "مراجعة وحدة الجمع والطرح ضمن ٩٩" },
-                    { id: "g2_u3_d1", type: "lesson", minVal: 100, maxVal: 199, title: "الأعداد ضمن ١٩٩" },
-                    { id: "g2_u3_d2", type: "lesson", minVal: 100, maxVal: 999, title: "الأعداد ضمن ٩٩٩" },
-                    { id: "g2_u3_d3", type: "place_value", minVal: 100, maxVal: 999, title: "القيمة المنزلية للأعداد ضمن ٩٩٩" },
-                    { id: "g2_u3_d4", type: "comparison", minVal: 100, maxVal: 999, title: "مقارنة الأعداد ضمن ٩٩٩" },
-                    { id: "g2_u3_d5", type: "ordering", minVal: 100, maxVal: 999, title: "ترتيب الأعداد ضمن ٩٩٩" },
-                    { id: "g2_u3_d6", type: "even_odd", minVal: 100, maxVal: 999, title: "الأعداد الزوجية والفردية ضمن ٩٩٩" },
-                    { id: "g2_u3_review", type: "unit_review", minVal: 100, maxVal: 999, title: "مراجعة وحدة الأعداد ضمن ٩٩٩" },
-                    { id: "g2_u4_d1", type: "geometry_lines", title: "القطعة المستقيمة والخط المنحني" },
-                    { id: "g2_u4_d2", type: "geometry_shapes", shapeType: "مربع", title: "المربع (الخصائص والرسم)" },
-                    { id: "g2_u4_d3", type: "geometry_shapes", shapeType: "مستطيل", title: "المستطيل (الخصائص والرسم)" },
-                    { id: "g2_u4_d4", type: "geometry_shapes", shapeType: "مثلث", title: "المثلث (الخصائص ورؤوسه)" },
-                    { id: "g2_u4_d5", type: "geometry_shapes", shapeType: "دائرة", title: "الدائرة" },
-                    { id: "g2_u4_review", type: "unit_review", title: "مراجعة وحدة الهندسة والقياس (١)" },
-                    { id: "g2_u5_d1", type: "data_basic", title: "البيانات ومفهومها" },
-                    { id: "g2_u5_d2", type: "data_pics", title: "تمثيل البيانات بالصور" },
-                    { id: "g2_u5_review", type: "unit_review", title: "مراجعة وحدة البيانات (١)" },
-                    { id: "g2_u6_d1", type: "skip_counting", title: "العد القفزي (اثنينات، ثلاثات، أربعات، خمسات)" },
-                    { id: "g2_u6_d2", type: "mul_concept", title: "مفهوم الضرب كجمع متكرر" },
-                    { id: "g2_u6_d3", type: "mul_table", factor: 2, title: "حقائق الضرب للعدد (٢)" },
-                    { id: "g2_u6_d4", type: "mul_table", factor: 3, title: "حقائق الضرب للعدد (٣)" },
-                    { id: "g2_u6_d5", type: "mul_table", factor: 4, title: "حقائق الضرب للعدد (٤)" },
-                    { id: "g2_u6_d6", type: "mul_table", factor: 5, title: "حقائق الضرب للعدد (٥)" },
-                    { id: "g2_u6_d7", type: "mul_table", factor: 10, title: "حقائق الضرب للعدد (١٠)" },
-                    { id: "g2_u7_d1", type: "div_concept", title: "مفهوم القسمة (التوزيع بالتساوي)" },
-                    { id: "g2_u7_d2", type: "division_1", title: "الجمع المجموعات المتكافئة (القسمة ١)" },
-                    { id: "g2_u7_d3", type: "division_2", title: "إيجاد ناتج القسمة (القسمة ٢)" },
-                    { id: "g2_u8_d1", type: "fraction_base", title: "الكسور (١/٢ ، ١/٣ ، ١/٤)" },
-                    { id: "g2_u8_d2", type: "fraction_adv", title: "الكسور (١/٨ ، ١/٥)" },
-                    { id: "g2_u9_d1", type: "length_units", title: "وحدات الطول (المتر والسنتيمتر)" },
-                    { id: "g2_u9_d2", type: "clock_reading", title: "قراءة الساعة" },
-                    { id: "g2_u9_d3", type: "solid_shapes", title: "المجسمات (المكعب، متوازي المستطيلات)" },
-                    { id: "g2_u10_d1", type: "data_collect", title: "جمع البيانات البسيطة وتنظيمها" },
-                    { id: "g2_u10_d2", type: "data_charts", title: "التمثيلات البيانية بالأعمدة" },
-                    { id: "g2_u11_d1", type: "operation_add_carry", minVal: 10, maxVal: 99, title: "جمع عددين مع الحمل ضمن ٩٩" },
-                    { id: "g2_u11_d2", type: "operation_sub_borrow", minVal: 10, maxVal: 99, title: "طرح عددين مع الاستلاف ضمن ٩٩" }
+                    { id: "u1_all", type: "unit_diagnostic", title: "ورقة تشخيصية شاملة: الوحدة الأولى كاملة" },
+                    { id: "u1_d1", type: "number_concept", val: 1, title: "الدرس الأول: العدد واحد" },
+                    { id: "u1_d2", type: "number_concept", val: 2, title: "الدرس الثاني: العدد اثنان" },
+                    { id: "u1_d3", type: "number_concept", val: 3, title: "الدرس الثالث: العدد ثلاثة" },
+                    { id: "u1_d4", type: "number_concept", val: 4, title: "الدرس الرابع: العدد أربعة" },
+                    { id: "u1_d5", type: "number_concept", val: 5, title: "الدرس الخامس: العدد خمسة" },
+                    { id: "u1_d6", type: "number_concept", val: 6, title: "الدرس السادس: العدد ستة" },
+                    { id: "u1_d7", type: "number_concept", val: 7, title: "الدرس السابع: العدد سبعة" },
+                    { id: "u1_d8", type: "number_concept", val: 8, title: "الدرس الثامن: العدد ثمانية" },
+                    { id: "u1_d9", type: "number_concept", val: 9, title: "الدرس التاسع: العدد تسعة" },
+                    { id: "u1_d10", type: "comparison", minVal: 1, maxVal: 9, title: "الدرس العاشر: مقارنة عددين ضمن ٩" },
+                    { id: "u1_d11", type: "ordering_asc", minVal: 1, maxVal: 9, title: "الدرس الحادي عشر: الترتيب التصاعدي" },
+                    { id: "u1_d12", type: "ordering_desc", minVal: 1, maxVal: 9, title: "الدرس الثاني عشر: الترتيب التنازلي" },
+                    { id: "u1_d13", type: "next_num", minVal: 1, maxVal: 8, title: "الدرس الثالث عشر: العدد التالي" },
+                    { id: "u1_d14", type: "prev_num", minVal: 2, maxVal: 9, title: "الدرس الرابع عشر: العدد السابق" },
+                    { id: "u1_d15", type: "ordinal_num", title: "الدرس الخامس عشر: العدد الترتيبي" }
                 ]
             },
-            grade1: {
-                name: "الصف الأول الأساسي",
-                directorate: "مديرية التربية والتعليم - طوباس",
+            u2: {
+                name: "الوحدة الثانية: مكونات الأعداد والعمليات والعدد ١٠ إلى ٢٠",
                 items: [
-                    { id: "g1_u1_d1", type: "lesson", minVal: 1, maxVal: 9, title: "الأعداد ضمن ٩" },
-                    { id: "g1_u1_d2", type: "operation_add", minVal: 1, maxVal: 9, title: "الجمع ضمن العدد ٩" },
-                    { id: "g1_u1_d3", type: "operation_sub", minVal: 1, maxVal: 9, title: "الطرح ضمن العدد ٩" }
+                    { id: "u2_all", type: "unit_diagnostic", title: "ورقة تشخيصية شاملة: الوحدة الثانية كاملة" },
+                    { id: "u2_d1", type: "number_concept", val: 0, title: "الدرس الأول: العدد صفر (٠)" },
+                    { id: "u2_d2", type: "components", maxVal: 5, title: "الدرس الثاني: مكونات الأعداد (أحاد) أولاً" },
+                    { id: "u2_d3", type: "components", maxVal: 9, title: "الدرس الثالث: مكونات الأعداد (أحاد) ثانياً" },
+                    { id: "u2_d4", type: "operation_add", maxVal: 9, title: "الدرس الرابع: الجمع ضمن العدد ٩" },
+                    { id: "u2_d5", type: "operation_sub", maxVal: 9, title: "الدرس الخامس: الطرح ضمن العدد ٩" },
+                    { id: "u2_d6", type: "add_sub_relation", maxVal: 9, title: "الدرس السادس: العلاقة بين الجمع والطرح" },
+                    { id: "u2_d7", type: "components", maxVal: 10, title: "الدرس السابع: العدد ١٠ وتكويناته" },
+                    { id: "u2_d8", type: "number_concept_range", minVal: 11, maxVal: 19, title: "الدرس الثامن: الأعداد من ١١ إلى ١٩" },
+                    { id: "u2_d9", type: "components", maxVal: 20, title: "الدرس التاسع: العدد ٢٠ وتكويناته" }
+                ]
+            },
+            u3: {
+                name: "الوحدة الثالثة: القيمة والترتيب والجمع لـ (١٨)",
+                items: [
+                    { id: "u3_all", type: "unit_diagnostic", title: "ورقة تشخيصية شاملة: الوحدة الثالثة كاملة" },
+                    { id: "u3_d1", type: "next_num", minVal: 10, maxVal: 19, title: "الدرس الأول: العدد التالي" },
+                    { id: "u3_d2", type: "prev_num", minVal: 11, maxVal: 20, title: "الدرس الثاني: العدد السابق" },
+                    { id: "u3_d3", type: "comparison", minVal: 10, maxVal: 20, title: "الدرس الثالث: المقارنة بين عددين" },
+                    { id: "u3_d4", type: "ordering_asc", minVal: 10, maxVal: 20, title: "الدرس الرابع: الترتيب التصاعدي" },
+                    { id: "u3_d5", type: "ordering_desc", minVal: 10, maxVal: 20, title: "الدرس الخامس: الترتيب التنازلي" },
+                    { id: "u3_d6", type: "place_value", minVal: 10, maxVal: 20, title: "الدرس السادس: القيمة المنزلية" },
+                    { id: "u3_d7", type: "expanded_form", minVal: 10, maxVal: 20, title: "الدرس السابع: الصورة الموسعة" },
+                    { id: "u3_d8", type: "operation_add", maxVal: 10, title: "الدرس الثامن: الجمع ضمن العدد (١٠)" },
+                    { id: "u3_d9", type: "operation_add", maxVal: 18, title: "الدرس التاسع: الجمع ضمن العدد (١٨) أولاً" },
+                    { id: "u3_d10", type: "operation_add", maxVal: 18, title: "الدرس العاشر: الجمع ضمن العدد (١٨) ثانياً" }
+                ]
+            },
+            u4: {
+                name: "الوحدة الرابعة: الطرح لـ (١٨)، الأعداد لـ ٩٩ والهندسة",
+                items: [
+                    { id: "u4_all", type: "unit_diagnostic", title: "ورقة تشخيصية شاملة: الوحدة الرابعة كاملة" },
+                    { id: "u4_d1", type: "operation_sub", maxVal: 10, title: "الدرس الأول: الطرح ضمن العدد (١٠)" },
+                    { id: "u4_d2", type: "operation_sub", maxVal: 18, title: "الدرس الثاني: الطرح ضمن العدد (١٨) أولاً" },
+                    { id: "u4_d3", type: "operation_sub", maxVal: 18, title: "الدرس الثالث: الطرح ضمن العدد (١٨) ثانياً" },
+                    { id: "u4_d4", type: "operation_sub", maxVal: 18, title: "الدرس الرابع: الطرح ضمن العدد (١٨) ثالثاً" },
+                    { id: "u4_d5", type: "number_concept_range", minVal: 20, maxVal: 40, title: "الدرس الخامس: الأعداد من ٢٠–٤٠" },
+                    { id: "u4_d6", type: "place_value", minVal: 20, maxVal: 40, title: "الدرس السادس: تمثيل الأعداد" },
+                    { id: "u4_d7", type: "number_concept_range", minVal: 40, maxVal: 99, title: "الدرس السابع: الأعداد من ٤٠–٩٩" },
+                    { id: "u4_d8", type: "multiples_ten", title: "الدرس الثامن: مضاعفات العشرة" },
+                    { id: "u4_d9", type: "operation_sub_borrow", minVal: 21, maxVal: 99, title: "الدرس التاسع: الاستلاف بالأحاد" },
+                    { id: "u4_d10", type: "geometry_flat", title: "الدرس العاشر: المربع – المستطيل – المثلث – الدائرة" },
+                    { id: "u4_d11", type: "geometry_solids", title: "الدرس الحادي عشر: متوازي المستطيلات – المكعب – الكرة" },
+                    { id: "u4_d12", type: "geometry_parts", title: "الدرس الثاني عشر: أجزاء الشكل" }
+                ]
+            },
+            diagnostic: {
+                name: "التقييمات الفتراتية والتشخيصية الشاملة",
+                items: [
+                    { id: "diag_entry", type: "global_diagnostic", period: "entry", title: "📊 الاختبار التشخيصي القبلي (بداية العام)" },
+                    { id: "diag_p1", type: "global_diagnostic", period: "p1", title: "📊 اختبار الفترة الأولى الشامل" },
+                    { id: "diag_p2", type: "global_diagnostic", period: "p2", title: "📊 اختبار الفترة الثانية (نصف الفصل)" },
+                    { id: "diag_p3", type: "global_diagnostic", period: "p3", title: "📊 اختبار الفترة الثالثة الشامل" },
+                    { id: "diag_final", type: "global_diagnostic", period: "final", title: "📊 الاختبار النهائي الموحد" }
                 ]
             }
         };
 
-        function populateLessons() {
-            const grade = document.getElementById("gradeSelector").value;
+        function populateLessonsByUnit() {
+            const unitKey = document.getElementById("unitSelector").value;
             const lessonSelect = document.getElementById("lessonSelector");
             lessonSelect.innerHTML = "";
-            curriculumRepository[grade].items.forEach(item => {
+            curriculumRepository[unitKey].items.forEach(item => {
                 const opt = document.createElement("option");
                 opt.value = item.id;
-                opt.text = (item.type.includes("review") ? "🏆 " : "📝 ") + toEasternArabicDigits(item.title);
+                opt.text = toEasternArabicDigits(item.title);
                 lessonSelect.appendChild(opt);
             });
             syncTeacherPanelWithLesson();
         }
 
         function syncTeacherPanelWithLesson() {
-            const gradeKey = document.getElementById("gradeSelector").value;
+            const unitKey = document.getElementById("unitSelector").value;
             const lessonId = document.getElementById("lessonSelector").value;
-            const lessonObj = curriculumRepository[gradeKey].items.find(i => i.id === lessonId);
+            const lessonObj = curriculumRepository[unitKey].items.find(i => i.id === lessonId);
             if(lessonObj) {
                 document.getElementById("customQuestionTitle").placeholder = `مثال معدل لدرس: ${toEasternArabicDigits(lessonObj.title)}`;
             }
@@ -616,14 +635,14 @@
                 if (block.querySelector('.creative-addition')) return;
                 const creativePrompt = document.createElement("div");
                 creativePrompt.className = "creative-addition";
-                creativePrompt.innerText = "🎨 ارسُمْ رَسْمَةً بَصَرِيَّةً تُعَبِّرُ عَنْ طَرِيقَةِ تَفْكِيرِكَ فِي حَلِّ هَذِهِ المَسْأَلَةِ.";
+                creativePrompt.innerText = "🎨 ارسُمْ رَسْمَةً بَصَرِيَّةً لِمَجْمُوعَةٍ تُعَبِّرُ عَنْ حَلِّكَ الذَّكِيِّ.";
                 block.appendChild(creativePrompt);
             });
         }
 
         function generateWorksheet() {
             const bodyContainer = document.getElementById("sheetBody");
-            const gradeKey = document.getElementById("gradeSelector").value;
+            const unitKey = document.getElementById("unitSelector").value;
             const lessonId = document.getElementById("lessonSelector").value;
             const schoolName = document.getElementById("schoolInput").value;
             const teacherName = document.getElementById("teacherInput").value;
@@ -634,15 +653,13 @@
             let targetCount = isNaN(parsedCount) || parsedCount <= 0 ? 5 : parsedCount;
             
             const levelMode = document.getElementById("levelSelector").value;
-            const gradeData = curriculumRepository[gradeKey];
-            const lessonObj = gradeData.items.find(i => i.id === lessonId);
+            const unitData = curriculumRepository[unitKey];
+            const lessonObj = unitData.items.find(i => i.id === lessonId);
             
             document.title = "ورقة عمل - " + lessonObj.title;
 
             document.getElementById("outSchool").innerText = "مدرسة: " + schoolName;
             document.getElementById("outTeacher").innerText = "المعلم: " + teacherName;
-            document.getElementById("outGrade").innerText = "الصف: " + gradeData.name;
-            document.getElementById("outDirectorate").innerText = gradeData.directorate;
             document.getElementById("outModel").innerText = "نموذج: " + modelLetter;
             document.getElementById("outLessonTitle").innerText = toEasternArabicDigits(lessonObj.title);
             
@@ -668,9 +685,19 @@
             let questionsNeeded = targetCount - lockedCount;
             if (questionsNeeded < 0) questionsNeeded = 0;
 
+            let typesPool = ["number_concept", "comparison", "ordering_asc", "operation_add", "operation_sub", "place_value"];
+            
             for (let q = 1; q <= questionsNeeded; q++) {
+                let currentObj = { ...lessonObj };
+                if (lessonObj.type === "unit_diagnostic" || lessonObj.type === "global_diagnostic") {
+                    currentObj.type = typesPool[(q - 1) % typesPool.length];
+                    if(unitKey === "u1") { currentObj.minVal = 1; currentObj.maxVal = 9; }
+                    else if(unitKey === "u2") { currentObj.minVal = 0; currentObj.maxVal = 20; }
+                    else { currentObj.minVal = 10; currentObj.maxVal = 99; }
+                }
+                
                 let tempDiv = document.createElement('div');
-                tempDiv.innerHTML = buildAlgorithmicQuestion(lockedCount + q, lessonObj, baseSeed + q, levelMode);
+                tempDiv.innerHTML = buildAlgorithmicQuestion(lockedCount + q, currentObj, baseSeed + q, levelMode);
                 bodyContainer.appendChild(tempDiv.firstElementChild);
             }
             
@@ -702,9 +729,9 @@
             const bodyContainer = document.getElementById("sheetBody");
             if (!bodyContainer.innerHTML) generateWorksheet();
 
-            const gradeKey = document.getElementById("gradeSelector").value;
+            const unitKey = document.getElementById("unitSelector").value;
             const lessonId = document.getElementById("lessonSelector").value;
-            const lessonObj = curriculumRepository[gradeKey].items.find(i => i.id === lessonId);
+            const lessonObj = curriculumRepository[unitKey].items.find(i => i.id === lessonId);
 
             const seed = "custom_" + Math.floor(Math.random() * 10000);
             
@@ -713,15 +740,15 @@
             let num2Input = document.getElementById("customNum2").value.trim();
             let structure = document.getElementById("customStructureType").value;
 
-            let rawN1 = num1Input ? parseInt(fromEasternArabicDigits(num1Input)) : getRandomIntSeeded(lessonObj.minVal || 10, lessonObj.maxVal || 99, seed + "x");
-            let rawN2 = num2Input ? parseInt(fromEasternArabicDigits(num2Input)) : getRandomIntSeeded(2, 9, seed + "y");
+            let rawN1 = num1Input ? parseInt(fromEasternArabicDigits(num1Input)) : getRandomIntSeeded(lessonObj.minVal || 1, lessonObj.maxVal || 9, seed + "x");
+            let rawN2 = num2Input ? parseInt(fromEasternArabicDigits(num2Input)) : getRandomIntSeeded(1, 5, seed + "y");
 
             let finalTitle = customTitleInput ? toEasternArabicDigits(customTitleInput) : `أَجِدُ نَاتِجَ المَسْأَلَةِ التَّالِيَةِ بِعِنَايَةٍ:`;
             let finalBody = "";
 
             if (structure === "auto") {
-                if (lessonObj.type === "comparison" || lessonObj.type === "place_value" || lessonObj.type === "even_odd") structure = "comparison";
-                else if (lessonObj.type.includes("geometry") || lessonObj.type.includes("fraction") || lessonObj.type.includes("solid")) structure = "pure_text";
+                if (lessonObj.type === "comparison" || lessonObj.type === "place_value") structure = "comparison";
+                else if (lessonObj.type && (lessonObj.type.includes("geometry") || lessonObj.type.includes("parts"))) structure = "pure_text";
                 else structure = "horizontal";
             }
 
@@ -740,7 +767,6 @@
                     <div class="visual-box-container">
                         <div class="visual-box"> آحَاد <span>................</span></div>
                         <div class="visual-box"> عَشَرَات <span>................</span></div>
-                        <div class="visual-box"> مِئَات <span>................</span></div>
                     </div>`;
             } else if (structure === "pure_text") {
                 finalBody = `<div class="custom-writing-area">مَسَاحَةُ الإِجَابَةِ المُرَتَّبَةِ:<br>........................................................................................................................................</div>`;
@@ -769,7 +795,7 @@
             if (creativityActive) {
                 const creativePrompt = document.createElement("div");
                 creativePrompt.className = "creative-addition";
-                creativePrompt.innerText = "🎨 ارسُمْ رَسْمَةً بَصَرِيَّةً تُعَبِّرُ عَنْ طَرِيقَةِ تَفْكِيرِكَ فِي حَلِّ هَذِهِ المَسْأَلَةِ.";
+                creativePrompt.innerText = "🎨 ارسُمْ رَسْمَةً بَصَرِيَّةً لِمَجْمُوعَةٍ تُعَبِّرُ عَنْ حَلِّكَ الذَّكِيِّ.";
                 qBlock.appendChild(creativePrompt);
             }
 
@@ -795,7 +821,7 @@
                     </div>
                 </div>
                 <div class="question-body" contenteditable="true">
-                    عَدَدٌ إِذَا أَضَفْنَا إِلَيْهِ نَفْسَهُ، ثُمَّ طَرَحْنَا مِنْهُ العَدَدَ [ <b>${toEasternArabicDigits(2)}</b> ] كَانَ النَّاتِجُ تَمَاماً [ <b>${toEasternArabicDigits(8)}</b> ]. فَمَنْ هُوَ هَذَا العَدَدُ النَّمُوذَجِيُّ؟
+                    أَنَا عَدَدٌ إِذَا أَضَفْتَ إِلَيَّ نَفْسِي كَانَ النَّاتِجُ تَمَاماً [ <b>${toEasternArabicDigits(٦)}</b> ]. فَمَنْ أَنَا؟
                     <br><br>العَدَدُ الذَّكِيُّ هُوَ: <span class="blank-space"></span>
                 </div>
             `;
@@ -821,138 +847,123 @@
             }
 
             switch(lesson.type) {
+                case "number_concept":
+                    let vTarget = lesson.val !== undefined ? lesson.val : getRandomIntSeeded(1, 9, seed);
+                    if (currentLevel === "concrete") {
+                        title += ` عُدَّ الأَشْكَالَ البَصَرِيَّةَ ثُمَّ اكْتُبِ العَدَدَ المُنَاسِبَ دَاخِلَ الصَّنْدُوقِ:`;
+                        body = `<div style="text-align:center; font-size:16pt;"><span class="concrete-shapes">${"★".repeat(vTarget === 0 ? 0 : vTarget)}</span> $\leftarrow$ العَدَدُ هُوَ: [ <span class="blank-space" style="width:50px;"></span> ]</div>`;
+                    } else {
+                        title += ` اكْتُبِ العَدَدَ التَّالِيَ بِالرُّمُوزِ الرِّيَاضِيَّةِ الصَّحِيحَةِ دَاخِلَ الفَرَاغِ:`;
+                        body = `<p style="text-align:center; font-size:16pt;">العَدَدُ [ <b>${toEasternArabicDigits(vTarget)}</b> ] يُكْتَبُ: <span class="blank-space"></span></p>`;
+                    }
+                    break;
+
+                case "number_concept_range":
+                    let vr = getRandomIntSeeded(lesson.minVal || 11, lesson.maxVal || 19, seed);
+                    title += ` اقْرَأِ العَدَدَ ثُمَّ مَثِّلْهُ بِالأَسْطُرِ أَوِ الكِتَابَةِ الرَّقْمِيَّةِ الدَّقِيقَةِ:`;
+                    body = `<p style="text-align:center; font-size:16pt;">العَدَدُ [ <b>${toEasternArabicDigits(vr)}</b> ] $\leftarrow$ مَكَانُ الإِجَابَةِ: <span class="blank-space-long"></span></p>`;
+                    break;
+
                 case "comparison":
-                    let c1 = getRandomIntSeeded(lesson.minVal || 10, lesson.maxVal || 99, seed);
-                    let c2 = getRandomIntSeeded(lesson.minVal || 10, lesson.maxVal || 99, seed + "c");
-                    if (c1 === c2) c2 = c2 - 2;
-                    if (c2 < (lesson.minVal || 10)) c2 = c1 + 3;
+                    let c1 = getRandomIntSeeded(lesson.minVal || 1, lesson.maxVal || 9, seed);
+                    let c2 = getRandomIntSeeded(lesson.minVal || 1, lesson.maxVal || 9, seed + "c");
+                    if (c1 === c2) c2 = c2 + 1 > (lesson.maxVal || 9) ? c2 - 1 : c2 + 1;
 
                     if (currentLevel === "concrete") {
-                        title += ` عُدَّ الأَشْكَالَ البَصَرِيَّةَ ثُمَّ ضَعْ إِشَارَةَ ( > ، < ، = ) فِي المُرَبَّعِ:`;
-                        body = `<div style="text-align:center; font-size:16pt;"><span class="concrete-shapes">${"★".repeat(c1 % 6 + 2)}</span> [ ${toEasternArabicDigits(c1)} ] <span class="blank-space" style="width:50px;"></span> [ ${toEasternArabicDigits(c2)} ] <span class="concrete-shapes">${"★".repeat(c2 % 6 + 2)}</span></div>`;
-                    } else if (currentLevel === "semi_concrete") {
-                        title += ` مَعَ سَامِي ${toEasternArabicDigits(c1)} قِرْشاً، وَمَعَ أَحْمَدَ ${toEasternArabicDigits(c2)} قِرْشاً. ضَعْ إِشَارَةَ المُقَارَنَةِ المُنَاسِبَةَ بَيْنَهُمَا:`;
-                        body = `<p style="text-align:center; font-size:18pt;">${toEasternArabicDigits(c1)} <span class="blank-space"></span> ${toEasternArabicDigits(c2)}</p> `;
+                        title += ` ضَعْ إِشَارَةَ ( > ، < ، = ) فِي المُرَبَّعِ بَعْدَ عَدِّ المَجْمُوعَاتِ:`;
+                        body = `<div style="text-align:center; font-size:16pt;"><span class="concrete-shapes">${"●".repeat(c1 % 6 + 1)}</span> [ ${toEasternArabicDigits(c1)} ] <span class="blank-space" style="width:50px;"></span> [ ${toEasternArabicDigits(c2)} ] <span class="concrete-shapes">${"●".repeat(c2 % 6 + 1)}</span></div>`;
                     } else {
-                        title += ` ضَعْ إِشَارَةَ ( > ، < ، = ) دَاخِلَ الفَرَاغِ لِتَكُونَ الجُمْلَةُ العَدَدِيَّةُ صَحِيحَةً:`;
+                        title += ` ضَعْ إِشَارَةَ ( > ، < ، = ) دَاخِلَ الفَرَاغِ لِتَكُونَ الجُمْلَةُ صَحِيحَةً:`;
                         body = `<p style="text-align:center; font-size:18pt;">${toEasternArabicDigits(c1)} <span class="blank-space"></span> ${toEasternArabicDigits(c2)}</p> `;
                     }
                     break;
 
-                case "ordering":
-                    let o1 = getRandomIntSeeded(lesson.minVal || 10, (lesson.maxVal || 99) - 10, seed);
-                    let o2 = o1 + getRandomIntSeeded(2, 4, seed);
-                    let o3 = o1 - getRandomIntSeeded(1, 3, seed);
-                    if (o3 < (lesson.minVal || 10)) o3 = o2 + 2;
-                    
-                    if (currentLevel === "semi_concrete") {
-                        title += ` قَامَ المُرْشِدُ بِتَسْجِيلِ أَعْمَارِ ثَلَاثَةِ طُلَّابٍ جُدُدٍ: ${toEasternArabicDigits(o1)} ، ${toEasternArabicDigits(o2)} ، ${toEasternArabicDigits(o3)}. رَتِّبْهَا تَصَاعُدِيّاً حَسَبَ السِّنِّ:`;
-                    } else {
-                        title += ` رَتِّبِ الأَعْدَادَ التَّالِيَةَ Tَرْتِيباً تَصَاعُدِيّاً نَمُوذَجِيّاً مِنَ الأَصْغَرِ إِلَى الأَكْبَرِ:`;
-                    }
-                    body = `<p style="text-align:center; font-size:16pt;">${toEasternArabicDigits(o1)} ، ${toEasternArabicDigits(o2)} ، ${toEasternArabicDigits(o3)}</p>التَّرْتِيبُ الصَّحِيحُ مِنَ اليَمِينِ: <span class="blank-space-long"></span>`;
+                case "ordering_asc":
+                    let o1 = getRandomIntSeeded(lesson.minVal || 1, (lesson.maxVal || 9) - 2, seed);
+                    let o2 = o1 + 1;
+                    let o3 = o1 + 2;
+                    title += ` رَتِّبِ الأَعْدَادَ التَّالِيَةَ تَرْتِيباً تَصَاعُدِيّاً مِنَ الأَصْغَرِ إِلَى الأَكْبَرِ:`;
+                    body = `<p style="text-align:center; font-size:16pt;">${toEasternArabicDigits(o2)} ، ${toEasternArabicDigits(o3)} ، ${toEasternArabicDigits(o1)}</p>التَّرْتِيبُ مِنَ اليَمِينِ: <span class="blank-space-long"></span>`;
                     break;
 
-                case "place_value":
-                    let pNum = getRandomIntSeeded(lesson.minVal || 10, lesson.maxVal || 99, seed);
-                    let digits = pNum.toString().split('');
-                    title += ` حَدِّدِ القِيمَةَ المَنْزِلِيَّةَ لِلرَّقْمِ الَّذِي تَحْتَهُ خَطٌّ مُسْتَقِيمٌ:`;
-                    if (digits.length === 2) {
-                        body = `العَدَدُ هُوَ [ <u>${toEasternArabicDigits(digits[0])}</u>${toEasternArabicDigits(digits[1])} ] القِيمَةُ المَنْزِلِيَّةُ لِلرَّقْمِ المَخْطُوطِ هِيَ: <span class="blank-space"></span>`;
-                    } else {
-                        body = `العَدَدُ هُوَ [ ${toEasternArabicDigits(digits[0])}<u>${toEasternArabicDigits(digits[1])}</u>${toEasternArabicDigits(digits[2])} ] القِيمَةُ المَنْزِلِيَّةُ لِلرَّقْمِ المَخْطُوطِ هِيَ: <span class="blank-space"></span>`;
-                    }
+                case "ordering_desc":
+                    let od1 = getRandomIntSeeded(lesson.minVal || 1, (lesson.maxVal || 9) - 2, seed);
+                    let od2 = od1 + 1;
+                    let od3 = od1 + 2;
+                    title += ` رَتِّبِ الأَعْدَادَ التَّالِيَةَ تَرْتِيباً تَنَازُلِيّاً مِنَ الأَكْبَرِ إِلَى الأَصْغَرِ:`;
+                    body = `<p style="text-align:center; font-size:16pt;">${toEasternArabicDigits(od2)} ، ${toEasternArabicDigits(od1)} ، ${toEasternArabicDigits(od3)}</p>التَّرْتِيبُ مِنَ اليَمِينِ: <span class="blank-space-long"></span>`;
                     break;
 
-                case "even_odd":
-                    let eoNum = getRandomIntSeeded(lesson.minVal || 10, lesson.maxVal || 99, seed);
-                    title += ` بَيِّنْ نَوْعَ العَدَدِ التَّالِي هَلْ هُوَ عَدَدٌ زَوْجِيٌّ أَمْ عَدَدٌ فَرْدِيٌّ:`;
-                    body = `العَدَدُ [ <b>${toEasternArabicDigits(eoNum)}</b> ] هُوَ عَدَدٌ: <span class="blank-space"></span>`;
+                case "next_num":
+                    let nx = getRandomIntSeeded(lesson.minVal || 1, lesson.maxVal || 8, seed);
+                    title += ` اكْتُبِ العَدَدَ التَّالِيَ مُبَاشَرَةً لِلْعَدَدِ مَعْرُوضِ:`;
+                    body = `<p style="text-align:center; font-size:16pt;">العَدَدُ التَّالِي لِلْعَدَدِ [ <b>${toEasternArabicDigits(nx)}</b> ] هُوَ: <span class="blank-space"></span></p>`;
+                    break;
+
+                case "prev_num":
+                    let pr = getRandomIntSeeded(lesson.minVal || 2, lesson.maxVal || 9, seed);
+                    title += ` اكْتُبِ العَدَدَ السَّابِقَ مُبَاشَرَةً لِلْعَدَدِ مَعْرُوضِ:`;
+                    body = `<p style="text-align:center; font-size:16pt;">العَدَدُ السَّابِقُ لِلْعَدَدِ [ <b>${toEasternArabicDigits(pr)}</b> ] هُوَ: <span class="blank-space"></span></p>`;
+                    break;
+
+                case "components":
+                    let compMax = lesson.maxVal || 5;
+                    title += ` أَكْمِلْ فَرَاغَاتِ مُكَوِّنَاتِ الأَعْدَادِ التَّالِيَةِ لِتَحْصُلَ عَلَى العَدَدِ مَطْلُوبِ:`;
+                    body = `<p style="text-align:center; font-size:16pt;">العَدَدُ [ <b>${toEasternArabicDigits(compMax)}</b> ] هُوَ عِبَارَةٌ عَنْ: <span class="blank-space" style="width:60px;"></span> + <span class="blank-space" style="width:60px;"></span></p>`;
                     break;
 
                 case "operation_add":
-                    let add1 = getRandomIntSeeded(lesson.minVal || 1, Math.floor((lesson.maxVal || 9) / 2), seed);
-                    let add2 = getRandomIntSeeded(lesson.minVal || 1, Math.floor((lesson.maxVal || 9) / 2), seed + "a");
+                    let mX = lesson.maxVal || 9;
+                    let add1 = getRandomIntSeeded(1, Math.floor(mX / 2), seed);
+                    let add2 = getRandomIntSeeded(1, Math.floor(mX / 2), seed + "a");
                     
                     if (currentLevel === "concrete") {
-                        title += ` جِدْ نَاتِجَ جَمْعِ المَجْمُوعَاتِ البَصَرِيَّةِ التَّالِيَةِ:`;
+                        title += ` جِدْ نَاتِجَ الجَمْعِ مُسْتَعِيناً بِالعَدِّ البَصَرِيِّ لِلرُّسُومِ:`;
                         body = `<div style="text-align:center;"><span class="concrete-shapes">${"●".repeat(add1)}</span> + <span class="concrete-shapes">${"●".repeat(add2)}</span> = <span class="blank-space"></span></div>`;
                     } else if (currentLevel === "semi_concrete") {
-                        title += ` قَطَفَ فَلَّاحٌ مِنَ البُسْتَانِ ${toEasternArabicDigits(add1)} ثِمَارٍ ثُمَّ قَطَفَ ${toEasternArabicDigits(add2)} أُخْرَى. كَمْ ثَمَرَةً مَعَهُ الآنَ؟`;
+                        title += ` مَعَ رَامِي ${toEasternArabicDigits(add1)} دَنَانِيرَ، وَأَعْطَاهُ أَبُوهُ ${toEasternArabicDigits(add2)} دَنَانِيرَ أُخْرَى. كَمْ مَعَهُ الآنَ؟`;
                         body = `<div class="math-column-form">${toEasternArabicDigits(add1)} + ${toEasternArabicDigits(add2)} = <span class="blank-space"></span></div>`;
                     } else {
-                        title += ` جِدْ نَاتِجَ عَمَلِيَّةِ الجَمْعِ الأُفُقِيَّةِ التَّالِيَةِ بِدِقَّةٍ:`;
+                        title += ` جِدْ نَاتِجَ عَمَلِيَّةِ الجَمْعِ الأُفُقِيَّةِ الصَّحِيحَةِ:`;
                         body = `<div class="math-column-form">${toEasternArabicDigits(add1)} + ${toEasternArabicDigits(add2)} = <span class="blank-space"></span></div>`;
                     }
                     break;
 
                 case "operation_sub":
-                    let sub1 = getRandomIntSeeded(Math.floor((lesson.maxVal || 9) / 2) + 2, lesson.maxVal || 9, seed);
-                    let sub2 = getRandomIntSeeded(lesson.minVal || 1, Math.floor((lesson.maxVal || 9) / 2), seed + "s");
+                    let mS = lesson.maxVal || 9;
+                    let sub1 = getRandomIntSeeded(Math.floor(mS / 2) + 1, mS, seed);
+                    let sub2 = getRandomIntSeeded(1, Math.floor(mS / 2), seed + "s");
                     if (sub1 < sub2) { let t = sub1; sub1 = sub2; sub2 = t; }
                     
                     if (currentLevel === "concrete") {
-                        title += ` اشْطُبْ مِنَ الرُّسُومَاتِ البَصَرِيَّةِ لِتَجِدَ نَاتِجَ الطَّرْحِ:`;
-                        body = `<div style="text-align:center;"><span class="concrete-shapes">${"■".repeat(sub1)}</span> (اقْطَعْ مِنْهَا ${toEasternArabicDigits(sub2)}) $\leftarrow$ البَاقِي هُوَ: <span class="blank-space"></span></div>`;
-                    } else if (currentLevel === "semi_concrete") {
-                        title += ` كَانَ عَلَى الشَّجَرَةِ ${toEasternArabicDigits(sub1)} عَصَافِيرَ، طَارَ مِنْهَا ${toEasternArabicDigits(sub2)} عَصَافِيرَ. كَمْ عُصْفُوراً بَقِيَ عَلَى الشَّجَرَةِ؟`;
-                        body = `<div class="math-column-form">${toEasternArabicDigits(sub1)} - ${toEasternArabicDigits(sub2)} = <span class="blank-space"></span></div>`;
+                        title += ` جِدْ نَاتِجَ الطَّرْحِ عَنْ طَرِيقِ شَطْبِ الرُّسُومَاتِ البَصَرِيَّةِ:`;
+                        body = `<div style="text-align:center;"><span class="concrete-shapes">${"■".repeat(sub1)}</span> (اقْطَعْ مِنْهَا ${toEasternArabicDigits(sub2)}) $\leftarrow$ البَاقِي: <span class="blank-space"></span></div>`;
                     } else {
-                        title += ` جِدْ نَاتِجَ عَمَلِيَّةِ الطَّرْحِ المُرَتَّبَةِ بِاصْطِفَافٍ صَحِيحٍ:`;
+                        title += ` أَوْجِدْ نَاتِجَ عَمَلِيَّةِ الطَّرْحِ التَّالِيَةِ:`;
                         body = `<div class="math-column-form">${toEasternArabicDigits(sub1)} - ${toEasternArabicDigits(sub2)} = <span class="blank-space"></span></div>`;
                     }
                     break;
 
-                case "skip_counting":
-                    title += ` أَكْمِلِ العَدَّ القَفْزِيَّ المُنْتَظَمَ التَّالِيَ بِتَفَوُّقٍ:`;
-                    body = `<p style="text-align:center; font-size:16pt;">${toEasternArabicDigits(2)} ، ${toEasternArabicDigits(4)} ، ${toEasternArabicDigits(6)} ، <span class="blank-space"></span> ، <span class="blank-space"></span></p>`;
+                case "place_value":
+                    let pNum = getRandomIntSeeded(lesson.minVal || 10, lesson.maxVal || 20, seed);
+                    title += ` حَلِّلِ العَدَدَ التَّالِيَ إِلَى مُكَوِّنَاتِهِ مِنَ الآحَادِ وَالعَشَرَاتِ:`;
+                    body = `<p style="text-align:center; font-size:16pt;">العَدَدُ [ <b>${toEasternArabicDigits(pNum)}</b> ] = <span class="blank-space" style="width:60px;"></span> آحَاد وَ <span class="blank-space" style="width:60px;"></span> عَشَرَات</p>`;
                     break;
 
-                case "mul_concept":
-                    title += ` حَوِّلْ جُمْلَةَ الجَمْعِ المُتَكَرِّرِ التَّالِيَةِ إِلَى جُمْلَةِ ضَرْبٍ مُكْتَمِلَةٍ:`;
-                    body = `<p style="text-align:center; font-size:16pt;"><span class="blank-space"></span> × <span class="blank-space"></span> = ${toEasternArabicDigits(3)} + ${toEasternArabicDigits(3)} + ${toEasternArabicDigits(3)}</p>`;
+                case "expanded_form":
+                    let exNum = getRandomIntSeeded(10, 20, seed);
+                    title += ` اكْتُبِ العَدَدَ التَّالِيَ بِالصُّورَةِ المُوَسَّعَةِ التَّحْلِيلِيَّةِ:`;
+                    body = `<p style="text-align:center; font-size:16pt;">${toEasternArabicDigits(exNum)} = <span class="blank-space" style="width:70px;"></span> + <span class="blank-space" style="width:70px;"></span></p>`;
                     break;
 
-                case "mul_table":
-                    let mulVal = getRandomIntSeeded(1, 10, seed);
-                    title += ` جِدْ نَاتِجَ حَقِيقَةِ الضَّرْبِ العِلْمِيَّةِ لِلْعَدَدِ (${toEasternArabicDigits(lesson.factor || 2)}):`;
-                    body = `<div class="math-column-form">${toEasternArabicDigits(mulVal)} × ${toEasternArabicDigits(lesson.factor || 2)} = <span class="blank-space"></span></div>`;
-                    break;
-
-                case "div_concept":
-                case "division_1":
-                case "division_2":
-                    let divFactor = getRandomIntSeeded(2, 5, seed);
-                    let divAns = getRandomIntSeeded(1, 5, seed + "d");
-                    let divTotal = divFactor * divAns;
-                    title += ` أَوْجِدْ نَاتِجَ عَمَلِيَّةِ القِسْمَةِ الرِّيَاضِيَّةِ العَادِلَةِ التَّالِيَةِ:`;
-                    body = `<div class="math-column-form">${toEasternArabicDigits(divTotal)} ÷ ${toEasternArabicDigits(divFactor)} = <span class="blank-space"></span></div>`;
-                    break;
-
-                case "geometry_shapes":
-                    title += ` أَوْجِدْ عَدَدَ الأَضْلَاعِ وَالرُّؤُوسِ المُرْتَبِطَةِ بِالشَّكْلِ المَطْلُوبِ:`;
-                    body = `شَكْلُ ( <b>${lesson.shapeType || 'المُثَلَّث'}</b> ) لَهُ عَدَدُ <span class="blank-space"></span> أَضْلَاعٍ ، وَعَدَدُ <span class="blank-space"></span> رُؤُوسٍ تَعْلِيمِيَّةٍ.`;
-                    break;
-
-                case "operation_add_carry":
-                    let ac1 = getRandomIntSeeded(15, 49, seed);
-                    let ac2 = getRandomIntSeeded(15, 45, seed + "c");
-                    title += ` جِدْ نَاتِجَ الجَمْعِ العَدَدِيِّ مَعَ الحَمْلِ دَاخِلَ المَنْزِلَةِ النَّمُوذَجِيَّةِ:`;
-                    body = `<div class="math-column-form">${toEasternArabicDigits(ac1)} + ${toEasternArabicDigits(ac2)} = <span class="blank-space"></span></div>`;
-                    break;
-
-                case "operation_sub_borrow":
-                    let sb1 = getRandomIntSeeded(51, 95, seed);
-                    let sb2 = getRandomIntSeeded(19, 49, seed + "b");
-                    if (sb1 < sb2) { let t = sb1; sb1 = sb2; sb2 = t; }
-                    title += ` جِدْ نَاتِجَ الطَّرْحِ العَدَدِيِّ مَعَ الِاسْتِيلَافِ المَنْزِلِيِّ الصَّارِمِ:`;
-                    body = `<div class="math-column-form">${toEasternArabicDigits(sb1)} - ${toEasternArabicDigits(sb2)} = <span class="blank-space"></span></div>`;
+                case "geometry_flat":
+                    title += ` تَعَرَّفْ عَلَى الهَنْدَسَةِ: كَمْ عَدَدُ أَضْلَاعِ الشَّكْلِ مَذْكُورِ؟`;
+                    body = `<p style="text-align:center; font-size:15pt;">شَكْلُ ( <b>المُثَلَّث</b> ) لَهُ عَدَدُ <span class="blank-space"></span> أَضْلَاعٍ مُسْتَقِيمَةٍ.</p>`;
                     break;
 
                 default:
-                    let v = getRandomIntSeeded(lesson.minVal || 10, lesson.maxVal || 99, seed);
-                    title += ` اقْرَأِ العَدَدَ الرَّقْمِيَّ التَّالِيَ ثُمَّ اكْتُبْهُ بِخَطِّكَ المُرَتَّبِ:`;
-                    body = `<p style="text-align:center; font-size:18pt;">العَدَدُ [ <b>${toEasternArabicDigits(v)}</b> ] يُكْتَبُ كَمَا يَلِي: <span class="blank-space-long"></span></p>`;
+                    title += ` اقْرَأِ مَسْأَلَةَ الرِّيَاضِيَّةَ التَّالِيَةَ ثُمَّ أَجِبْ دَاخِلَ الفَرَاغِ:`;
+                    body = `<div class="custom-writing-area">مَكَانُ خَطِّ الطَّالِبِ مُنَظَّمِ:<br>........................................................................................................................................</div>`;
                     break;
             }
 
@@ -970,7 +981,7 @@
 
         window.onload = function() { 
             loadMetadata();
-            populateLessons(); 
+            populateLessonsByUnit(); 
             generateWorksheet(); 
         };
     </script>
