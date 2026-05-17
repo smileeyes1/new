@@ -42,7 +42,7 @@
         }
         .panel-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
             margin-bottom: 20px;
         }
@@ -63,21 +63,6 @@
             border-radius: 8px;
             outline: none;
             font-family: inherit;
-        }
-        .slider-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: var(--primary-light);
-            padding: 10px 15px;
-            border-radius: 8px;
-        }
-        .slider-container input { flex: 1; }
-        .slider-val {
-            font-weight: bold;
-            font-size: 12pt;
-            min-width: 40px;
-            text-align: center;
         }
         .actions-row {
             display: flex;
@@ -105,6 +90,8 @@
         .btn-secondary { background-color: #34495e; color: white; }
         .btn-innovation { background-color: #d35400; color: white; }
         .btn-innovation:hover { background-color: #b34700; }
+        .btn-creativity { background-color: #27ae60; color: white; }
+        .btn-creativity:hover { background-color: #1e8449; }
         .btn-beauty { background-color: #8e44ad; color: white; }
         .btn-beauty:hover { background-color: #732d91; }
         
@@ -117,14 +104,12 @@
             position: relative;
             transition: all 0.3s ease;
         }
-        /* النمط الجمالي المعزز */
         .sheet-wrapper.enhanced-beauty {
             border: 6px double #1b5e20;
             outline: 2px solid #1b5e20;
             outline-offset: -12px;
             background-image: radial-gradient(#1b5e20 0.5px, transparent 0.5px);
             background-size: 24px 24px;
-            background-opacity: 0.02;
         }
         .flex-header {
             display: flex;
@@ -153,12 +138,14 @@
             margin-bottom: 40px;
             page-break-inside: avoid;
             position: relative;
-            padding: 10px;
+            padding: 15px;
+            border: 1px solid transparent;
             border-radius: 6px;
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
         .question-block:hover {
             background: #fdfefe;
+            border-color: #ddd;
         }
         .question-title {
             font-size: 13pt;
@@ -177,6 +164,31 @@
             line-height: 2.2;
             padding-right: 15px;
             color: #000;
+        }
+        .creative-addition {
+            margin-top: 12px;
+            padding: 8px 12px;
+            background: #f9fbf9;
+            border-right: 3px solid #27ae60;
+            font-size: 11pt;
+            color: #1e8449;
+            font-style: italic;
+        }
+        .creative-box {
+            border: 2px dashed #27ae60;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 30px;
+            background: #fff;
+            page-break-inside: avoid;
+        }
+        .creative-box-title {
+            font-weight: bold;
+            color: #27ae60;
+            font-size: 13pt;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #27ae60;
+            padding-bottom: 4px;
         }
         .delete-action {
             background: #c0392b;
@@ -277,21 +289,27 @@
                 </div>
                 <div class="input-group">
                     <label>المبحث والدرس التفصيلي</label>
-                    <select id="lessonSelector">
-                        </select>
+                    <select id="lessonSelector"></select>
                 </div>
                 <div class="input-group">
-                    <label>عدد الأسئلة المطلوبة</label>
-                    <div class="slider-container">
-                        <input type="range" id="countSlider" min="1" max="20" value="5" oninput="updateSliderLabel(this.value)">
-                        <span class="slider-val" id="sliderLabel">٥</span>
-                    </div>
+                    <label>مستوى التدرج التربوي</label>
+                    <select id="levelSelector">
+                        <option value="adaptive">متوازن وتكيفي متدرج</option>
+                        <option value="concrete">المستوى المحسوس (رسومات وشطب)</option>
+                        <option value="semi_concrete">المستوى شبه المحسوس (مسائل لفظية)</option>
+                        <option value="abstract">المستوى المجرد (رموز ومعادلات)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>عدد الأسئلة المطلوبة (مفتوح)</label>
+                    <input type="number" id="countInput" min="1" max="100" value="5">
                 </div>
             </div>
             
             <div class="actions-row">
                 <button class="btn btn-secondary" onclick="generateWorksheet()">⚡ توليد المتن النظيف</button>
                 <button class="btn btn-innovation" onclick="injectInnovativeQuestion()">💡 زر الابتكار</button>
+                <button class="btn btn-creativity" onclick="activateCreativityMode()">🎨 زر الإبداع</button>
                 <button class="btn btn-beauty" onclick="toggleBeautyTheme()">✨ زر الجمال</button>
                 <button class="btn btn-primary" onclick="window.print()">🖨️ طباعة فورية</button>
             </div>
@@ -324,6 +342,7 @@
 
     <script>
         let innovationCounter = 1;
+        let creativityActive = false;
 
         function toEasternArabicDigits(num) {
             const id = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
@@ -404,10 +423,6 @@
             });
         }
 
-        function updateSliderLabel(val) {
-            document.getElementById("sliderLabel").innerText = toEasternArabicDigits(val);
-        }
-
         function toggleBeautyTheme() {
             const sheet = document.getElementById("sheetOutput");
             sheet.classList.toggle("enhanced-beauty");
@@ -429,12 +444,14 @@
         }
 
         function generateWorksheet() {
+            creativityActive = false;
             const gradeKey = document.getElementById("gradeSelector").value;
             const lessonId = document.getElementById("lessonSelector").value;
             const schoolName = document.getElementById("schoolInput").value;
             const teacherName = document.getElementById("teacherInput").value;
             const modelLetter = document.getElementById("modelSelector").value;
-            const questionsCount = parseInt(document.getElementById("countSlider").value);
+            const questionsCount = parseInt(document.getElementById("countInput").value) || 5;
+            const levelMode = document.getElementById("levelSelector").value;
             
             const gradeData = curriculumRepository[gradeKey];
             const lessonObj = gradeData.items.find(i => i.id === lessonId);
@@ -446,14 +463,56 @@
             document.getElementById("outModel").innerText = "نموذج: " + modelLetter;
             document.getElementById("outLessonTitle").innerText = lessonObj.title;
             
-            const baseSeed = lessonId + "_" + modelLetter + "_";
+            // إضافة عامل عشوائي زمني حقيقي لضمان التغير اللانهائي عند كل نقرة
+            const runTimestamp = Math.floor(Math.random() * 999999);
+            const baseSeed = lessonId + "_" + modelLetter + "_" + runTimestamp + "_";
+            
             let htmlHTML = "";
             for (let q = 1; q <= questionsCount; q++) {
-                htmlHTML += buildAlgorithmicQuestion(q, lessonObj, baseSeed + q);
+                htmlHTML += buildAlgorithmicQuestion(q, lessonObj, baseSeed + q, levelMode);
             }
             document.getElementById("sheetBody").innerHTML = htmlHTML;
             document.getElementById("sheetOutput").style.display = "block";
             innovationCounter = questionsCount + 1;
+        }
+
+        function activateCreativityMode() {
+            if (!document.getElementById("sheetBody").innerHTML) return;
+            creativityActive = true;
+            
+            // تأثير حقيقي: تتبع جميع الأسئلة وإدراج بند مهارات تفكير عليا مفتوح ومخصص للأطفال لكل سؤال
+            const blocks = document.querySelectorAll('#sheetBody .question-block');
+            blocks.forEach((block, idx) => {
+                if (block.querySelector('.creative-addition')) return;
+                
+                const creativePrompt = document.createElement("div");
+                creativePrompt.className = "creative-addition";
+                
+                const prompts = [
+                    "🎨 ارسُمْ رَسْمَةً صَغِيرَةً فِي جَانِبِ الصَّفْحَةِ تُعَبِّرُ عَنْ حَلِّكَ الذَّكِيِّ.",
+                    "🧠 كَيْفَ تَحْقَّقْتَ مِنْ صِحَّةِ هَذَا الحَلِّ؟ اشْرَحْ لِصَدِيقِكَ بِالْكَلِمَاتِ.",
+                    "🌟 إِذَا كَانَتْ إِجَابَتُكَ صَحِيحَةً، ضَعْ لِنَفْسِكَ نَجْمَةً كَبِيرَةً وَلَوِّنْهَا.",
+                    "🔍 اكْتُبْ مَسْأَلَةً جَدِيدَةً تُشْبِهُ هَذِهِ المَسْأَلَةَ تَمَاماً مِنْ عَقْلِكَ."
+                ];
+                
+                creativePrompt.innerText = prompts[idx % prompts.length];
+                block.appendChild(creativePrompt);
+            });
+
+            // إدراج صندوق التحدي الأكبر لزيتونة الذكية في نهاية الورقة
+            if (!document.getElementById("masterCreativeBox")) {
+                const masterBox = document.createElement("div");
+                masterBox.id = "masterCreativeBox";
+                masterBox.className = "creative-box";
+                masterBox.innerHTML = `
+                    <div class="creative-box-title">🏆 صُنْدُوقُ العَبَاقِرَةِ الأذْكِيَاءِ (مَشْرُوعُ زَيْتُونَةَ التَّكَيُّفِيِّ)</div>
+                    <div style="font-size:12pt; line-height:1.8; color:#000;">
+                        فَكِّرْ ثُمَّ تَخَيَّلْ: إِذَا زَارَنَا طَالِبٌ جَدِيدٌ فِي الصَّفِّ وَلَا يَعْرِفُ مَوْضُوعَ اليَوْمِ، كَيْفَ تُسَاعِدُهُ بِرَسْمَةٍ وَاحِدَةٍ لِيَفْهَمَ هَذَا الدَّرْسَ تَمَاماً؟
+                        <br><br>[ ........................................................................................................................................ ]
+                    </div>
+                `;
+                document.getElementById("sheetBody").appendChild(masterBox);
+            }
         }
 
         function injectInnovativeQuestion() {
@@ -467,7 +526,6 @@
             let title = `<span class="question-title-text">السؤال ${toEasternArabicDigits(innovationCounter)}:</span>`;
             let body = "";
             
-            // أسئلة الذكاء المتقدم والتحدي المربوطة بالكامل بنوع الدرس
             switch(lessonObj.type) {
                 case "diagnostic":
                 case "unit_review":
@@ -479,7 +537,7 @@
                     body = `<b>سُؤالُ الِابْتِكَارِ:</b> اكْتُبْ كَلِمَةً أَوْ ارْسُمْ رَسْمَةً مَبْنِيَّةً عَلَى خَيَالِكَ التَّامِّ تُعَبِّرُ عَنْ تَمْثِيلِ العَدَدِ المُنْضَبِطِ [ <b>${toEasternArabicDigits(v)}</b> ]: <br><br> [ ........................................................................................ ]`;
                     break;
                 case "comparison":
-                    body = `<b>فَكِّرْ ثُمَّ أَجِبْ:</b> اكْتُبْ عَدَدًا مَفْقُودًا فِي الفَرَاغِ لِتَكُونَ الجُمْلَةُ الرِّيَاضِيَّةُ صَحِيحَةً تَمَامًا: <br><p style="text-align:center; font-size:14pt;"><span class="blank-space"></span> &gt; ${toEasternArabicDigits(lessonObj.minVal + 1)}</p>`;
+                    body = `<b>فَكِّرْ ثُمَّ أَجِبْ:</b> اكْتُبْ عَدَدًا مَفْقُودًا فِي الفَرَاغِ Lِتَكُونَ الجُمْلَةُ الرِّيَاضِيَّةُ صَحِيحَةً تَمَامًا: <br><p style="text-align:center; font-size:14pt;"><span class="blank-space"></span> &gt; ${toEasternArabicDigits(lessonObj.minVal + 1)}</p>`;
                     break;
                 case "ordering":
                     body = `<b>تحدّي التَّرْتِيبِ:</b> اكْتُبْ ثَلَاثَةَ أَعْدَادٍ مُخْتَلِفَةٍ مِنْ عِنْدِكَ تَقَعُ تَمَامًا بَيْنَ العَدَدِ [ ${toEasternArabicDigits(lessonObj.minVal)} ] وَالعَدَدِ [ ${toEasternArabicDigits(lessonObj.maxVal)} ] مُرَتَّبَةً تَصَاعُدِيًّا: <br><br> <span class="blank-space"></span> ، <span class="blank-space"></span> ، <span class="blank-space"></span>`;
@@ -517,16 +575,36 @@
                 </div>
                 <div class="question-body">${body}</div>
             `;
-            bodyContainer.appendChild(qBlock);
+            
+            // المحافظة على وجود صندوق التحدي في النهاية إن وجد
+            const masterBox = document.getElementById("masterCreativeBox");
+            if (masterBox) {
+                bodyContainer.insertBefore(qBlock, masterBox);
+            } else {
+                bodyContainer.appendChild(qBlock);
+            }
+            
+            if (creativityActive) {
+                const creativePrompt = document.createElement("div");
+                creativePrompt.className = "creative-addition";
+                creativePrompt.innerText = "🎨 ارسُمْ رَسْمَةً صَغِيرَةً فِي جَانِبِ الصَّفْحَةِ تُعَبِّرُ عَنْ حَلِّكَ الذَّكِيِّ.";
+                qBlock.appendChild(creativePrompt);
+            }
+            
             innovationCounter++;
             document.getElementById("sheetOutput").style.display = "block";
         }
 
-        function buildAlgorithmicQuestion(index, lesson, seed) {
+        function buildAlgorithmicQuestion(index, lesson, seed, levelMode) {
             const arabicIndex = toEasternArabicDigits(index);
             let title = `<span class="question-title-text">السؤال ${arabicIndex}:</span>`; 
             let body = "";
-            const mode = index % 3;
+            
+            // تحديد نمط السؤال بناء على مستوى التدرج المختار أو التناوب التكيفي
+            let mode = index % 3;
+            if (levelMode === "concrete") mode = 0;
+            if (levelMode === "semi_concrete") mode = 2;
+            if (levelMode === "abstract") mode = 1;
 
             switch(lesson.type) {
                 case "diagnostic":
@@ -553,7 +631,7 @@
                     if (mode === 0 && lesson.shape && currentVal > 0) {
                         title += ` عُدّ الأشكال البصرية الموضحة ثم اكتب العدد المناسب داخل الفراغ:`;
                         body = `<div class="shapes-container">${lesson.shape.repeat(currentVal)}</div> عَدَدُ العَنَاصِر = <span class="blank-space"></span>`;
-                    } else if (mode === 1 && currentVal > 0) {
+                    } else if (mode === 2 && currentVal > 0) {
                         title += ` ارسم عناصر هندسية مبسطة (دوائر أو نقاط) تمثل القيمة العددية المطلوبة تماماً:`;
                         body = `المطلوب رسم ما يماثل العدد [ <b>${toEasternArabicDigits(currentVal)}</b> ] داخل الحيز المقابل: <br><br> [ ........................................................................................ ]`;
                     } else {
@@ -577,7 +655,7 @@
                         let r = getRandomIntSeeded(lesson.minVal, lesson.maxVal, seed + arr.length);
                         if(!arr.includes(r)) arr.push(r);
                     }
-                    if (mode === 0) {
+                    if (mode === 0 || mode === 2) {
                         title += ` رتّب المجموعة العددية التالية ترتيباً تصاعدياً صحيحاً (من الأصغر إلى الأكبر):`;
                         body = `<p style="font-size:14pt; text-align:center; letter-spacing:10px;">${arr.map(toEasternArabicDigits).join(' ، ')}</p> الترتيب التصاعدي الصحيح: <span class="blank-space-long"></span>`;
                     } else {
@@ -615,7 +693,7 @@
                         body = `<div style="font-size:15pt; text-align:center; width:80px; margin:10px auto; border:1px solid #000; padding:10px; line-height:1.5;">${toEasternArabicDigits(s1)}<br>-<br>${toEasternArabicDigits(s2)}<br><hr></div>`;
                     } else {
                         title += ` اقرأ المسألة اللفظية الحياتية المنضبطة التالية ثم أوجد ناتج الطرح (الباقي):`;
-                        body = `كَانَ فِي المَزْرَعَةِ ${toEasternArabicDigits(s1)} خِرَافٍ، خَرَجَ مِنْهَا ${toEasternArabicDigits(s2)} خِرَافٍ. كَمْ خَرُوفاً بَقِيَ فِي المَزْرَعَةِ؟ <br> البَاقِي الفِعْلِي = <span class="blank-space"></span> خِرَافٍ.`;
+                        body = `كَانَ فِي Mَزْرَعَةِ ${toEasternArabicDigits(s1)} خِرَافٍ، خَرَجَ مِنْهَا ${toEasternArabicDigits(s2)} خِرَافٍ. كَمْ خَرُوفاً بَقِيَ فِي المَزْرَعَةِ؟ <br> البَاقِي الفِعْلِي = <span class="blank-space"></span> خِرَافٍ.`;
                     }
                     break;
 
