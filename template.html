@@ -5,26 +5,19 @@
     <title>منظومة أتمتة أوراق العمل الشاملة - المنهاج الفلسطيني</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; direction: rtl; background: #f4f7f6; color: black; margin: 0; padding: 20px; }
-        
-        /* لوحة تحكم المعلم - تختفي تلقائياً عند الطباعة */
         .control-panel { background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); max-width: 900px; margin: 0 auto 30px auto; border: 2px solid #2e7d32; text-align: center; }
         .control-panel h2 { color: #2e7d32; margin-top: 0; font-size: 18pt; }
         .select-container { display: flex; gap: 15px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap; }
         select { font-size: 13pt; padding: 10px; border-radius: 8px; border: 2px solid #2e7d32; width: 300px; outline: none; font-family: inherit; }
         .print-btn { background: #2e7d32; color: white; border: none; padding: 12px 30px; font-size: 14pt; border-radius: 8px; cursor: pointer; font-weight: bold; transition: background 0.2s; }
         .print-btn:hover { background: #1b5e20; }
-
-        /* إعدادات ورقة العمل والطباعة القياسية A4 */
         .sheet-container { background: white; max-width: 850px; margin: 0 auto; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.05); display: none; border: 1px solid #ccc; }
         @page { size: A4; margin: 15mm; }
-        
         @media print {
             body { background: white; padding: 0; }
             .control-panel { display: none; }
             .sheet-container { display: block; box-shadow: none; margin: 0; padding: 0; max-width: 100%; border: none; }
         }
-
-        /* ترويسة Flexbox القياسية للمدرسة */
         .flex-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px double black; padding-bottom: 10px; margin-bottom: 25px; }
         .header-item { flex: 1; }
         .header-item.right { text-align: right; font-size: 11pt; line-height: 1.4; }
@@ -32,21 +25,11 @@
         .header-item.left { text-align: left; font-size: 11pt; line-height: 1.4; }
         h1 { font-size: 18pt; margin: 0 0 5px 0; }
         h2.sheet-title { font-size: 14pt; margin: 0; font-weight: normal; }
-        
-        /* تنسيق المحتوى والأسئلة للتدرج الهندي */
         .content-section { margin-top: 15px; }
         .question-box { margin-bottom: 25px; page-break-inside: avoid; border: 1px solid #eee; padding: 15px; border-radius: 6px; }
         h3 { font-size: 13pt; margin-top: 0; margin-bottom: 12px; color: #000; border-bottom: 1px dashed #ccc; padding-bottom: 5px; }
         .clean-input { border: none; border-bottom: 1.5px dashed black; width: 60px; display: inline-block; text-align: center; height: 20px; }
         .shapes-display { font-size: 22pt; margin: 15px 0; letter-spacing: 5px; }
-        
-        /* إطارات العشرة ولوحة المنازل */
-        .ten-frame-container { display: flex; gap: 20px; margin: 15px 0; }
-        .ten-frame { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; border: 2px solid black; padding: 5px; background: #fff; width: 200px; }
-        .cell { border: 1px solid black; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 16pt; }
-        .place-table { border-collapse: collapse; width: 150px; text-align: center; margin: 10px 0; }
-        .place-table th, .place-table td { border: 1.5px solid black; padding: 8px; font-size: 12pt; }
-        .place-table th { background-color: #f2f2f2; }
     </style>
 </head>
 <body>
@@ -88,13 +71,11 @@
     </div>
 
     <script>
-        // هيكل قاعدة البيانات الكاملة لجميع دروس الصفين الأول والثاني
         const lessonsRepository = {
             "grade1": {
                 name: "الصف الأول الأساسي",
                 lessons: {
-                    // الوحدة الأولى
-                    "g1_u1_d1": { title: "العدد واحد (١)", content: `<div class="question-box"><h3>السؤال الأول: أعد الأشكال البصرية التالية، ثم أكتب العدد المناسب:</h3><div class="shapes-display">🦩</div><p>العدد هو: <span class="clean-input"></span></p></div><div class="question-box"><h3>السؤال الثاني: أرسم عنصراً واحداً داخل الصندوق الماليء:</h3><p>[ .................................................... ]</p></div><div class="question-box"><h3>السؤال الثالث: أكتب الرمز (١) بخط يدوي سليم ونظيف:</h3><p style="font-size:18pt; letter-spacing:20px;">١ ١ ١ ١ ١</p></div>` },
+                    "g1_u1_d1": { title: "العدد واحد (١)", content: `<div class="question-box"><h3>السؤال الأول: أعد الأشكال البصرية التالية، ثم أكتب العدد المناسب:</h3><div class="shapes-display">🦩</div><p>العدد هو: <span class="clean-input"></span></p></div><div class="question-box"><h3>السؤال الثاني: أرسم عنصراً واحداً داخل الصندوق الفارغ:</h3><p>[ .................................................... ]</p></div><div class="question-box"><h3>السؤال الثالث: أكتب الرمز (١) بخط يدوي سليم ونظيف:</h3><p style="font-size:18pt; letter-spacing:20px;">١ ١ ١ ١ ١</p></div>` },
                     "g1_u1_d2": { title: "العدد اثنان (٢)", content: `<div class="question-box"><h3>السؤال الأول: أعد وأكتب العدد المناسب في الفراغ:</h3><div class="shapes-display">🍎 🍎</div><p>العدد هو: <span class="clean-input"></span></p></div><div class="question-box"><h3>السؤال الثاني: أرسم تفاحتين ليمتلئ الصندوق:</h3><p>[ .................................................... ]</p></div><div class="question-box"><h3>السؤال الثالث: أكتب الرمز (٢) بخط سليم ونظيف:</h3><p style="font-size:18pt; letter-spacing:20px;">٢ ٢ ٢ ٢ ٢</p></div>` },
                     "g1_u1_d3": { title: "العدد ثلاثة (٣)", content: `<div class="question-box"><h3>السؤال الأول: أعد وأكتب العدد المناسب في الفراغ:</h3><div class="shapes-display">⭐ ⭐ ⭐</div><p>العدد هو: <span class="clean-input"></span></p></div><div class="question-box"><h3>السؤال الثاني: أضع دائرة حول ٣ عناصر فقط من المجموعة:</h3><div class="shapes-display">🎈 🎈 🎈 🎈</div></div>` },
                     "g1_u1_d4": { title: "العدد أربعة (٤)", content: `<div class="question-box"><h3>السؤال الأول: أعد وأكتب العدد المناسب في الفراغ:</h3><div class="shapes-display">🍀 🍀 🍀 🍀</div><p>العدد هو: <span class="clean-input"></span></p></div><div class="question-box"><h3>السؤال الثاني: أكمل الرسم لتصل المجموعة إلى ٤ عناصر:</h3><div class="shapes-display">💎 💎</div></div>` },
@@ -104,17 +85,41 @@
                     "g1_u1_d8": { title: "العدد ثمانية (٨)", content: `<div class="question-box"><h3>السؤال الأول: أعد عناصر المجموعة البصرية:</h3><div class="shapes-display">🦀 🦀 🦀 🦀 🦀 🦀 🦀 🦀</div><p>العدد: <span class="clean-input"></span></p></div>` },
                     "g1_u1_d9": { title: "العدد تسعة (٩)", content: `<div class="question-box"><h3>السؤال الأول: أعد وأكتب العدد المناسب في الفراغ:</h3><div class="shapes-display">🌻 🌻 🌻 🌻 🌻 🌻 🌻 🌻 🌻</div><p>العدد الكلي: <span class="clean-input"></span></p></div>` },
                     "g1_u1_d10": { title: "مقارنة عددين ضمن العدد ٩", content: `<div class="question-box"><h3>السؤال الأول: أضع الإشارة المناسبة ( &gt; ، &lt; ، = ) في الفراغ:</h3><p>٥ <span class="clean-input"></span> ٣</p><p>٧ <span class="clean-input"></span> ٩</p><p>٤ <span class="clean-input"></span> ٤</p></div>` },
-                    "g1_u1_d11": { title: "الترتيب التصاعدي", content: `<div class="question-box"><h3>السؤال الأول: أرتب الأعداد التالية تصاعدياً (من الأصغر إلى الأكبر):</h3><p style="font-size:16pt;">٣ ، ٩ ، ٥ ، ١</p><p>الترتيب: <span class="clean-input"></span> ، <span class="clean-input"></span> ، <span class="clean-input"></span> ، <span class="clean-input"></span></p></div>` },
-                    "g1_u1_d12": { title: "الترتيب التنازلي", content: `<div class="question-box"><h3>السؤال الأول: أرتب الأعداد التالية تنازلياً (من الأكبر إلى الأصغر):</h3><p style="font-size:16pt;">٤ ، ٢ ، ٨ ، ٦</p><p>الترتيب: <span class="clean-input"></span> ، <span class="clean-input"></span> ., <span class="clean-input"></span> ، <span class="clean-input"></span></p></div>` },
-                    "g1_u1_d13": { title: "الالعدد التالي ضمن العدد ٩", content: `<div class="question-box"><h3>السؤال الأول: أكتب العدد التالي مباشرة في الفراغ:</h3><p>العدد ٥ تاليه هو <span class="clean-input"></span></p><p>العدد ٨ تاليه هو <span class="clean-input"></span></p></div>` },
+                    "g1_u1_d11": { title: "الترتيب التصاعدي", content: `<div class="question-box"><h3>السؤال الأول: أرتب الأعداد التالية تصاعدياً (من الأصغر إلى الأكبر):</h3><p style="font-size:16pt;">٣ ، ٩ ، ٥ ، ١</p><p>الترتيب: <span class="clean-input"></span> ، <span class="clean-input"></span> ، <span class="clean-input"></span> Berry <span class="clean-input"></span></p></div>` },
+                    "g1_u1_d12": { title: "الترتيب التنازلي", content: `<div class="question-box"><h3>السؤال الأول: أرتب الأعداد التالية تنازلياً (من الأكبر إلى الأصغر):</h3><p style="font-size:16pt;">٤ ، ٢ ، ٨ ، ٦</p><p>الترتيب: <span class="clean-input"></span> ، <span class="clean-input"></span> ، <span class="clean-input"></span> ، <span class="clean-input"></span></p></div>` },
+                    "g1_u1_d13": { title: "العدد التالي ضمن العدد ٩", content: `<div class="question-box"><h3>السؤال الأول: أكتب العدد التالي مباشرة في الفراغ:</h3><p>العدد ٥ تاليه هو <span class="clean-input"></span></p><p>العدد ٨ تاليه هو <span class="clean-input"></span></p></div>` },
                     "g1_u1_d14": { title: "العدد السابق ضمن العدد ٩", content: `<div class="question-box"><h3>السؤال الأول: أكتب العدد السابق مباشرة في الفراغ:</h3><p>العدد ٤ سابقه هو <span class="clean-input"></span></p><p>العدد ٧ سابقه هو <span class="clean-input"></span></p></div>` },
-                    "g1_u1_d15": { title: "الالعدد الترتيبي", content: `<div class="question-box"><h3>السؤال الأول: ألاحظ ترتيب الأرانب المتسابقة نحو الجزرة، ثم أجيب:</h3><p>الأرنب الذي يقع في المركز الأول ملون باللون الأبيض.</p><p>ما هو المركز الترتيبي للأرنب الذي يليه مباشرة؟ المركز <span class="clean-input"></span></p></div>` },
-                    
-                    // الوحدة الثانية
+                    "g1_u1_d15": { title: "العدد الترتيبي", content: `<div class="question-box"><h3>السؤال الأول: ألاحظ ترتيب الأرانب المتسابقة نحو الجزرة، ثم أجيب:</h3><p>الأرنب الأول لونُه أبيض. ما هو الترتيب اللفظي للأرنب الذي يليه مباشرة؟ المركز <span class="clean-input"></span></p></div>` },
                     "g1_u2_d1": { title: "العدد صفر (٠)", content: `<div class="question-box"><h3>السؤال الأول: أعد حبات الفاكهة داخل القفص الفارغ:</h3><div class="shapes-display">[ ]</div><p>العدد هو: <span class="clean-input"></span></p></div>` },
                     "g1_u2_d2": { title: "مكونات الأعداد (أحاد) أولاً", content: `<div class="question-box"><h3>السؤال الأول: أجد مكونات العدد ٤ مستعيناً بالرسم البصري:</h3><div class="shapes-display">🔴 🔴 | 🔵 🔵</div><p>العدد ٤ يتكون من <span class="clean-input"></span> و <span class="clean-input"></span></p></div>` },
                     "g1_u2_d3": { title: "مكونات الأعداد (أحاد) ثانياً", content: `<div class="question-box"><h3>السؤال الأول: أكمل فراغات مكونات الأعداد الصافية:</h3><p>العدد ٧ يتكون من ٣ و <span class="clean-input"></span></p><p>العدد ٥ يتكون من ٠ و <span class="clean-input"></span></p></div>` },
-                    "g1_u2_d4": { title: "الجمع ضمن العدد ٩", content: `<div class="question-box"><h3>السؤال الأول: أستعين بالرسومات لحساب ناتج الجمع الكلي:</h3><div class="shapes-display">(🍎 🍎 🍎) + (🍎 🍎)</div><p>الجمع: ٣ + ٢ = <span class="clean-input"></span></p></div><div class="question-box"><h3>السؤال الثاني: أجد ناتج الجمع ذهنيّاً:</h3><p>٦ + ٣ = ......</p><p>٤ + ٤ = ......</p></div>` },
-                    "g1_u2_d5": { title: "الطرح ضمن العدد ٩", content: `<div class="question-box"><h3>السؤال الأول: أعد العناصر المتبقية بعد شطب العناصر التالفة:</h3><div class="shapes-display">🎈 🎈 🎈 <span style="text-decoration:line-through; color:red;">🎈 🎈</span></div><p>المسألة: ٥ - ٢ = <span class="clean-input"></span></p></div><div class="question-box"><h3>السؤال الثاني: أجد ناتج الطرح المجرد:</h3><p>٩ - ٤ = ......</p><p>٧ - ٣ = ......</p></div>` },
-                    "g1_u2_d6": { title: "العلاقة بين الجمع والطرح", content: `<div class="question-box"><h3>السؤال الأول: أكمل عائلة الحقائق المترابطة للأعداد (٣، ٥، ٨):</h3><p>٣ + ٥ = ٨</p><p>٥ + ٣ = <span class="clean-input"></span></p><p>٨ - ٥ = <span class="clean-input"></span></p></div>` },
-                    "g1_u2_d7": { title: "العدد ١٠ وتكويناته", content: `<div class="question-box"><h3>الس
+                    "g1_u2_d4": { title: "الجمع ضمن العدد ٩", content: `<div class="question-box"><h3>السؤال الأول: أستعين بالرسومات لحساب ناتج الجمع الكلي:</h3><div class="shapes-display">(🍎 🍎 🍎) + (🍎 🍎)</div><p>الجمع: ٣ + ٢ = <span class="clean-input"></span></p></div>` },
+                    "g1_u2_d5": { title: "الطرح ضمن العدد ٩", content: `<div class="question-box"><h3>السؤال الأول: أعد العناصر المتبقية بعد شطب العناصر التالفة:</h3><div class="shapes-display">🎈 🎈 🎈 <span style="text-decoration:line-through; color:red;">🎈 🎈</span></div><p>المسألة: ٥ - ٢ = <span class="clean-input"></span></p></div>` },
+                    "g1_u2_d6": { title: "العلاقة بين الجمع والطرح", content: `<div class="question-box"><h3>السؤال الأول: أكمل عائلة الحقائق المترابطة للأعداد (٣، ٥، ٨):</h3><p>٣ + ٥ = ٨ 👈 ٥ + ٣ = <span class="clean-input"></span> 👈 ٨ - ٥ = <span class="clean-input"></span></p></div>` },
+                    "g1_u2_d7": { title: "العدد ١٠ وتكويناته", content: `<div class="question-box"><h3>السؤال الأول: أكمل الفراغ لتكوين حزمة العدد ١٠ الكاملة:</h3><p>٩ + <span class="clean-input"></span> = ١٠ | ٨ + <span class="clean-input"></span> = ١٠</p></div>` },
+                    "g1_u2_d8": { title: "الأعداد من ١١ إلى ١٩", content: `<div class="question-box"><h3>السؤال الأول: أكتب قيمة الآحاد والعشرات الممثلة بالحزم:</h3><p> حزمة كاملة و ٣ عناصر منفردة 👈 العدد هو: <span class="clean-input"></span></p></div>` },
+                    "g1_u2_d9": { title: "العدد ٢٠ وتكويناته", content: `<div class="question-box"><h3>السؤال الأول: كم حزمة عشرات نحتاج لتكوين العدد ٢٠؟</h3><p>نحتاج إلى عدد <span class="clean-input"></span> حزم من العشرات الكاملة.</p></div>` },
+                    "g1_u3_d1": { title: "العدد التالي ضمن العدد ٩٩", content: `<div class="question-box"><h3>السؤال الأول: أكتب العدد التالي مباشرة للرموز المجردة:</h3><p>العدد ٢٤ تاليه هو <span class="clean-input"></span> | العدد ٥٩ تاليه هو <span class="clean-input"></span></p></div>` },
+                    "g1_u3_d2": { title: "العدد السابق ضمن العدد ٩٩", content: `<div class="question-box"><h3>السؤال الأول: أكتب العدد السابق مباشرة للرموز المجردة:</h3><p>العدد ٣٦ سابقه هو <span class="clean-input"></span> | العدد ٩٠ سابقه هو <span class="clean-input"></span></p></div>` },
+                    "g1_u3_d3": { title: "المقارنة بين عددين ضمن ٩٩", content: `<div class="question-box"><h3>السؤال الأول: أضع إشارة المقارنة الصحيحة ( &gt; ، &lt; ، = ):</h3><p>٤٥ <span class="clean-input"></span> ٥٤ | ٨٧ <span class="clean-input"></span> ٨٧</p></div>` },
+                    "g1_u3_d4": { title: "الترتيب التصاعدي ضمن العدد ٩٩", content: `<div class="question-box"><h3>السؤال الأول: أرتب الأعداد تصاعدياً: ٣٤ ، ١٢ ، ٩٨</h3><p>الترتيب: <span class="clean-input"></span> ، <span class="clean-input"></span> ، <span class="clean-input"></span></p></div>` },
+                    "g1_u3_d5": { title: "الترتيب التنازلي ضمن العدد ٩٩", content: `<div class="question-box"><h3>السؤال الأول: أرتب الأعداد تنازلياً: ٤٥ ، ٧٨ ، ٢٣</h3><p>الترتيب: <span class="clean-input"></span> ، <span class="clean-input"></span> ، <span class="clean-input"></span></p></div>` },
+                    "g1_u3_d6": { title: "القيمة المنزلية", content: `<div class="question-box"><h3>السؤال الأول: حدد القيمة الرقمية للمنزلة التي تحتها خط:</h3><p>٤<u>٧</u> 👈 قيمتها: <span class="clean-input"></span> | <u>٨</u>٣ 👈 قيمتها: <span class="clean-input"></span></p></div>` },
+                    "g1_u3_d7": { title: "الصورة الموسعة", content: `<div class="question-box"><h3>السؤال الأول: أكتب الأعداد بالصورة الموسعة:</h3><p>٥٩ = <span class="clean-input"></span> + <span class="clean-input"></span></p></div>` },
+                    "g1_u3_d8": { title: "الجمع ضمن العدد (١٠)", content: `<div class="question-box"><h3>السؤال الأول: أجد ناتج الجمع الأفقي المباشر:</h3><p>٧ + ٣ = ...... | ٦ + ٤ = ......</p></div>` },
+                    "g1_u3_d9": { title: "الجمع ضمن العدد (١٨) أولاً", content: `<div class="question-box"><h3>السؤال الأول: أجد ناتج الجمع بالإكمال للعشرة:</h3><p>٩ + ٥ = ٩ + ١ + ٤ = ١٠ + ٤ = <span class="clean-input"></span></p></div>` },
+                    "g1_u3_d10": { title: "الجمع ضمن العدد (١٨) ثانياً", content: `<div class="question-box"><h3>السؤال الأول: أجد ناتج الجمع المجرد سريعاً:</h3><p>٨ + ٧ = ...... | ٩ + ٩ = ......</p></div>` },
+                    "g1_u4_d1": { title: "الطرح ضمن العدد (١٠)", content: `<div class="question-box"><h3>السؤال الأول: أحسب ناتج الطرح الصافي:</h3><p>١٠ - ٦ = ...... | ١٠ - ٣ = ......</p></div>` },
+                    "g1_u4_d2": { title: "الطرح ضمن العدد (١٨) أولاً", content: `<div class="question-box"><h3>السؤال الأول: أجد ناتج الطرح بالتفكيك للمكونات:</h3><p>١٣ - ٤ = ١٠ - ٤ + ٣ = ٦ + ٣ = <span class="clean-input"></span></p></div>` },
+                    "g1_u4_d3": { title: "الطرح ضمن العدد (١٨) ثانياً", content: `<div class="question-box"><h3>السؤال الأول: أجد ناتج الطرح المجرد:</h3><p>١٥ - ٧ = ......</p></div>` },
+                    "g1_u4_d4": { title: "الطرح ضمن العدد (١٨) ثالثاً", content: `<div class="question-box"><h3>السؤال الأول: أحل المسألة اللفظية:</h3><p>في الحظيرة ١٤ خروفاً، خرج منها ٦ خراف. كم خروفاً بقي؟</p><p>الحل: ١٤ - ٦ = <span class="clean-input"></span> خراف.</p></div>` },
+                    "g1_u4_d5": { title: "الأعداد من ٢٠ إلى ٤٠", content: `<div class="question-box"><h3>السؤال الأول: أكتب الأعداد المفقودة في السلسلة:</h3><p>٢٨ ، ٢٩ ، <span class="clean-input"></span> ، ٣١ ، ٣٢ ، <span class="clean-input"></span></p></div>` },
+                    "g1_u4_d6": { title: "تمثيل الأعداد", content: `<div class="question-box"><h3>السؤال الأول: المعداد الممثل للرقم ٣٥ يحتوي في خانة العشرات على عدد <span class="clean-input"></span> حلقات.</h3></div>` },
+                    "g1_u4_d7": { title: "الأعداد من ٤٠ إلى ٩٩", content: `<div class="question-box"><h3>السؤال الأول: أكتب بالرموز المشرقية النظيفة:</h3><p>أربعة وسبعون = ...... | خمسة وتسعون = ......</p></div>` },
+                    "g1_u4_d8": { title: "مضاعفات العشرة", content: `<div class="question-box"><h3>السؤال الأول: أكمل العد القفزي بالعشرات:</h3><p>١٠ ، ٢٠ ، <span class="clean-input"></span> ، ٤٠ ، ٥٠ ، <span class="clean-input"></span></p></div>` },
+                    "g1_u4_d9": { title: "الاستلاف بالأحاد", content: `<div class="question-box"><h3>السؤال الأول: ألاحظ عملية الاستلاف العمودية ثم أجد الباقي:</h3><p style="letter-spacing:5px;"> (١٢)(٣)<br> ٤ ٢<br>- ١ ٥<br>------<br> <span class="clean-input"></span></p></div>` },
+                    "g1_u4_d10": { title: "المربع – المستطيل – المثلث – الدائرة", content: `<div class="question-box"><h3>السؤال الأول: الشكل الهندسي الذي يحتوي على ٣ أضلاع و٣ رؤوس يسمى: <span class="clean-input"></span></h3></div>` },
+                    "g1_u4_d11": { title: "متوازي المستطيلات – المكعب – الكرة", content: `<div class="question-box"><h3>السؤال الأول: شكل علبة الكبريت المنتظمة يمثل مجسم: <span class="clean-input"></span></h3></div>` },
+                    "g1_u4_d12": { title: "أجزاء الشكل", content: `<div class="question-box"><h3>السؤال الأول: إذا قسمنا رغيف الخبز الدائري إلى نصفين متطابقين، يسمى الجزء الواحد: <span class="clean-input"></span></h3></div>` }
+                }
+            },
