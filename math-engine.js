@@ -33,11 +33,11 @@ function buildAlgorithmicQuestion(index, lesson, seed, levelMode) {
             } else if (mode === 1) {
                 const v1 = getRandomIntSeeded(minV, maxV, seed);
                 const v2 = getRandomIntSeeded(minV, maxV, seed + "diag_b");
-                title += ` قَارِنْ بَيْنَ العَدَدَيْنِ بِوَضْعِ الإِشَارَةِ المُنَاسِبَةِ ( > ، < ، = ) دَاخِلَ الفَرَاغِ:`;
+                title += ` قَارِنْ بَيْنَ العَدَدَيْنِ بِوَضْعِ الإِشَارَةِ Mُنَاسِبَةِ ( > ، < ، = ) دَاخِلَ الفَرَاغِ:`;
                 body = `<p style="text-align:center; font-size:15pt;">${toEasternArabicDigits(v1)} <span class="blank-space"></span> ${toEasternArabicDigits(v2)}</p>`;
             } else {
                 const start = getRandomIntSeeded(minV, maxV - 3, seed);
-                title += ` تَتَبَّعِ التَّسَلْسُلَ العَدَدِيَّ مُنْتَظَمَ ثُمَّ اكْتُبِ الأَعْدَادَ المَفْقُودَةَ:`;
+                title += ` تَتَبَّعِ التَّسَلْسُلَ العَدَدِيَّ مُنْتَظَمَ ثُمَّ اكْتُبِ الأَعْدَادَ Mَفْقُودَةَ:`;
                 body = `<p style="text-align:center; font-size:15pt;">${toEasternArabicDigits(start)} ، ${toEasternArabicDigits(start+1)} ، <span class="blank-space"></span> ، <span class="blank-space"></span></p>`;
             }
             break;
@@ -45,11 +45,11 @@ function buildAlgorithmicQuestion(index, lesson, seed, levelMode) {
         case "lesson":
             const currentVal = getRandomIntSeeded(minV, maxV, seed);
             if (mode === 0 && lesson.shape && currentVal > 0) {
-                title += ` عُدَّ الأَشْكَالَ البَصَرِيَّةَ المُرَتَّبَةَ ثُمَّ اكْتُبِ العَدَدَ المُنَاسِبَ دَاخِلَ الفَرَاغِ:`;
+                title += ` عُدَّ الأَشْكَالَ البَصَرِيَّةَ Mُرَتَّبَةَ ثُمَّ اكْتُبِ العَدَدَ Mُنَاسِبَ دَاخِلَ الفَرَاغِ:`;
                 body = `<div class="shapes-container">${lesson.shape.repeat(currentVal)}</div> عَدَدُ العَنَاصِرِ الكُلِّيِّ = <span class="blank-space"></span>`;
             } else if (mode === 2 && currentVal > 0) {
                 title += ` ارْسُمْ عَنَاصِرَ هَنْدَسِيَّةً مُبَسَّطَةً (دَوَائِرَ أَوْ نِقَاطاً) تُمَثِّلُ القِيمَةَ العَدَدِيَّةَ تَمَاماً:`;
-                body = `المَطْلُوبُ رَسْمُ مَا يُمَاثِلُ العَدَدَ [ <b>${toEasternArabicDigits(currentVal)}</b> ] دَاخِلَ الحَيِّزِ المَقَابِلِ: <br><br> [ ........................................................................................ ]`;
+                body = `المَطْلُوبُ رَسْمُ مَا يُمَاثِلُ العَدَدَ [ <b>${toEasternArabicDigits(currentVal)}</b> ] دَاخِلَ الحَيِّزِ Mَقَابِلِ: <br><br> [ ........................................................................................ ]`;
             } else {
                 const finalVal = currentVal === 0 ? minV : currentVal;
                 title += ` اكْتُبِ الرَّمْزَ العَدَدِيَّ الصَّحِيحَ لِلْعَدَدِ [ ${toEasternArabicDigits(finalVal)} ] بِخَطٍّ سَلِيمٍ وَمُكَرَّرٍ:`;
@@ -62,7 +62,7 @@ function buildAlgorithmicQuestion(index, lesson, seed, levelMode) {
             const c1 = getRandomIntSeeded(minV, maxV, seed);
             let c2 = getRandomIntSeeded(minV, maxV, seed + "comp");
             if (c1 === c2) c2 = (c2 === maxV) ? c2 - 1 : c2 + 1;
-            title += ` قَارِنْ بَيْنَ المَقَادِيرِ وَالرُّمُوزِ العَدَدِيَّةِ مُرَتَّبَةِ بِوَضْعِ الإِشَارَةِ الصَّحِيحَةِ ( > ، < ، = ):`;
+            title += ` قَارِنْ بَيْنَ Mَقَادِيرِ وَالرُّمُوزِ العَدَدِيَّةِ Mُرَتَّبَةِ بِوَضْعِ الإِشَارَةِ الصَّحِيحَةِ ( > ، < ، = ):`;
             body = `<p style="font-size:16pt; text-align:center;">${toEasternArabicDigits(c1)} <span class="blank-space"></span> ${toEasternArabicDigits(c2)}</p>`;
             break;
 
@@ -94,11 +94,11 @@ function buildAlgorithmicQuestion(index, lesson, seed, levelMode) {
                 title += ` جِدْ نَاتِجَ عَمَلِيَّةِ الجَمْعِ الأُفُقِيِّ الصَّافِيَةِ التَّالِيَةِ بِدِقَّةٍ:`;
                 body = `<div class="math-column-form">${toEasternArabicDigits(a1)} + ${toEasternArabicDigits(a2)} = <span class="blank-space"></span></div>`;
             } else if (mode === 1) {
-                title += ` أَوْجِدِ مَجْمُوعَ الحِسَابِيَّ مِنْ خِلالِ عَمَلِيَّةِ الجَمْعِ العَمُودِيِّ مُنَظَّمَةِ:`;
+                title += ` أَوْجِدِ Mَجْمُوعَ الحِسَابِيَّ مِنْ خِلالِ عَمَلِيَّةِ الجَمْعِ العَمُودِيِّ Mُنَظَّمَةِ:`;
                 body = `<div style="font-size:16pt; text-align:center; width:90px; margin:15px auto; border:2px solid #000; padding:12px; line-height:1.6;">${toEasternArabicDigits(a1)}<br>+<br>${toEasternArabicDigits(a2)}<br><hr style="border-top:2px solid #000;"></div>`;
             } else {
-                title += ` حُلَّ مَسْأَلَةَ اللَّفْظِيَّةَ وَالسِّيَاقِيَّةَ التَّالِيَةَ لِمَفْهُومِ الجَمْعِ مُنْضَبِطِ:`;
-                body = ` مَعَ طَالِبٍ [ ${toEasternArabicDigits(a1)} ] قِطَعٍ، وَأَعْطَاهُ وَالِدُهُ [ ${toEasternArabicDigits(a2)} ] قِطَعٍ إِضَافِيَّةٍ. كَمْ قِطْعَةً أَصْبَحَتْ مَعَهُ؟ <br> مَجْمُوعُ مُنْضَبِطُ = <span class="blank-space"></span> قِطَعٍ.`;
+                title += ` حُلَّ Mَسْأَلَةَ اللَّفْظِيَّةَ وَالسِّيَاقِيَّةَ التَّالِيَةَ لِمَفْهُومِ الجَمْعِ Mُنْضَبِطِ:`;
+                body = ` مَعَ طَالِبٍ [ ${toEasternArabicDigits(a1)} ] قِطَعٍ، وَأَعْطَاهُ وَالِدُهُ [ ${toEasternArabicDigits(a2)} ] قِطَعٍ إِضَافِيَّةٍ. كَمْ قِطْعَةً أَصْبَحَتْ مَعَهُ؟ <br> Mَجْمُوعُ Mُنْضَبِطُ = <span class="blank-space"></span> قِطَعٍ.`;
             }
             break;
 
@@ -110,11 +110,11 @@ function buildAlgorithmicQuestion(index, lesson, seed, levelMode) {
                 title += ` جِدْ نَاتِجَ عَمَلِيَّةِ الطَّرْحِ الأُفُقِيِّ الصَّافِيَةِ التَّالِيَةِ بِدِقَّةٍ:`;
                 body = `<div class="math-column-form">${toEasternArabicDigits(s1)} - ${toEasternArabicDigits(s2)} = <span class="blank-space"></span></div>`;
             } else if (mode === 1) {
-                title += ` أَوْجِدِ البَاقِي الحِسَابِيَّ مِنْ خِلَالِ دَالَّةِ الطَّرْحِ العَمُودِيِّ مُنَسَّقَةِ:`;
+                title += ` أَوْجِدِ البَاقِي الحِسَابِيَّ مِنْ خِلَالِ دَالَّةِ الطَّرْحِ العَمُودِيِّ Mُنَسَّقَةِ:`;
                 body = `<div style="font-size:16pt; text-align:center; width:90px; margin:15px auto; border:2px solid #000; padding:12px; line-height:1.6;">${toEasternArabicDigits(s1)}<br>-<br>${toEasternArabicDigits(s2)}<br><hr style="border-top:2px solid #000;"></div>`;
             } else {
-                title += ` اقْرَأِ مَسْأَلَةَ اللَّفْظِيَّةَ الحَيَاتِيَّةَ التَّالِيَةَ ثُمَّ أَوْجِدْ نَاتِجَ الطَّرْحِ (البَاقِي):`;
-                body = ` كَانَ فِي مَزْرَعَةِ [ ${toEasternArabicDigits(s1)} ] خِرَافٍ، خَرَجَ مِنْهَا [ ${toEasternArabicDigits(s2)} ] خِرَافٍ. كَمْ خَرُوفاً بَقِيَ فِي مَزْرَعَةِ؟ <br> البَاقِي الفِعْلِيُّ = <span class="blank-space"></span> خِرَافٍ.`;
+                title += ` اقْرَأِ Mَسْأَلَةَ اللَّفْظِيَّةَ الحَيَاتِيَّةَ التَّالِيَةَ ثُمَّ أَوْجِدْ نَاتِجَ الطَّرْحِ (البَاقِي):`;
+                body = ` كَانَ فِي Mَزْرَعَةِ [ ${toEasternArabicDigits(s1)} ] خِرَافٍ، خَرَجَ مِنْهَا [ ${toEasternArabicDigits(s2)} ] خِرَافٍ. كَمْ خَرُوفاً بَقِيَ فِي Mَزْرَعَةِ؟ <br> البَاقِي الفِعْلِيُّ = <span class="blank-space"></span> خِرَافٍ.`;
             }
             break;
 
@@ -131,7 +131,7 @@ function buildAlgorithmicQuestion(index, lesson, seed, levelMode) {
         case "even_odd":
         case "even_odd_adv":
             const eoNum = getRandomIntSeeded(minV, maxV, seed);
-            title += ` حَدِّدْ نَوْعَ العَدَدِ المَذْكُورِ (زَوْجِيّ أَمْ فَرْدِيّ):`;
+            title += ` حَدِّدْ نَوْعَ العَدَدِ Mَذْكُورِ (زَوْجِيّ أَمْ فَرْدِيّ):`;
             body = `العَدَدُ [ <b>${toEasternArabicDigits(eoNum)}</b> ] يُعْتَبَرُ عَدَداً: <span class="blank-space"></span> (اكتب: زَوْجِيّ أوْ فَرْدِيّ)`;
             break;
 
