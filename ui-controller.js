@@ -1,3 +1,14 @@
+/**
+ * =========================================================================
+ * المنظومة الرقمية لأتمتة أوراق العمل التكيفية - واجهة المستخدم وإدارة الأحداث
+ * المطور: مدرسة عاطوف الأساسية - مديرية طوباس
+ * الإصدار المستقر والمغلق للثغرات البرمجية والتزامنية - ٢٠٢٦م
+ * =========================================================================
+ */
+
+// التأكد من الوجود المطلق للمستودع وتأمينه في النطاق العالمي للمتصفح
+window.curriculumRepository = window.curriculumRepository || {};
+
 function saveMetadata() {
     localStorage.setItem('math_schoolName', document.getElementById("schoolInput").value);
     localStorage.setItem('math_teacherName', document.getElementById("teacherInput").value);
@@ -10,15 +21,18 @@ function loadMetadata() {
     if(localStorage.getItem('math_modelLetter')) document.getElementById("modelSelector").value = localStorage.getItem('math_modelLetter');
 }
 
-// إغلاق ثغرة تجميد القوائم وتوحيد قراءة الكائن التراكمي الشامل للمناهج
+/**
+ * تفكيك وتوزيع الدروس - مغلق الثغرات لضمان قراءة المستودع مهما اختلف النطاق
+ */
 function populateLessons() {
-    const grade = document.getElementById("gradeSelector").value;
+    const gradeSelect = document.getElementById("gradeSelector");
     const lessonSelect = document.getElementById("lessonSelector");
-    if (!lessonSelect) return;
+    if (!gradeSelect || !lessonSelect) return;
     
+    const grade = gradeSelect.value;
     lessonSelect.innerHTML = "";
     
-    // فحص شامل وتأمين الاتصال بالمستودع
+    // فحص الأمان الشامل للتأكد من أن المناهج قد تم تحميلها تماماً في الذاكرة
     if (window.curriculumRepository && window.curriculumRepository[grade]) {
         const gradeData = window.curriculumRepository[grade];
         
@@ -30,12 +44,18 @@ function populateLessons() {
                 unit.items.forEach(item => {
                     const opt = document.createElement("option");
                     opt.value = item.id;
+                    // تمييز نمط التقييم برمز تعبيري مناسب لطلاب الصفوف الأولى
                     opt.text = (item.type.includes("diag") ? "🔍 " : item.type.includes("review") ? "🏆 " : "📝 ") + item.title;
                     optGroup.appendChild(opt);
                 });
                 lessonSelect.appendChild(optGroup);
             });
         }
+    } else {
+        // حماية النظام من التجميد في حال تأخر تحميل ملف المنهج
+        const opt = document.createElement("option");
+        opt.text = "جاري تحميل قائمة الدروس...";
+        lessonSelect.appendChild(opt);
     }
 }
 
@@ -59,10 +79,16 @@ function renumberQuestions() {
     });
 }
 
+/**
+ * محرك البناء والإنتاج الفوري لكتل الأسئلة المخصصة للطلاب
+ */
 function generateWorksheet() {
     creativityActive = false;
     const gradeKey = document.getElementById("gradeSelector").value;
-    const lessonId = document.getElementById("lessonSelector").value;
+    const lessonSelect = document.getElementById("lessonSelector");
+    if (!lessonSelect) return;
+    
+    const lessonId = lessonSelect.value;
     const schoolName = document.getElementById("schoolInput").value;
     const teacherName = document.getElementById("teacherInput").value;
     const modelLetter = document.getElementById("modelSelector").value;
@@ -96,6 +122,7 @@ function generateWorksheet() {
     document.getElementById("outModel").innerText = "نموذج: " + modelLetter;
     document.getElementById("outLessonTitle").innerText = lessonObj.title;
     
+    // بناء الـ Seed الرياضي العشوائي الثابت لمنع التبدد البصري
     const baseSeed = lessonId + "_" + modelLetter + "_" + Math.floor(Math.random() * 1000) + "_";
     
     let htmlHTML = "";
@@ -166,7 +193,6 @@ function activateCreativityMode() {
 
 function injectInnovativeQuestion() {
     const gradeKey = document.getElementById("gradeSelector").value;
-    const lessonId = document.getElementById("lessonSelector").value;
     const bodyContainer = document.getElementById("sheetBody");
     if (!window.curriculumRepository || !window.curriculumRepository[gradeKey]) return;
     
@@ -186,8 +212,20 @@ function injectInnovativeQuestion() {
     renumberQuestions();
 }
 
-window.onload = function() { 
+// معالجة مشكلة تزامن استدعاء كتل البيانات أثناء التحميل الأولي
+document.addEventListener("DOMContentLoaded", function() {
     loadMetadata();
     populateLessons(); 
-    generateWorksheet(); 
+    // فحص تأكيدي لتوليد المتن تلقائياً بعد تهيئة القائمة بالدروس المتاحة
+    if (document.getElementById("lessonSelector").options.length > 0) {
+        generateWorksheet();
+    }
+});
+
+// إسناد فوري لضمان تفعيل الأحداث عبر النطاق العالمي للمتصفح
+window.onload = function() {
+    if (document.getElementById("lessonSelector").options.length <= 1) {
+        populateLessons();
+        generateWorksheet();
+    }
 };
