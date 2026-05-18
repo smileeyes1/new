@@ -2,16 +2,14 @@
  * =========================================================================
  * المنظومة الرقمية لأتمتة أوراق العمل التكيفية - المحرك الموحد والمغلق كلياً
  * المطور: مدرسة عاطوف الأساسية - مديرية طوباس | محمد وجيه غنام
- * الإصدار الفولاذي المستقر والمدمج لعام ٢٠٢٦م
+ * الإصدار الفولاذي الشامل والمستقر لعام ٢٠٢٦م - إغلاق كامل لثغرات التزامن والتكرار اللانهائي
  * =========================================================================
  */
 
-// ١. تأمين النطاق العالمي وتوحيد بيئة العمل الرقمية
 window.curriculumRepository = window.curriculumRepository || {};
-let innovationCounter = ١;
+let innovationCounter = 1;
 let creativityActive = false;
 
-// ٢. نظام الأرقام المشرقية الآمن داخلياً
 window.toEasternArabicDigits = function(num) {
     if (num === null || num === undefined) return '';
     const id = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
@@ -29,7 +27,6 @@ window.formatEasternInput = function(element) {
     element.value = window.toEasternArabicDigits(element.value);
 };
 
-// ٣. دوال التوليد الرياضي العشوائي الثابت (Seeded Random) لمنع التبدد البصري
 function seededRandom(seedStr) {
     let hash = 0;
     for (let i = 0; i < seedStr.length; i++) {
@@ -44,83 +41,134 @@ function getRandomIntSeeded(min = 1, max = 10, seed) {
     return min + Math.floor(seededRandom(seed) * (max - min + 1));
 }
 
-// ٤. المحرك الخوارزمي المطور لإنتاج الأسئلة (بديل math-engine المعطوب)
+// حل ثغرة الحساب الذهني دون تجميع أو استلاف للصف الثاني الأساسي
+function generateNoCarryAddition(minV, maxV, seed) {
+    let n1, n2, attempts = 0;
+    do {
+        n1 = getRandomIntSeeded(minV, maxV - 1, seed + attempts);
+        n2 = getRandomIntSeeded(1, maxV - n1, seed + "n2_" + attempts);
+        attempts++;
+        if (attempts > 50) break;
+    } while ((n1 % 10 + n2 % 10 >= 10) || (Math.floor(n1 / 10) + Math.floor(n2 / 10) >= 10));
+    return { n1, n2 };
+}
+
+function generateNoBorrowSubtraction(minV, maxV, seed) {
+    let sub1, sub2, attempts = 0;
+    do {
+        sub1 = getRandomIntSeeded(minV + 1, maxV, seed + attempts);
+        sub2 = getRandomIntSeeded(minV, sub1, seed + "sub_" + attempts);
+        attempts++;
+        if (attempts > 50) break;
+    } while ((sub1 % 10 < sub2 % 10) || (Math.floor(sub1 / 10) < Math.floor(sub2 / 10)));
+    return { sub1, sub2 };
+}
+
 window.buildAlgorithmicQuestion = function(index, lesson, seed, levelMode) {
     const arabicIndex = window.toEasternArabicDigits(index);
     let title = `<span class="question-title-text">السؤال ${arabicIndex}:</span>`; 
     let body = "";
     
-    let mode = index % 3;
+    let mode = index % 3; 
     if (levelMode === "concrete") mode = 0;
-    if (levelMode === "semi_concrete") mode = 2;
     if (levelMode === "abstract") mode = 1;
+    if (levelMode === "semi_concrete") mode = 2;
 
-    // معالجة أمان الأرقام لضمان عدم تمرير قيم فارغة
     const minV = lesson.minVal !== undefined ? parseInt(lesson.minVal) : 1;
     const maxV = lesson.maxVal !== undefined ? parseInt(lesson.maxVal) : 9;
 
-    switch(lesson.type) {
-        case "diagnostic":
-        case "review":
-        case "worksheet":
-            if (mode === 0) {
-                const n1 = getRandomIntSeeded(minV, Math.floor(maxV / 2) + 1, seed);
-                const n2 = getRandomIntSeeded(1, Math.max(1, maxV - n1), seed + "diag_a");
-                title += ` جِدْ نَاتِجَ عَمَلِيَّةِ الجَمْعِ الرِّيَاضِيَّةِ التَّالِيَةِ:`;
-                body = `<div class="math-column-form" style="font-size:16pt; direction:rtl;">${window.toEasternArabicDigits(n1)} + ${window.toEasternArabicDigits(n2)} = <span class="blank-space"></span></div>`;
-            } else if (mode === 1) {
-                const v1 = getRandomIntSeeded(minV, maxV, seed);
-                const v2 = getRandomIntSeeded(minV, maxV, seed + "diag_b");
-                title += ` قَارِنْ بَيْنَ العَدَدَيْنِ بِوَضْعِ الإِشَارَةِ المُتَوَافِقَةِ ( > ، < ، = ) دَاخِلَ الفَرَاغِ:`;
-                body = `<p style="text-align:center; font-size:16pt; direction:rtl;">${window.toEasternArabicDigits(v1)} <span class="blank-space"></span> ${window.toEasternArabicDigits(v2)}</p>`;
-            } else {
-                const start = getRandomIntSeeded(minV, Math.max(minV, maxV - 3), seed);
-                title += ` تَتَبَّعِ التَّسَلْسُلَ العَدَدِيَّ المُنْتَظَمَ ثُمَّ اكْتُبِ الأَعْدَادَ Mَفْقُودَةَ:`;
-                body = `<p style="text-align:center; font-size:16pt; direction:rtl;">${window.toEasternArabicDigits(start)} ، ${window.toEasternArabicDigits(start+1)} ، <span class="blank-space"></span> ، <span class="blank-space"></span></p>`;
-            }
-            break;
-
-        case "lesson":
-            const currentVal = getRandomIntSeeded(minV, maxV, seed);
-            if (mode === 0 && lesson.shape && currentVal > 0) {
-                title += ` عُدَّ الأَشْكَالَ البَصَرِيَّةَ المُرَتَّبَةَ ثُمَّ اكْتُبِ العَدَدَ المُنَاسِبَ دَاخِلَ الفَرَاغِ:`;
-                body = `<div class="shapes-container" style="font-size:24pt; letter-spacing:5px; margin:10px 0;">${lesson.shape.repeat(currentVal)}</div> عَدَدُ العَنَاصِرِ الكُلِّيِّ = <span class="blank-space"></span>`;
+    if (lesson.type === "comparison") {
+        const c1 = getRandomIntSeeded(minV, maxV, seed);
+        let c2 = getRandomIntSeeded(minV, maxV, seed + "comp");
+        if (c1 === c2) c2 = (c2 === maxV) ? c2 - 1 : c2 + 1;
+        
+        if (mode === 0 && lesson.shape) {
+            title += ` عُدَّ العَنَاصِرَ فِي كُلِّ مَجْمُوعَةٍ، ثُمَّ ضَعِ الإِشَارَةَ المُنَاسِبَةَ ( > ، < ، = ):`;
+            body = `<div style="display:flex; justify-content:center; align-items:center; gap:30px; font-size:20pt;">
+                <div>${lesson.shape.repeat(c1)} (<span style="font-size:12pt; color:#666;">${window.toEasternArabicDigits(c1)}</span>)</div>
+                <div class="blank-space" style="width:50px;"></div>
+                <div>${lesson.shape.repeat(c2)} (<span style="font-size:12pt; color:#666;">${window.toEasternArabicDigits(c2)}</span>)</div>
+            </div>`;
+        } else if (mode === 2) {
+            title += ` اقْرَأْ المَسْأَلَةَ الحَيَاتِيَّةَ ثُمَّ قَارِنْ بِوَضْعِ الإِشَارَةِ المُنَاسِبَةِ ( > ، < ، = ):`;
+            body = `<p style="font-size:14pt; line-height:2;">مَعَ أَحْمَدَ <b>${window.toEasternArabicDigits(c1)}</b> بَرْتُقَالِاتٍ، وَمَعَ سَارَةَ <b>${window.toEasternArabicDigits(c2)}</b> بَرْتُقَالِاتٍ. أَيُّهُمَا يَمْلِكُ المِقْدَارَ الأَكْبَرَ؟<br>
+            <div style="text-align:center; font-size:16pt; margin-top:10px;">${window.toEasternArabicDigits(c1)} <span class="blank-space"></span> ${window.toEasternArabicDigits(c2)}</div></p>`;
+        } else {
+            title += ` قَارِنْ بَيْنَ الأَعْدَادِ التَّالِيَةِ بِوَضْعِ الإِشَارَةِ الصَّحِيحَةِ ( > ، < ، = ) دَاخِلَ الفَرَاغِ:`;
+            body = `<p style="font-size:18pt; text-align:center; direction:rtl; letter-spacing:5px;">${window.toEasternArabicDigits(c1)} <span class="blank-space"></span> ${window.toEasternArabicDigits(c2)}</p>`;
+        }
+    } 
+    else if (lesson.type === "sorting") {
+        let arr = [];
+        let range = maxV - minV + 1;
+        let desiredLength = Math.min(3, range);
+        let loopAttempts = 0;
+        
+        while(arr.length < desiredLength && loopAttempts < 100) {
+            let r = getRandomIntSeeded(minV, maxV, seed + arr.length + "_" + loopAttempts);
+            if(!arr.includes(r)) arr.push(r);
+            loopAttempts++;
+        }
+        
+        const isAscending = (index % 2 === 0);
+        const directionText = isAscending ? "تَصَاعُدِيّاً (مِنَ الأَصْغَرِ إِلَى الأَكْبَرِ)" : "تَنَازُلِيّاً (مِنَ الأَكْبَرِ إِلَى الأَصْغَرِ)";
+        
+        title += ` رَتِّبِ المَجْمُوعَةَ العَدَدِيَّةَ الآتِيَةَ تَرْتِيباً ${directionText}:`;
+        body = `<p style="font-size:18pt; text-align:center; letter-spacing:15px; margin:15px 0;">${arr.map(window.toEasternArabicDigits).join(' ، ')}</p>
+        <div style="text-align:center;">التَّرْتِيبُ الصَّحِيحُ: <span class="blank-space-long"></span></div>`;
+    } 
+    else if (lesson.type === "diagnostic" || lesson.type === "review" || lesson.type === "worksheet") {
+        const isAddition = (index % 2 === 0);
+        
+        if (isAddition) {
+            const { n1, n2 } = generateNoCarryAddition(minV, maxV, seed);
+            if (mode === 0 && lesson.shape) {
+                title += ` جِدْ نَاتِجَ الجَمْعِ بِالاسْتِعَانَةِ بِالأَشْكَالِ البَصَرِيَّةِ المُمَثَّلَةِ:`;
+                body = `<div style="font-size:20pt; text-align:center; margin:10px 0;">
+                    ${lesson.shape.repeat(Math.min(n1, 10))} + ${lesson.shape.repeat(Math.min(n2, 10))} = <span class="blank-space"></span>
+                </div>`;
             } else if (mode === 2) {
-                title += ` ارْسُمْ عَنَاصِرَ هَنْدَسِيَّةً مُبَسَّطَةً تُمَثِّلُ القِيمَةَ العَدَدِيَّةَ تَمَاماً:`;
-                body = `المَطْلُوبُ رَسْمُ مَا يُمَاثِلُ العَدَدَ [ <b>${window.toEasternArabicDigits(currentVal)}</b> ] دَاخِلَ الحَيِّزِ المَقَابِلِ: <br><br> [ ........................................................................................ ]`;
+                title += ` حُلَّ المَسْأَلَةَ اللَّفْظِيَّةَ التَّالِيَةَ ثُمَّ اكْتُبِ النَّاتِجَ دَاخِلَ الفَرَاغِ:`;
+                body = `<p style="font-size:13pt; line-height:2;">فِي الحَقْلِ <b>${window.toEasternArabicDigits(n1)}</b> مِنَ الطُّيُورِ، طَارَ إِلَيْهَا <b>${window.toEasternArabicDigits(n2)}</b> عَصَافِيرَ أُخْرَى. كَمْ عَصْفُوراً أَصْبَحَ فِي الحَقْلِ؟<br>
+                <div style="text-align:center; font-size:16pt; margin-top:10px;">${window.toEasternArabicDigits(n1)} + ${window.toEasternArabicDigits(n2)} = <span class="blank-space"></span></div></p>`;
             } else {
-                const finalVal = currentVal === 0 ? minV : currentVal;
-                title += ` اكْتُبِ الرَّمْزَ العَدَدِيَّ الصَّحِيحَ لِلْعَدَدِ [ ${window.toEasternArabicDigits(finalVal)} ] بِخَطٍّ سَلِيمٍ وَمُكَرَّرٍ:`;
-                body = `<p style="font-size:18pt; letter-spacing:40px; text-align:center; direction:rtl;">${window.toEasternArabicDigits(finalVal)} —— ${window.toEasternArabicDigits(finalVal)} —— ${window.toEasternArabicDigits(finalVal)}</p>`;
+                title += ` جِدْ نَاتِجَ عَمَلِيَّةِ الجَمْعِ الرِّيَاضِيَّةِ التَّالِيَةِ بِدقَّةٍ:`;
+                body = `<div class="math-column-form" style="font-size:18pt; text-align:center; letter-spacing:2px;">${window.toEasternArabicDigits(n1)} + ${window.toEasternArabicDigits(n2)} = <span class="blank-space"></span></div>`;
             }
-            break;
-
-        case "comparison":
-            const c1 = getRandomIntSeeded(minV, maxV, seed);
-            let c2 = getRandomIntSeeded(minV, maxV, seed + "comp");
-            if (c1 === c2) c2 = (c2 === maxV) ? c2 - 1 : c2 + 1;
-            title += ` قَارِنْ بَيْنَ المَقَادِيرِ وَالرُّمُوزِ العَدَدِيَّةِ بِوَضْعِ الإِشَارَةِ الصَّحِيحَةِ ( > ، < ، = ):`;
-            body = `<p style="font-size:16pt; text-align:center; direction:rtl;">${window.toEasternArabicDigits(c1)} <span class="blank-space"></span> ${window.toEasternArabicDigits(c2)}</p>`;
-            break;
-
-        case "sorting":
-            let arr = [];
-            for(let i=0; i<3; i++) {
-                let r = getRandomIntSeeded(minV, maxV, seed + i);
-                if(!arr.includes(r)) arr.push(r);
+        } else {
+            const { sub1, sub2 } = generateNoBorrowSubtraction(minV, maxV, seed);
+            if (mode === 0 && lesson.shape) {
+                title += ` اشْطُبْ مِنَ الأَشْكَالِ لِتَجِدَ نَاتِجَ عَمَلِيَّةِ الطَّرْحِ المَطْلُوبَةِ:`;
+                body = `<div style="font-size:20pt; text-align:center; margin:10px 0;">
+                    ${lesson.shape.repeat(Math.min(sub1, 10))} (اشْطُبْ مِنْهَا ${window.toEasternArabicDigits(sub2)}) | النَّاتِجُ = <span class="blank-space"></span>
+                </div>`;
+            } else if (mode === 2) {
+                title += ` حُلَّ المَسْأَلَةَ الكَلَامِيَّةَ التَّالِيَةَ وَاكْتُبْ جُمْلَةَ الطَّرْحِ:`;
+                body = `<p style="font-size:13pt; line-height:2;">كَانَ مَعَ جَنَى <b>${window.toEasternArabicDigits(sub1)}</b> دَنَانِيرَ، أَعْطَتْ أَخَاهَا الصَّغِيرَ <b>${window.toEasternArabicDigits(sub2)}</b> دَنَانِيرَ. كَمْ دِينَاراً بَقِيَ مَعَهَا؟<br>
+                <div style="text-align:center; font-size:16pt; margin-top:10px;">${window.toEasternArabicDigits(sub1)} - ${window.toEasternArabicDigits(sub2)} = <span class="blank-space"></span></div></p>`;
+            } else {
+                title += ` جِدْ نَاتِجَ عَمَلِيَّةِ الطَّرْحِ العَدَدِيَّةِ التَّالِيَةِ:`;
+                body = `<div class="math-column-form" style="font-size:18pt; text-align:center; letter-spacing:2px;">${window.toEasternArabicDigits(sub1)} - ${window.toEasternArabicDigits(sub2)} = <span class="blank-space"></span></div>`;
             }
-            if(arr.length < 2) arr.push(maxV);
-            title += ` رَتِّبِ المَجْمُوعَةَ العَدَدِيَّةَ التَّالِيَةَ تَرْتِيباً صَحِيحاً دَاخِلَ الفَرَاغِ:`;
-            body = `<p style="font-size:15pt; text-align:center; letter-spacing:12px; direction:rtl;">${arr.map(window.toEasternArabicDigits).join(' ، ')}</p> التَّرْتِيبُ المَطْلُوبُ: <span class="blank-space-long"></span>`;
-            break;
-
-        default:
-            title += ` مَهَمَّةٌ تَعْلِيمِيَّةٌ وَتَطْبِيقٌ عَمَلِيٌّ لِدَرْسِ:`;
-            body = `<div style="font-size:14pt; padding:10px; color:#333;">${lesson.title}</div> [ ........................................................................................ ]`;
-            break;
+        }
+    } 
+    else {
+        const currentVal = getRandomIntSeeded(minV, maxV, seed);
+        if (mode === 0 && lesson.shape && currentVal > 0) {
+            title += ` عُدَّ الأَشْكَالَ البَصَرِيَّةَ المُرَتَّبَةَ ثُمَّ اكْتُبِ العَدَدَ المُنَاسِبَ دَاخِلَ الفَرَاغِ:`;
+            body = `<div class="shapes-container" style="text-align:center; margin:15px 0;">${lesson.shape.repeat(Math.min(currentVal, 10))}</div><div style="text-align:center;">عَدَدُ العَنَاصِرِ الكُلِّيِّ = <span class="blank-space"></span></div>`;
+        } else if (mode === 2) {
+            title += ` ارْسُمْ عَنَاصِرَ هَنْدَسِيَّةً أَوْ رُسُومَاتٍ بَصَرِيَّةً مُبَسَّطَةً تُمَثِّلُ القِيمَةَ العَدَدِيَّةَ:`;
+            body = `<div style="font-size:13pt; margin-bottom:10px;">المَطْلُوبُ رَسْمُ مَا يُمَاثِلُ العَدَدَ [ <b>${window.toEasternArabicDigits(currentVal)}</b> ] دَاخِلَ الصُّنْدُوقِ المَقَابِلِ:</div>
+            <div style="border:1px dashed #000; width:100%; height:80px; border-radius:4px;"></div>`;
+        } else {
+            const finalVal = currentVal === 0 ? minV : currentVal;
+            title += ` اكْتُبِ الرَّمْزَ العَدَدِيَّ الصَّحِيحَ لِلْعَدَدِ [ ${window.toEasternArabicDigits(finalVal)} ] بِخَطٍّ سَلِيمٍ وَمُكَرَّرٍ:`;
+            body = `<p style="font-size:18pt; letter-spacing:40px; text-align:center; direction:rtl; margin:15px 0;">${window.toEasternArabicDigits(finalVal)} —— ${window.toEasternArabicDigits(finalVal)} —— ${window.toEasternArabicDigits(finalVal)}</p>`;
+        }
     }
 
-    return `<div class="question-block" style="direction:rtl; text-align:right;">
+    return `<div class="question-block">
         <div class="question-title">
             ${title}
             <button class="delete-action no-print" onclick="removeQuestion(this)">❌ استبعاد</button>
@@ -129,11 +177,10 @@ window.buildAlgorithmicQuestion = function(index, lesson, seed, levelMode) {
     </div>`;
 };
 
-// ٥. إدارة التزامن وتغذية القوائم المنسدلة (UI Logic)
 function saveMetadata() {
-    localStorage.setItem('math_schoolName', document.getElementById("schoolInput").value);
-    localStorage.setItem('math_teacherName', document.getElementById("teacherInput").value);
-    localStorage.setItem('math_modelLetter', document.getElementById("modelSelector").value);
+    if(document.getElementById("schoolInput")) localStorage.setItem('math_schoolName', document.getElementById("schoolInput").value);
+    if(document.getElementById("teacherInput")) localStorage.setItem('math_teacherName', document.getElementById("teacherInput").value);
+    if(document.getElementById("modelSelector")) localStorage.setItem('math_modelLetter', document.getElementById("modelSelector").value);
 }
 
 function loadMetadata() {
@@ -171,7 +218,7 @@ function populateLessons() {
         }
     } else {
         const opt = document.createElement("option");
-        opt.text = "⚠️ لم يتم العثور على ملفات المنهج";
+        opt.text = "⚠️ لم يتم تحميل ملف المنهج المخصص بعد";
         lessonSelect.appendChild(opt);
     }
 }
@@ -319,13 +366,13 @@ function injectInnovativeQuestion() {
             <span class="question-title-text">السؤال ${window.toEasternArabicDigits(currentIdx)}:</span>
             <button class="delete-action no-print" onclick="removeQuestion(this)">❌ استبعاد</button>
         </div>
-        <div class="question-body"><b>تَحَدٍّ إِبْدَاعِيٌّ فُجَائِيٌّ:</b> اكْتُبْ عَدَدًا مَفْقُودًا فِي الفَرَاغِ لِتَكُونَ الجُمْلَةُ الرِّيَاضِيَّةُ صَحِيحَةً تَمَامًا.</div>
+        <div class="question-body"><b>تَحَدٍّ إِبْدَاعِيٌّ فُجَائِيٌّ (${window.toEasternArabicDigits(innovationCounter++)}):</b> اكْتُبْ عَدَدًا مَفْقُودًا فِي الفَرَاغِ لِتَكُونَ الجُمْلَةُ الرِّيَاضِيَّةُ صَحِيحَةً تَمَامًا وَفْقَ نَمَطِ التَّفْكِيرِ العُلْيَا.</div>
     `;
     bodyContainer.appendChild(qBlock);
     renumberQuestions();
 }
 
-// ٦. إطلاق المنظومة بشكل متزامن وقاطع
+// توحيد دورة حياة التحميل لمنع التكرار والصراعات الصامتة للـ DOM
 document.addEventListener("DOMContentLoaded", function() {
     loadMetadata();
     populateLessons();
@@ -340,8 +387,3 @@ document.addEventListener("DOMContentLoaded", function() {
         generateWorksheet();
     }
 });
-
-window.onload = function() {
-    populateLessons();
-    generateWorksheet();
-};
