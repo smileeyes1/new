@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منظومة أوراق العمل التكيفية</title>
     <style>
-        /* --- التصميم البصري والأناقة العامة --- */
         :root {
             --primary-color: #2c3e50;
             --accent-color: #16a085;
             --bg-color: #f8f9fa;
             --border-color: #bdc3c7;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
@@ -20,8 +18,6 @@
             padding: 20px;
             color: #333;
         }
-
-        /* --- لوحة التحكم الجانبية (تختفي عند الطباعة) --- */
         .control-panel {
             background: #fff;
             padding: 20px;
@@ -30,41 +26,35 @@
             margin-bottom: 25px;
             border: 1px solid var(--border-color);
         }
-
         .panel-row {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
             margin-bottom: 15px;
         }
-
         .form-group {
             flex: 1;
             min-width: 200px;
             display: flex;
             flex-direction: column;
         }
-
         .form-group label {
             font-weight: bold;
             margin-bottom: 5px;
             color: var(--primary-color);
         }
-
         .form-group input, .form-group select {
             padding: 8px 12px;
             border: 1px solid var(--border-color);
             border-radius: 4px;
             font-size: 11pt;
         }
-
         .btn-group {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
             margin-top: 15px;
         }
-
         button {
             padding: 10px 20px;
             border: none;
@@ -74,17 +64,10 @@
             font-size: 11pt;
             transition: background 0.2s;
         }
-
         .btn-generate { background-color: var(--primary-color); color: #fff; }
-        .btn-generate:hover { background-color: #34495e; }
         .btn-beauty { background-color: var(--accent-color); color: #fff; }
-        .btn-beauty:hover { background-color: #11806a; }
         .btn-creative { background-color: #9b59b6; color: #fff; }
-        .btn-creative:hover { background-color: #8e44ad; }
         .btn-innovative { background-color: #e67e22; color: #fff; }
-        .btn-innovative:hover { background-color: #d35400; }
-
-        /* --- ترويسة ورقة العمل الهيكلية المدمجة (Flexbox) --- */
         .sheet-container {
             background: #fff;
             padding: 30px;
@@ -95,7 +78,6 @@
             max-width: 800px;
             margin: 0 auto;
         }
-
         .sheet-header-flex {
             display: flex;
             justify-content: space-between;
@@ -104,41 +86,22 @@
             padding-bottom: 15px;
             margin-bottom: 20px;
         }
-
         .header-meta-right, .header-meta-left {
             flex: 1;
             font-size: 13pt;
             line-height: 1.8;
             font-weight: bold;
         }
-
         .header-meta-left { text-align: left; }
-
-        .header-title-center {
-            flex: 2;
-            text-align: center;
-        }
-
-        .header-title-center h1 {
-            margin: 0 0 5px 0;
-            font-size: 20pt;
-            color: #000;
-        }
-
-        .header-title-center h2 {
-            margin: 0;
-            font-size: 15pt;
-            font-weight: normal;
-        }
-
-        /* --- بنية الأسئلة والمتن النظيف --- */
+        .header-title-center { flex: 2; text-align: center; }
+        .header-title-center h1 { margin: 0 0 5px 0; font-size: 20pt; }
+        .header-title-center h2 { margin: 0; font-size: 15pt; font-weight: normal; }
         .question-block {
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 1px dashed #ccc;
             page-break-inside: avoid;
         }
-
         .question-title {
             display: flex;
             justify-content: space-between;
@@ -147,98 +110,20 @@
             font-weight: bold;
             margin-bottom: 12px;
         }
-
-        .question-body {
-            font-size: 13pt;
-            line-height: 2;
-            padding-right: 15px;
-        }
-
-        .blank-space {
-            display: inline-block;
-            width: 80px;
-            border-bottom: 1px solid #000;
-            margin: 0 5px;
-            vertical-align: bottom;
-        }
-
-        .blank-space-long {
-            display: inline-block;
-            width: 250px;
-            border-bottom: 1px solid #000;
-            margin: 0 5px;
-            vertical-align: bottom;
-        }
-
-        .custom-writing-area {
-            margin-top: 15px;
-            color: #555;
-            line-height: 2.2;
-        }
-
-        .delete-action {
-            background-color: #e74c3c;
-            color: white;
-            padding: 3px 8px;
-            font-size: 9pt;
-            border-radius: 3px;
-        }
-
-        /* --- نمط صندوق العباقرة والإبداع (مشروع زيتونة) --- */
-        .creative-addition {
-            margin-top: 10px;
-            font-size: 11pt;
-            color: #2980b9;
-            font-style: italic;
-            font-weight: bold;
-        }
-
-        .creative-box {
-            margin-top: 40px;
-            border: 2px solid #000;
-            padding: 20px;
-            background: #fafafa;
-            border-radius: 4px;
-            page-break-inside: avoid;
-        }
-
-        .creative-box-title {
-            font-weight: bold;
-            font-size: 14pt;
-            border-bottom: 2px solid #000;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-        }
-
-        .shapes-container {
-            font-size: 22pt;
-            letter-spacing: 5px;
-            margin: 10px 0;
-        }
-
-        /* --- الثيم الجمالي الإضافي المتقدم --- */
-        .enhanced-beauty {
-            border: 4px double var(--accent-color) !important;
-            background-image: radial-gradient(var(--bg-color) 1px, transparent 0);
-            background-size: 20px 20px;
-        }
-
-        /* --- محددات وإعدادات الطباعة الاحترافية --- */
+        .question-body { font-size: 13pt; line-height: 2; padding-right: 15px; }
+        .blank-space { display: inline-block; width: 80px; border-bottom: 1px solid #000; margin: 0 5px; vertical-align: bottom; }
+        .blank-space-long { display: inline-block; width: 250px; border-bottom: 1px solid #000; margin: 0 5px; vertical-align: bottom; }
+        .custom-writing-area { margin-top: 15px; color: #555; line-height: 2.2; }
+        .delete-action { background-color: #e74c3c; color: white; padding: 3px 8px; font-size: 9pt; border-radius: 3px; }
+        .creative-addition { margin-top: 10px; font-size: 11pt; color: #2980b9; font-style: italic; font-weight: bold; }
+        .creative-box { margin-top: 40px; border: 2px solid #000; padding: 20px; background: #fafafa; border-radius: 4px; page-break-inside: avoid; }
+        .creative-box-title { font-weight: bold; font-size: 14pt; border-bottom: 2px solid #000; padding-bottom: 5px; margin-bottom: 15px; }
+        .shapes-container { font-size: 22pt; letter-spacing: 5px; margin: 10px 0; }
+        .enhanced-beauty { border: 4px double var(--accent-color) !important; background-image: radial-gradient(var(--bg-color) 1px, transparent 0); background-size: 20px 20px; }
         @media print {
-            .no-print, button, .control-panel, .delete-action {
-                display: none !important;
-            }
-            body {
-                background-color: #fff;
-                padding: 0;
-            }
-            .sheet-container {
-                border: none !important;
-                box-shadow: none !important;
-                padding: 0 !important;
-                max-width: 100% !important;
-                display: block !important;
-            }
+            .no-print, button, .control-panel, .delete-action { display: none !important; }
+            body { background-color: #fff; padding: 0; }
+            .sheet-container { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; display: block !important; }
         }
     </style>
 </head>
@@ -294,7 +179,7 @@
 
         <div class="form-group" style="margin-bottom:15px;">
             <label for="teacherCustomIdeaInput">حقن فكرة تربوية أو سؤال مخصص:</label>
-            <input type="text" id="teacherCustomIdeaInput" placeholder="اكتب نص المسألة الحرة هنا ليتم تهيئتها فوراً وإضافتها للمتن...">
+            <input type="text" id="teacherCustomIdeaInput" placeholder="اكتب نص المسألة الحرة هنا...">
         </div>
 
         <div class="btn-group">
@@ -308,7 +193,6 @@
     </div>
 
     <div class="sheet-container" id="sheetOutput">
-        
         <div class="sheet-header-flex">
             <div class="header-meta-right">
                 <span id="outDirectorate">وزارة التربية والتعليم</span><br>
@@ -330,11 +214,12 @@
             اسْمُ الطَّالِبِ الرُّبَاعِيُّ: ....................................................................................................
         </div>
 
-        <div id="sheetBody">
-            </div>
+        <div id="sheetBody"></div>
     </div>
 
-    <script src="grade/curriculum.js"></script>
+    <script src="grades/grade1.js"></script>
+    <script src="grades/grade2.js"></script>
+
     <script src="helpers.js"></script>
     <script src="math-engine.js"></script>
     <script src="ui-controller.js"></script>
