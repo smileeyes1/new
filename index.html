@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة AATE - النظام التعليمي السيادي والذكاء التكيفي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- واجهة النظام الرئيسية للمستخدم (تُعزل تماماً أثناء الطباعة المادية) -->
+    <div class="system-application-wrapper no-print" id="appMainLayout">
+        
+        <!-- شريط القيادة والملاحة الجانبي لـ SaaS -->
+        <aside class="sidebar-matrix">
+            <div class="sidebar-brand-container">
+                <div class="brand-avatar">🧠</div>
+                <div class="brand-metadata">
+                    <h2>منظومة AATE</h2>
+                    <p>الذكاء التربوي التكيفي</p>
+                </div>
+            </div>
+            
+            <nav class="sidebar-menu-items">
+                <button class="menu-tab-btn active" data-panel="dashboard-panel">📊 لوحة التحكم والتحليلات</button>
+                <button class="menu-tab-btn" data-panel="ai-intelligence-panel">💡 محرك الإدراك والشرح</button>
+                <button class="menu-tab-btn" data-panel="academic-documents-panel">📝 أوراق العمل والامتحانات</button>
+                <button class="menu-tab-btn" data-panel="students-ledger-panel">👥 سجل الكفاءة الطلابي</button>
+                <button class="menu-tab-btn" data-panel="saas-billing-panel">💎 إدارة اشتراكات SaaS</button>
+                <button class="menu-tab-btn" data-panel="api-gateway-panel">⚙️ بوابات ومفاتيح الـ AI</button>
+            </nav>
+
+            <div class="sidebar-system-footer">
+                <p>الإصدار الأكاديمي v٢.٠.٠</p>
+                <p>تاريخ المعالجة الفوري: ٢٠٢٦م</p>
+            </div>
+        </aside>
+
+        <!-- مساحة العمل المركزية والمعالجة الحية -->
+        <main class="workspace-viewport">
+            <header class="workspace-global-header">
+                <div class="header-context">
+                    <h1 id="currentPanelTitle">لوحة التحكم والتحليلات القيادية</h1>
+                    <p class="context-subtitle">مراقبة الأداء المعرفي العام وهندسة مسارات التعليم المستدامة</p>
+                </div>
+                <div class="engine-status-indicator">
+                    <span class="pulse-dot"></span>
+                    <span id="engineBadgeStatus">نظام القواعد المحلي: نشط ومؤمن</span>
+                </div>
+            </header>
+
+            <!-- كتل وبوابات اللوحات الديناميكية المستقلة -->
+            
+            <!-- لوحة التحكم الإحصائية الشاملة -->
+            <section id="dashboard-panel" class="workspace-view-block">
+                <div class="analytics-cards-grid">
+                    <div class="metric-card-widget">
+                        <div class="card-icon">👥</div>
+                        <div class="card-data-flow">
+                            <h3>إجمالي الطلاب النشطين</h3>
+                            <p class="metric-counter" id="dashTotalStudents">٠٣</p>
+                        </div>
+                    </div>
+                    <div class="metric-card-widget">
+                        <div class="card-icon">🎯</div>
+                        <div class="card-data-flow">
+                            <h3>المسارات المتكيفة المتولدة</h3>
+                            <p class="metric-counter" id="dashTotalPaths">١٨</p>
+                        </div>
+                    </div>
+                    <div class="metric-card-widget">
+                        <div class="card-icon">🖨️</div>
+                        <div class="card-data-flow">
+                            <h3>الوثائق الأكاديمية المستخرجة</h3>
+                            <p class="metric-counter" id="dashTotalDocs">١٢</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-analytics-split">
+                    <div class="analysis-graph-simulate">
+                        <h4>📈 مراقبة نمو جودة الاستيعاب الصفي التراكمي</h4>
+                        <div class="bar-progress-container">
+                            <p>مستوى الفهم والاستيعاب الحسي البصري: ٩٢%</p>
+                            <div class="progress-bar-track"><div class="progress-bar-fill" style="width: 92%;"></div></div>
+                        </div>
+                        <div class="bar-progress-container">
+                            <p>مستوى الانتقال للتجريد الرمزي والمعادلات: ٦٥%</p>
+                            <div class="progress-bar-track"><div class="progress-bar-fill" style="width: 65%; background: #eab308;"></div></div>
+                        </div>
+                    </div>
+                    <div class="analysis-alerts-simulate">
+                        <h4>⚠️ إشعارات تشخيصية فورية لخطط معالجة الضعف</h4>
+                        <ul class="alerts-vector-list">
+                            <li><strong>تنبيه نمائي:</strong> هناك ٣ طلاب في الصف الأول الابتدائي يحتاجون إلى زيادة في مرحلة رسومات الشطب قبل الانتقال إلى الأرقام المجردة.</li>
+                            <li><strong>تأكيد كفاءة:</strong> أتمت المجموعة "ب" مهارات التفكير النقدي المتكامل لدرس السلاسل الغذائية بنجاح.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- محرك الإدراك والتلقين التكيفي الذكي -->
+            <section id="ai-intelligence-panel" class="workspace-view-block hidden">
+                <div class="input-form-card">
+                    <h4>🧠 محرك هندسة وتفكيك المفاهيم والمحاور المعرفية</h4>
+                    <p class="form-instruction">يقوم هذا المحرك بصياغة مسارات التدريس آلياً بالتدرج المعرفي الدقيق بناءً على الفئة العمرية والصف المستهدف.</p>
+                    
+                    <div class="form-inputs-matrix">
+                        <div class="input-field-group">
+                            <label>المادة الدراسية:</label>
+                            <input type="text" id="aiSubjectInput" placeholder="مثال: الرياضيات، العلوم العامة...">
+                        </div>
+                        <div class="input-field-group">
+                            <label>الصف المستهدف والمستوى الإدراكي:</label>
+                            <select id="aiGradeInput">
+                                <option value="المرحلة الأساسية الدنيا (الصف ١-٣)">المرحلة الأساسية الدنيا (الصف ١-٣) -> تركيز حسي مادي</option>
+                                <option value="المرحلة الأساسية المتوسطة (الصف ٤-٦)">المرحلة الأساسية المتوسطة (الصف ٤-٦) -> سياق مفهومي حياتي</option>
+                                <option value="المرحلة الأساسية العليا (الصف ٧-٩)">المرحلة الأساسية العليا (الصف ٧-٩) -> تفكير نقدي وتحليلي</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-field-group" style="margin-top: 15px;">
+                        <label>المفهوم أو عنوان الدرس المراد هندسته:</label>
+                        <input type="text" id="aiTopicInput" placeholder="مثال: مفهوم عملية الطرح، خصائص التمدد الحراري...">
+                    </div>
+                    
+                    <button class="action-btn primary-btn" id="triggerAiEngineBtn">⚡ تفعيل المحرك وتوليد المسار المتكيف</button>
+                </div>
+
+                <!-- وعاء عرض مخرجات مسار التعليم المتدرج -->
+                <div class="output-response-card hidden" id="aiOutputWorkspaceWrapper">
+                    <div class="output-card-header">
+                        <h5>📋 الهيكل المعرفي المتكامل للمسار التعليمي المتولد</h5>
+                        <button class="action-btn secondary-btn" id="ttsPlaybackBtn">🔊 محاكاة القراءة الصوتية الواضحة</button>
+                    </div>
+                    <div id="aiDynamicScaffoldingContainer" class="scaffolding-payload"></div>
+                </div>
+            </section>
+
+            <!-- نظام توليد وثائق الامتحان وأوراق العمل المطبوعة -->
+            <section id="academic-documents-panel" class="workspace-view-block hidden">
+                <div class="input-form-card">
+                    <h4>📝 مهندس الوثائق الأكاديمية المعيارية القابلة للطباعة الرسمية</h4>
+                    <p class="form-instruction">صياغة وتوليد أوراق عمل واختبارات تقويمية نظيفة تماماً للطلاب، مجهزة هندسياً للتوافق الكلي مع مقاس الورق العالمي A4.</p>
+                    
+                    <div class="form-inputs-matrix">
+                        <div class="input-field-group">
+                            <label>نوع الوثيقة الأكاديمية:</label>
+                            <select id="docTypeInput">
+                                <option value="ورقة عمل تشخيصية متدرجة">ورقة عمل تشخيصية متدرجة</option>
+                                <option value="اختبار تقويمي منهجي مقنن">اختبار تقويمي منهجي مقنن</option>
+                            </select>
+                        </div>
+                        <div class="input-field-group">
+                            <label>موضوع ورقة العمل / الاختبار:</label>
+                            <input type="text" id="docTopicFieldInput" placeholder="مثال: مهارات الطرح ضمن العدد ٩">
+                        </div>
+                    </div>
+                    
+                    <button class="action-btn success-btn" id="compileDocumentBtn" style="margin-top: 15px;">🛠️ هندسة وبناء الوثيقة الرسمية للطلاب</button>
+                </div>
+            </section>
+
+            <!-- سجل الأداء الطلابي ومصفوفة التحليل التشخيصي -->
+            <section id="students-ledger-panel" class="workspace-view-block hidden">
+                <div class="input-form-card">
+                    <div class="output-card-header" style="padding:0; margin-bottom: 15px;">
+                        <h4>👥 مصفوفة رصد الكفاءة المعرفية والتحليل النمائي للطلاب</h4>
+                        <button class="action-btn primary-btn" id="registerStudentBtn">+ تسجيل طالب جديد في النظام</button>
+                    </div>
+                    
+                    <div class="table-responsive-wrapper">
+                        <table class="enterprise-data-table" id="studentsEcosystemTable">
+                            <thead>
+                                <tr>
+                                    <th>اسم الطالب الثلاثي</th>
+                                    <th>مستوى الاستيعاب الحالي</th>
+                                    <th>مرحلة التدرج النشطة</th>
+                                    <th>أبرز نقاط القوة المرصودة</th>
+                                    <th>الإجراء العلاجي المقترح فوراً</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- يتم الحقن والبناء آلياً عبر محرك الجافا سكريبت -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- لوحة إدارة مبيعات SaaS والخطط التجارية والمؤسسية -->
+            <section id="saas-billing-panel" class="workspace-view-block hidden">
+                <div class="saas-plans-grid">
+                    <div class="plan-billing-card">
+                        <div class="plan-badge">الحساب المجاني</div>
+                        <h3>خطة Freemium</h3>
+                        <p class="plan-price">٠$ / شهرياً</p>
+                        <ul>
+                            <li>توليد ٣ تحاضير دروس شهرياً</li>
+                            <li>طباعة وثائق محدودة الحجم</li>
+                            <li>المعالج المحلي التقليدي</li>
+                        </ul>
+                        <button class="action-btn secondary-btn" disabled>الخطة النشطة حالياً</button>
+                    </div>
+                    <div class="plan-billing-card professional">
+                        <div class="plan-badge premium">الأكثر طلباً</div>
+                        <h3>خطة المعلم المحترف Pro</h3>
+                        <p class="plan-price">١٩$ / شهرياً</p>
+                        <ul>
+                            <li>توليد غير محدود لكافة الدروس والمحاور</li>
+                            <li>الوصول الكامل لمحرك الـ API الذكي السحابي</li>
+                            <li>توليد أوراق عمل A4 غير محدودة وبدون علامة مائية</li>
+                        </ul>
+                        <button class="action-btn primary-btn">ترقية الحساب الآن</button>
+                    </div>
+                    <div class="plan-billing-card enterprise">
+                        <div class="plan-badge school">للمدارس والمؤسسات</div>
+                        <h3>الترخيص المؤسسي الفائق</h3>
+                        <p class="plan-price">٩٩$ / شهرياً</p>
+                        <ul>
+                            <li>ربط ومزامنة لوحات تحكم كافة معلمي المدرسة</li>
+                            <li>سجلات تشخيصية موحدة ومراقبة أداء الإدارة</li>
+                            <li>دعم فني مخصص وخوادم استضافة مستقلة عالية الأداء</li>
+                        </ul>
+                        <button class="action-btn success-btn">طلب تواصل للمؤسسات</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- لوحة بوابات ومفاتيح محركات الذكاء السحابية والمحلية -->
+            <section id="api-gateway-panel" class="workspace-view-block hidden">
+                <div class="input-form-card">
+                    <h4>⚙️ تكوين وإعداد بوابات الربط ومحركات النماذج الهجينة (Hybrid System Configuration)</h4>
+                    <p class="form-instruction">يمكنك إدخال مفاتيح الاتصال بالنماذج السحابية أو مسارات الاستضافة المحلية. يمتلك النظام آلية تراجع ذكية تفعل محرك القواعد الداخلي في حال غياب الاتصال بالإنترنت.</p>
+                    
+                    <div class="input-field-group">
+                        <label>رمز الوصول السري لنموذج (Google Gemini API Key):</label>
+                        <input type="password" id="geminiApiKeyField" placeholder="أدخل رمز الـ API الفعلي للاتصال السحابي الفوري...">
+                    </div>
+                    <div class="input-field-group" style="margin-top: 15px;">
+                        <label>مسار خادم الاستضافة المحلي (Ollama / WebLLM Endpoint):</label>
+                        <input type="text" id="localEndpointField" value="http://localhost:11434" placeholder="مسار معالجة البيانات دون اتصال بالإنترنت">
+                    </div>
+                    <p class="field-info-tip">💡 بمجرد حفظ الإعدادات، يدمج النظام المحركات الجديدة تلقائياً دون الحاجة لتغيير الكود الأساسي للمنصة.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- طـبـقـة مـخـرجـات الـطبـاعـة الأكـاديـمـيـة الصارمة وعزل الـ A4 (Isolated Print Area) -->
+    <!-- ========================================================================= -->
+    <div id="academicEnterpriseA4PrintViewport" class="print-preview-master-container hidden">
+        <div class="print-control-sticky-bar no-print">
+            <button class="action-btn success-btn" id="confirmPhysicalPrintJobBtn">🖨️ تأكيد إرسال مستند الطلاب إلى الطابعة المادية</button>
+            <button class="action-btn neutral-btn" id="cancelPrintPreviewModeBtn">🔄 إلغاء ومعاودة الرجوع للوحة التحكم</button>
+        </div>
+
+        <!-- الهيكل المادي النظيف لمحاكاة ورقة الـ A4 الرسمية للطلاب -->
+        <article class="a4-physical-document-sheet">
+            <header class="a4-official-document-header">
+                <div class="institution-meta-right">
+                    <p class="heavy-weight">دولة فلسطين</p>
+                    <p class="heavy-weight">وزارة التربية والتعليم</p>
+                    <p>مديرية التربية والتعليم العالي</p>
+                </div>
+                <div class="institution-meta-center">
+                    <h2 id="printedDocMainHeaderTitle">ورقة عمل تشخيصية متدرجة</h2>
+                    <p id="printedDocSubHeaderSubtitle">نظام التقييم المعرفي التكيفي وتتبع جودة التعليم</p>
+                </div>
+                <div class="institution-meta-left">
+                    <p>التاريخ المرجعي: ٢٠٢٦/٠٥/١٨م</p>
+                    <p>العام الدراسي: ٢٠٢٥ / ٢٠٢٦م</p>
+                    <p id="printedDocSecureHash">المعرف الرقمي: AATE-ـ</p>
+                </div>
+            </header>
+
+            <hr class="a4-horizontal-double-line">
+
+            <!-- جدول البيانات التعريفية للطالب (خالي ونظيف ومجهز للكتابة اليدوية) -->
+            <table class="a4-student-identity-table">
+                <tr>
+                    <th>اسم الطالب الثلاثي والواضح:</th>
+                    <td>........................................................................</td>
+                    <th>الصف والشعبة:</th>
+                    <td id="printedDocGradeCell">............................</td>
+                </tr>
+                <tr>
+                    <th>المادة الدراسية المستهدفة:</th>
+                    <td id="printedDocSubjectCell">............................</td>
+                    <th>عنوان المحور المعرفي والدرس:</th>
+                    <td id="printedDocTopicCell">............................</td>
+                </tr>
+            </table>
+
+            <!-- متن المحتوى التعليمي النظيف والموجه للطلاب حصراً دون أي عناصر ويب -->
+            <div id="printedDocMainPayloadContainer" class="a4-student-clean-content-payload"></div>
+
+            <footer class="a4-official-document-footer">
+                <p>مخرجات أكاديمية نظيفة مخصصة للطلاب جاهزة للطباعة الفورية متولدة آلياً عبر نظام "AATE" الذكي التكيفي المتوافق مع معايير المنهاج الفلسطيني.</p>
+            </footer>
+        </article>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
