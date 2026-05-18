@@ -17,6 +17,7 @@
             margin: 0;
             padding: 20px;
             color: #333;
+            direction: rtl;
         }
         .control-panel {
             background: #fff;
@@ -48,6 +49,7 @@
             border: 1px solid var(--border-color);
             border-radius: 4px;
             font-size: 11pt;
+            font-family: inherit;
         }
         .btn-group {
             display: flex;
@@ -63,11 +65,13 @@
             font-weight: bold;
             font-size: 11pt;
             transition: background 0.2s;
+            font-family: inherit;
         }
         .btn-generate { background-color: var(--primary-color); color: #fff; }
         .btn-beauty { background-color: var(--accent-color); color: #fff; }
         .btn-creative { background-color: #9b59b6; color: #fff; }
         .btn-innovative { background-color: #e67e22; color: #fff; }
+        
         .sheet-container {
             background: #fff;
             padding: 30px;
@@ -96,6 +100,7 @@
         .header-title-center { flex: 2; text-align: center; }
         .header-title-center h1 { margin: 0 0 5px 0; font-size: 20pt; }
         .header-title-center h2 { margin: 0; font-size: 15pt; font-weight: normal; }
+        
         .question-block {
             margin-bottom: 25px;
             padding-bottom: 15px;
@@ -120,6 +125,7 @@
         .creative-box-title { font-weight: bold; font-size: 14pt; border-bottom: 2px solid #000; padding-bottom: 5px; margin-bottom: 15px; }
         .shapes-container { font-size: 22pt; letter-spacing: 5px; margin: 10px 0; }
         .enhanced-beauty { border: 4px double var(--accent-color) !important; background-image: radial-gradient(var(--bg-color) 1px, transparent 0); background-size: 20px 20px; }
+        
         @media print {
             .no-print, button, .control-panel, .delete-action { display: none !important; }
             body { background-color: #fff; padding: 0; }
@@ -153,7 +159,7 @@
         <div class="panel-row">
             <div class="form-group">
                 <label for="gradeSelector">المستهدف الدراسي (الصف):</label>
-                <select id="gradeSelector" onchange="populateLessons()">
+                <select id="gradeSelector">
                     <option value="grade1">الصف الأول الأساسي</option>
                     <option value="grade2">الصف الثاني الأساسي</option>
                 </select>
@@ -173,7 +179,7 @@
             </div>
             <div class="form-group">
                 <label for="countInput">حجم الأسئلة المطلوب:</label>
-                <input type="text" id="countInput" value="٥" oninput="formatEasternInput(this)">
+                <input type="text" id="countInput" value="٥" oninput="window.formatEasternInput(this)">
             </div>
         </div>
 
@@ -206,7 +212,7 @@
             <div class="header-meta-left">
                 <span id="outGrade">الصف: ...</span><br>
                 <span id="outModel">نموذج: ...</span><br>
-                <span>التاريخ: .... / .... / 2026م</span>
+                <span>التاريخ: .... / .... / ٢٠٢٦م</span>
             </div>
         </div>
 
@@ -219,8 +225,6 @@
 
     <script src="grades/grade1.js"></script>
     <script src="grades/grade2.js"></script>
-    <script src="helpers.js"></script>
-    <script src="math-engine.js"></script>
     <script src="ui-controller.js"></script>
 
 </body>
