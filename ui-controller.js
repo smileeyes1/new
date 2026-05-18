@@ -160,7 +160,7 @@ function injectTeacherCustomIdea() {
     const qBlock = document.createElement("div");
     qBlock.className = "question-block";
     
-    let writingLines = `<div class="custom-writing-area">الإِجَابَةُ المُنْضَبِطَة...:<br>........................................................................................................................................<br>........................................................................................................................................</div>`;
+    let writingLines = `<div class="custom-writing-area">الإِجَابَةُ Mُنْضَبِطَة...:<br>........................................................................................................................................<br>........................................................................................................................................</div>`;
 
     qBlock.innerHTML = `
         <div class="question-title">
@@ -168,7 +168,7 @@ function injectTeacherCustomIdea() {
             <button class="delete-action no-print" onclick="removeQuestion(this)">❌ استبعاد</button>
         </div>
         <div class="question-body">
-            <b>فِكْرَةُ المُعَلِّمِ المُنْفَذَةُ:</b> ${formattedIdea}
+            <b>فِكْرَةُ Mُعَلِّمِ Mُنْفَذَةُ:</b> ${formattedIdea}
             ${writingLines}
         </div>
     `;
@@ -210,7 +210,7 @@ function activateCreativityMode() {
             "🎨 ارسُمْ رَسْمَةً صَغِيرَةً بَيَانِيَّةً تُعَبِّرُ عَنْ حَلِّكَ الذَّكِيِّ السَّلِيمِ.",
             "🧠 كَيْفَ تَحْقَّقْتَ مِنْ صِحَّةِ هَذَا الحَلِّ؟ اشْرَحْ لِصَدِيقِكَ بِالْكَلِمَاتِ.",
             "🌟 إِذَا كَانَتْ إِجَابَتُكَ صَحِيحَةً، ضَعْ لِنَفْسِكَ نَجْمَةً كَبِيرَةً وَلَوِّنْهَا.",
-            "🔍 اكْتُبْ مَسْأَلَةً جَدِيدَةً تُشْبِهُ هَذِهِ المَسْأَلَةَ تَمَاماً مِنْ عَقْلِكَ."
+            "🔍 اكْتُبْ مَسْأَلَةً جَدِيدَةً تُشْبِهُ هَذِهِ Mَسْأَلَةَ تَمَاماً مِنْ عَقْلِكَ."
         ];
         
         creativePrompt.innerText = prompts[idx % prompts.length];
@@ -222,9 +222,9 @@ function activateCreativityMode() {
         masterBox.id = "masterCreativeBox";
         masterBox.className = "creative-box";
         masterBox.innerHTML = `
-            <div class="creative-box-title">🏆 صُنْدُوقُ العَبَاقِرَةِ الأذْكِيَاءِ (مَشْرُوعُ زَيْتُونَةَ التَّكَيُّفِيِّ)</div>
+            <div class="creative-box-title">🏆 صُنْدُوقُ العَبَاقِرَةِ الأذْكِيَاءِ (Mَشْرُوعُ زَيْتُونَةَ التَّكَيُّفِيِّ)</div>
             <div style="font-size:13pt; line-height:2; color:#000;">
-                فَكِّرْ ثُمَّ تَخَيَّلْ: إِذَا زَارَنَا طَالِبٌ جَدِيدٌ فِي الصَّفِّ وَلَا يَعْرِفُ مَوْضُوعَ اليَوْمِ، كَيْفَ تُسَاعِدُهُ بِرَسْمَةٍ وَاحِدَةٍ لِيَفْهَمَ هَذَا الدَّرْسَ تَمَاماً؟
+                فَكِّرْ ثُمَّ تَخَيَّلْ: إِذَا زَارَنَا طَالِبٌ جَدِيدٌ فِي الصَّفِّ وَلَا يَعْرِفُ Mَوْضُوعَ اليَوْمِ، كَيْفَ تُسَاعِدُهُ بِرَسْمَةٍ وَاحِدَةٍ لِيَفْهَمَ هَذَا الدَّرسَ تَمَاماً؟
                 <br><br>[ ........................................................................................................................................ ]
             </div>
         `;
@@ -267,36 +267,36 @@ function injectInnovativeQuestion() {
         case "diagnostic":
         case "review":
         case "worksheet":
-            body = `<b>تحدّي الذكاء:</b> أَنا عَدَدٌ أَكْبَرُ مِنْ المِقْدَارِ [ ${toEasternArabicDigits(lessonObj.minVal ? lessonObj.minVal + 2 : 2)} ] وَأَصْغَرُ مِنْ [ ${toEasternArabicDigits(lessonObj.maxVal ? lessonObj.maxVal : 9)} ]، إِذَا جَمَعْتَ لِي النَّاتِجَ صِفْرًا أَبْقَى كَمَا أَنَا. فَمَنْ أَكُون...؟ <br>العَدَدُ الذَّكِيُّ هُوَ: <span class="blank-space"></span>`;
+            body = `<b>تحدّي الذكاء:</b> أَنا عَدَدٌ أَكْبَرُ مِنْ Mِقْدَارِ [ ${toEasternArabicDigits(lessonObj.minVal ? lessonObj.minVal + 2 : 2)} ] وَأَصْغَرُ مِنْ [ ${toEasternArabicDigits(lessonObj.maxVal ? lessonObj.maxVal : 9)} ]، إِذَا جَمَعْتَ لِي النَّاتِجَ صِفْرًا أَبْقَى كَمَا أَنَا. فَمَنْ أَكُون...؟ <br>العَدَدُ الذَّكِيُّ هُوَ: <span class="blank-space"></span>`;
             break;
         case "lesson":
             const v = getRandomIntSeeded(lessonObj.minVal || 1, lessonObj.maxVal || 20, seed);
-            body = `<b>سُؤالُ الِابْتِكاَرِ:</b> اكْتُبْ كَلِمَةً أَوْ ارْسُمْ رَسْمَةً مَبْنِيَّةً عَلَى خَيَالِكَ التَّامِّ تُعَبِّرُ عَنْ تَمْثِيلِ العَدَدِ المُنْضَبِطِ [ <b>${toEasternArabicDigits(v)}</b> ]: <br><br> [ ........................................................................................ ]`;
+            body = `<b>سُؤالُ الِابْتِكاَرِ:</b> اكْتُبْ كَلِمَةً أَوْ ارْسُمْ رَسْمَةً Mَبْنِيَّةً عَلَى خَيَالِكَ التَّامِّ تُعَبِّرُ عَنْ تَمْثِيلِ العَدَدِ Mُنْضَبِطِ [ <b>${toEasternArabicDigits(v)}</b> ]: <br><br> [ ........................................................................................ ]`;
             break;
         case "comparison":
         case "comparison_adv":
-            body = `<b>فَكِّرْ ثُمَّ أَجِبْ:</b> اكْتُبْ عَدَدًا مَفْقُودًا فِي الفَرَاغِ لِتَكُونَ الجُمْلَةُ الرِّيَاضِيَّةُ صَحِيحَةً تَمَامًا: <br><p style="text-align:center; font-size:15pt;"><span class="blank-space"></span> &gt; ${toEasternArabicDigits((lessonObj.minVal || 0) + 1)}</p>`;
+            body = `<b>فَكِّرْ ثُمَّ أَجِبْ:</b> اكْتُبْ عَدَدًا Mَفْقُودًا فِي الفَرَاغِ لِتَكُونَ الجُمْلَةُ الرِّيَاضِيَّةُ صَحِيحَةً تَمَامًا: <br><p style="text-align:center; font-size:15pt;"><span class="blank-space"></span> &gt; ${toEasternArabicDigits((lessonObj.minVal || 0) + 1)}</p>`;
             break;
         case "sorting":
         case "sorting_adv":
-            body = `<b>تحدّي التَّرْتِيبِ:</b> اكْتُبْ ثَلَاثَةَ أَعْدَادٍ مُخْتَلِفَةٍ مِنْ عِنْدِكَ تَقَعُ تَمَامًا بَيْنَ العَدَدِ [ ${toEasternArabicDigits(lessonObj.minVal || 0)} ] وَالعَدَدِ [ ${toEasternArabicDigits(lessonObj.maxVal || 10)} ] مُرَتَّبَةً تَصَاعُدِيًّا: <br><br> <span class="blank-space"></span> ، <span class="blank-space"></span> ، <span class="blank-space"></span>`;
+            body = `<b>تحدّي التَّرْتِيبِ:</b> اكْتُبْ ثَلَاثَةَ أَعْدَادٍ Mُخْتَلِفَةٍ مِنْ عِنْدِكَ تَقَعُ تَمَامًا بَيْنَ العَدَدِ [ ${toEasternArabicDigits(lessonObj.minVal || 0)} ] وَالعَدَدِ [ ${toEasternArabicDigits(lessonObj.maxVal || 10)} ] Mُرَتَّبَةً تَصَاعُدِيًّا: <br><br> <span class="blank-space"></span> ، <span class="blank-space"></span> ، <span class="blank-space"></span>`;
             break;
         case "operation_add":
         case "add_carry":
             const targetAdd = getRandomIntSeeded((lessonObj.minVal || 0) + 3, lessonObj.maxVal || 20, seed);
-            body = `<b>مَحْفِلُ التَّفْكِيرِ:</b> جِدْ عَدَدَيْنِ مُخْتَلِفَيْنِ إِذَا قُمْنَا بِجَمْعِهِمَا مَعًا كَانَ النَّاتِجُ يُسَاوِي تَمَامًا العَدَدَ [ <b>${toEasternArabicDigits(targetAdd)}</b> ]: <br><br> <span class="blank-space"></span> + <span class="blank-space"></span> = ${toEasternArabicDigits(targetAdd)}`;
+            body = `<b>Mَحْفِلُ التَّفْكِيرِ:</b> جِدْ عَدَدَيْنِ Mُخْتَلِفَيْنِ إِذَا قُمْنَا بِجَمْعِهِمَا Mَعًا كَانَ النَّاتِجُ يُسَاوِي تَمَامًا العَدَدَ [ <b>${toEasternArabicDigits(targetAdd)}</b> ]: <br><br> <span class="blank-space"></span> + <span class="blank-space"></span> = ${toEasternArabicDigits(targetAdd)}`;
             break;
         case "operation_sub":
         case "sub_borrow":
             const targetSub = getRandomIntSeeded(lessonObj.minVal || 1, Math.floor((lessonObj.maxVal || 20) / 2), seed);
-            body = `<b>مَحْفِلُ التَّفْكِيرِ:</b> جِدْ عَدَدَيْنِ مُخْتَلِفَيْنِ إِذَا طَرَحْنَا أَحَدَهُمَا مِنْ الآخَرِ بَقِيَ مَعَنَا تَمَامًا العَدَدُ [ <b>${toEasternArabicDigits(targetSub)}</b> ]: <br><br> <span class="blank-space"></span> - <span class="blank-space"></span> = ${toEasternArabicDigits(targetSub)}`;
+            body = `<b>Mَحْفِلُ التَّفْكِيرِ:</b> جِدْ عَدَدَيْنِ Mُخْتَلِفَيْنِ إِذَا طَرَحْنَا أَحَدَهُمَا مِنْ الآخَرِ بَقِيَ Mَعَنَا تَمَامًا العَدَدَ [ <b>${toEasternArabicDigits(targetSub)}</b> ]: <br><br> <span class="blank-space"></span> - <span class="blank-space"></span> = ${toEasternArabicDigits(targetSub)}`;
             break;
         case "components":
             const compVal = getRandomIntSeeded((lessonObj.minVal || 2) + 1, lessonObj.maxVal || 9, seed);
-            body = `<b>التَّحْلِيلُ الِابْتِكَارِيُّ:</b> اكْتُبْ طَرِيقَتَيْنِ مُخْتَلِفَتَيْنِ لِتَحْلِيلِ العَدَدِ [ <b>${toEasternArabicDigits(compVal)}</b> ] إِلَى مُكَوِّنَاتِهِ الأَسَاسِيَّةِ: <br>الطَّرِيقَةُ الأولى: <span class="blank-space"></span> وَ <span class="blank-space"></span> <br>الطَّرِيقَةُ الثَّانِيَةُ: <span class="blank-space"></span> وَ <span class="blank-space"></span>`;
+            body = `<b>التَّحْلِيلُ الِابْتِكَارِيُّ:</b> اكْتُبْ طَرِيقَتَيْنِ Mُخْتَلِفَتَيْنِ لِتَحْلِيلِ العَدَدِ [ <b>${toEasternArabicDigits(compVal)}</b> ] إِلَى Mُكَوِّنَاتِهِ الأَسَاسِيَّةِ: <br>الطَّرِيقَةُ الأولى: <span class="blank-space"></span> وَ <span class="blank-space"></span> <br>الطَّرِيقَةُ الثَّانِيَةُ: <span class="blank-space"></span> وَ <span class="blank-space"></span>`;
             break;
         case "pattern":
-            body = `<b>أَكْمِلْ النَّمَطَ الذَّكِيَّ:</b> اكْتُبْ النَّمَطَ النَّاشِئَ عَنْ قَفْزِ الأَعْدَادِ بِشَكْلٍ مَعْكُوسٍ: <br><p style="text-align:center; font-size:15pt;">${toEasternArabicDigits(lessonObj.maxVal || 99)} ، ${toEasternArabicDigits((lessonObj.maxVal || 99) - 2)} ، <span class="blank-space"></span> ، <span class="blank-space"></span></p>`;
+            body = `<b>أَكْمِلْ النَّمَطَ الذَّكِيَّ:</b> اكْتُبْ النَّمَطَ النَّاشِئَ عَنْ قَفْزِ الأَعْدَادِ بِشَكْلٍ Mَعْكُوسٍ: <br><p style="text-align:center; font-size:15pt;">${toEasternArabicDigits(lessonObj.maxVal || 99)} ، ${toEasternArabicDigits((lessonObj.maxVal || 99) - 2)} ، <span class="blank-space"></span> ، <span class="blank-space"></span></p>`;
             break;
         default:
             body = `<b>تَحَدٍّ إِضَافِيٌّ لِدَرْسِ ( ${lessonObj.title} ):</b> فَكِّرْ عَمِيقاً ثُمَّ عَبِّرْ عَنْ فَهْمِكَ لِهَذَا العُنْوَانِ بِرَسْمَةٍ أَوْ عِبَارَةٍ دَقِيقَةٍ: <br><br> [ ........................................................................................ ]`;
