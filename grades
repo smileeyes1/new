@@ -1,0 +1,31 @@
+window.curriculumRepository = window.curriculumRepository || {};
+
+window.curriculumRepository.grade1 = {
+    name: "الصف الأول الأساسي",
+    directorate: "مديرية التربية والتعليم - طوباس",
+    items: [
+        { id: "g1_diag", type: "diagnostic", minVal: 1, maxVal: 9, title: "الاختبار التشخيصي المعياري الشامل لبداية العام" },
+        { id: "g1_u1_d1", type: "lesson", rangeType: "fixed_range", minVal: 1, maxVal: 3, title: "الوحدة ١: الأعداد (١، ٢، ٣)", digit: 3, shape: "🍎" },
+        { id: "g1_u1_d2", type: "lesson", rangeType: "fixed_range", minVal: 4, maxVal: 6, title: "الوحدة ١: الأعداد (٤، ٥، ٦)", digit: 5, shape: "⭐" },
+        { id: "g1_u1_d3", type: "lesson", rangeType: "fixed_range", minVal: 7, maxVal: 9, title: "الوحدة ١: الأعداد (٧، ٨، ٩)", digit: 8, shape: "🦋" },
+        { id: "g1_u1_d4", type: "lesson", rangeType: "fixed_range", minVal: 0, maxVal: 0, title: "الوحدة ١: عدد الصفر (٠) ومفهوم الخلو", digit: 0, shape: "⚪" },
+        { id: "g1_u1_d5", type: "comparison", minVal: 0, maxVal: 9, title: "الوحدة ١: مقارنة الأعداد ضمن ٩ (أكبر، أصغر، يساوي)" },
+        { id: "g1_u1_d6", type: "ordering", minVal: 0, maxVal: 9, title: "الوحدة ١: الترتيب التصاعدي والتنازلي ضمن ٩" },
+        { id: "g1_u1_end", type: "unit_review", minVal: 0, maxVal: 9, title: "تقييم ختامي شامل: الوحدة الأولى كاملة" },
+        { id: "g1_u2_d1", type: "operation_add", minVal: 1, maxVal: 9, title: "الوحدة ٢: مفهوم الجمع البصري ضمن العدد ٩" },
+        { id: "g1_u2_d2", type: "components", minVal: 2, maxVal: 9, title: "الوحدة ٢: مكونات الأعداد (مكونات الأعداد من ٢ إلى ٩)" },
+        { id: "g1_u2_d3", type: "operation_sub", minVal: 1, maxVal: 9, title: "الوحدة ٢: مفهوم الطرح بالشطب والمحسوس" },
+        { id: "g1_u2_d4", type: "operation_mixed", minVal: 1, maxVal: 9, title: "الوحدة ٢: العلاقة المتبادلة بين الجمع والطرح" },
+        { id: "g1_u2_end", type: "unit_review", minVal: 0, maxVal: 9, title: "تقييم ختامي شامل: الوحدة الثانية كاملة" },
+        { id: "g1_u3_d1", type: "lesson", rangeType: "fixed_range", minVal: 10, maxVal: 20, title: "الوحدة ٣: الأعداد ضمن النطاق (١٠ إلى ٢٠)", digit: 14, shape: "🎈" },
+        { id: "g1_u3_d2", type: "lesson", rangeType: "fixed_range", minVal: 10, maxVal: 20, title: "الوحدة ٣: قراءة وكتابة الأعداد حتى ٢٠ وتمثيلها" },
+        { id: "g1_u3_d3", type: "comparison", minVal: 10, maxVal: 20, title: "الوحدة ٣: مقارنة وترتيب الأعداد ضمن ٢٠" },
+        { id: "g1_u4_d1", type: "operation_add", minVal: 10, maxVal: 20, title: "الوحدة ٤: الجمع دون حمل ضمن النطاق ٢٠" },
+        { id: "g1_u4_d2", type: "operation_sub", minVal: 10, maxVal: 20, title: "الوحدة ٤: الطرح دون استلاف ضمن النطاق ٢٠" },
+        { id: "g1_u5_d1", type: "geometry", minVal: 1, maxVal: 5, title: "الوحدة ٥: الهندسة والقياس (الخطوط والأشكال الهندسية المستوية)", shape: "🔺" },
+        { id: "g1_u6_d1", type: "lesson", rangeType: "fixed_range", minVal: 21, maxVal: 99, title: "الوحدة ٦: الأعداد ضمن النطاق ٩٩ والقيمة المنزلية (آحاد وعشرات)" },
+        { id: "g1_u7_d1", type: "operation_add", minVal: 20, maxVal: 99, title: "الوحدة ٧: الجمع دون حمل العمودي والأفقي ضمن النطاق ٩٩" },
+        { id: "g1_u7_d2", type: "operation_sub", minVal: 20, maxVal: 99, title: "الوحدة ٧: الطرح دون استلاف العمودي والأفقي ضمن النطاق ٩٩" },
+        { id: "g1_u8_d1", type: "geometry", minVal: 1, maxVal: 12, title: "الوحدة ٨: القياس والزمن (قراءة الساعة بالوقت الكامل والدقائق)", shape: "🕒" }
+    ]
+};
