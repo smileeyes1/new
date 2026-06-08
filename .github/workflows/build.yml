@@ -2,26 +2,38 @@ name: Build APK
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
 
-      - uses: subosito/flutter-action@v2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
-          flutter-version: '3.22.0'
+          distribution: temurin
+          java-version: "17"
 
-      - name: Install dependencies
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.22.0"
+          cache: true
+
+      - name: Flutter Pub Get
         run: flutter pub get
 
-      - name: Build release APK
+      - name: Build Release APK
         run: flutter build apk --release
 
-      - name: Upload APK
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
-    runs-on: ubuntu-latest
-
-    steps:
+``
