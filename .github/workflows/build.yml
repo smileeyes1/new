@@ -1,49 +1,60 @@
-name: Flutter Android Build
+name: Flutter Android Build (Fail-Safe)
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04   # تثبيت النظام - ليس latest
+
+    env:
+      JAVA_HOME: /usr/lib/jvm/temurin-11-jdk-amd64
+      PATH: /usr/lib/jvm/temurin-11-jdk-amd64/bin:${{ env.PATH }}
 
     steps:
-      # 1️⃣ جلب الكود
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ تثبيت Java 11 (الحل الذري الأساسي)
-      - name: Set up Java 11
+      # ✅ قفل Java بشكل جذري
+      - name: Install Java 11 (hard-pinned)
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
           java-version: '11'
+          distribution: 'temurin'
+          check-latest: false
 
-      # 3️⃣ تثبيت Flutter (نسخة مستقرة)
-      - name: Set up Flutter
+      # ✅ تأكيد فعلي (حاسم)
+      - name: Verify Java
+        run: |
+          java -version
+          javac -version
+
+      # ✅ تثبيت Flutter ثابت
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: stable
+          flutter-version: '3.22.0'
           cache: true
 
-      # 4️⃣ التحقق من البيئة
       - name: Flutter Doctor
         run: flutter doctor -v
 
-      # 5️⃣ تحميل الحزم
       - name: Flutter Pub Get
         run: flutter pub get
 
-      # 6️⃣ بناء APK (Release)
-      - name: Build APK
-        run: flutter build apk --release
+      # ✅ قفل Gradle Daemon
+      - name: Disable Gradle Daemon
+        run: |
+          echo "org.gradle.daemon=false" >> android/gradle.properties
 
-      # 7️⃣ رفع الـ APK كـ Artifact
+      # ✅ البناء النهائي
+      - name: Build Release APK
+        run: flutter build apk --release --no-daemon
+
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
