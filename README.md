@@ -1,3 +1,7 @@
 # Teacher Zero Effort App
 
-Push to GitHub and get APK automatically via Actions.
+Mobile-first Flutter app.
+
+## Build APK
+Push to ` generate:
+`app-release.apk`
