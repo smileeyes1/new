@@ -1,10 +1,13 @@
 name: teacher_zero_effort_app
-description: Zero effort teacher assistant
-version: 1.0.0
+description: Mobile App
+version: 1.0.0+1
+
 environment:
   sdk: '>=3.0.0 <4.0.0'
+
 dependencies:
   flutter:
     sdk: flutter
+
 flutter:
   uses-material-design: true
