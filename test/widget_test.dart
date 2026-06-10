@@ -1,19 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:provider/provider.dart';
 import 'package:teacher_zero_effort_app/main.dart';
+import 'package:teacher_zero_effort_app/presentation/viewmodels/app_viewmodel.dart';
+import 'package:teacher_zero_effort_app/domain/entities/app_info.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(const TeacherApp());
+  group('TeacherApp Widget Tests', () {
+    testWidgets('App renders home page', (WidgetTester tester) async {
+      // Build our app
+      await tester.pumpWidget(const TeacherApp());
 
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+      // Verify app renders
+      expect(find.byType(MaterialApp), findsOneWidget);
+    });
 
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    testWidgets('Counter increments when fab is pressed',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const TeacherApp());
 
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      // Find the counter FAB and tap it
+      expect(find.byIcon(Icons.add), findsOneWidget);
+      await tester.tap(find.byIcon(Icons.add));
+      await tester.pump();
+
+      // Verify counter incremented
+      expect(find.text('1'), findsOneWidget);
+    });
+
+    testWidgets('HomePage displays title',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const TeacherApp());
+
+      // Verify title is displayed
+      expect(find.text('تطبيق المعلم بلا جهد'), findsWidgets);
+    });
   });
 }

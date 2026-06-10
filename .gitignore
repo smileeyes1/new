@@ -26,6 +26,8 @@
 .pub-cache/
 .pub/
 /build/
+.env
+.env.*.local
 
 # Symbolication related
 app.*.symbols
@@ -65,12 +67,6 @@ app.*.map.json
 # Web support
 lib/generated_plugin_registrant.dart
 
-# Symbolication related
-app.*.symbols
-
-# Obfuscation related
-app.*.map.json
-
 # Android Studio will place build artifacts here
 /android/app/debug
 /android/app/profile
@@ -79,5 +75,17 @@ app.*.map.json
 # Coverage
 coverage/
 
-# Exceptions to above rules.
-!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+# Generated files
+*.g.dart
+*.freezed.dart
+*.config.dart
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# OS
+.DS_Store
+Thumbs.db

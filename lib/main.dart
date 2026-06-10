@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:teacher_zero_effort_app/core/di/service_locator.dart';
+import 'package:teacher_zero_effort_app/core/logger/app_logger.dart';
+import 'package:teacher_zero_effort_app/core/theme/app_theme.dart';
+import 'package:teacher_zero_effort_app/presentation/viewmodels/app_viewmodel.dart';
+import 'package:teacher_zero_effort_app/presentation/pages/home_page.dart';
 
-void main() {
+future void main() async {
+  // Ensure Flutter binding is initialized
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize service locator
+  await initServiceLocator();
+  
+  AppLogger.info('Application started');
+  
   runApp(const TeacherApp());
 }
 
@@ -9,59 +23,19 @@ class TeacherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'تطبيق المعلم بلا جهد',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
-      home: const HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('تطبيق المعلم بلا جهد'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'مرحباً بك في التطبيق',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AppViewModel>(
+          create: (_) => getIt<AppViewModel>(),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'زيادة',
-        child: const Icon(Icons.add),
+      ],
+      child: MaterialApp(
+        title: 'تطبيق المعلم بلا جهد',
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.light,
+        home: const HomePage(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
