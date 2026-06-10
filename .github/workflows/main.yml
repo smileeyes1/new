@@ -2,72 +2,53 @@ name: Flutter Android Build (Release)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # ─────────────────────────────
-      # 1. Checkout repository
-      # ─────────────────────────────
       - name: Checkout code
         uses: actions/checkout@v4
 
       # ─────────────────────────────
-      # 2. Setup Java (required for Android Gradle)
+      # Java (Android requirement)
       # ─────────────────────────────
-      - name: Set up JDK
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           java-version: "17"
 
       # ─────────────────────────────
-      # 3. Setup Flutter SDK
+      # Flutter SDK (FIXED)
       # ─────────────────────────────
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "stable"
+          channel: "stable"
+          flutter-version: "3.24.5"
           cache: true
 
-      # ─────────────────────────────
-      # 4. Verify Flutter environment
       # ─────────────────────────────
       - name: Flutter doctor
         run: flutter doctor -v
 
-      # ─────────────────────────────
-      # 5. Get dependencies
-      # ─────────────────────────────
-      - name: Install dependencies
+      - name: Get dependencies
         run: flutter pub get
 
-      # ─────────────────────────────
-      # 6. Code analysis (IMPORTANT - stops bad builds early)
-      # ─────────────────────────────
       - name: Analyze code
         run: flutter analyze
 
-      # ─────────────────────────────
-      # 7. Run tests (if any)
-      # ─────────────────────────────
       - name: Run tests
         run: flutter test
 
-      # ─────────────────────────────
-      # 8. Build Release APK
-      # ─────────────────────────────
       - name: Build APK (Release)
         run: flutter build apk --release
 
-      # ─────────────────────────────
-      # 9. Upload artifact (optional but recommended)
-      # ─────────────────────────────
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
