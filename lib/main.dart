@@ -4,7 +4,8 @@ import 'package:teacher_zero_effort_app/core/di/service_locator.dart';
 import 'package:teacher_zero_effort_app/core/logger/app_logger.dart';
 import 'package:teacher_zero_effort_app/core/theme/app_theme.dart';
 import 'package:teacher_zero_effort_app/presentation/viewmodels/app_viewmodel.dart';
-import 'package:teacher_zero_effort_app/presentation/pages/home_page.dart';
+import 'package:teacher_zero_effort_app/presentation/viewmodels/teacher_viewmodel.dart';
+import 'package:teacher_zero_effort_app/presentation/pages/dashboard_page.dart';
 
 future void main() async {
   // Ensure Flutter binding is initialized
@@ -28,13 +29,16 @@ class TeacherApp extends StatelessWidget {
         ChangeNotifierProvider<AppViewModel>(
           create: (_) => getIt<AppViewModel>(),
         ),
+        ChangeNotifierProvider<TeacherViewModel>(
+          create: (_) => getIt<TeacherViewModel>(),
+        ),
       ],
       child: MaterialApp(
         title: 'تطبيق المعلم بلا جهد',
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.light,
-        home: const HomePage(),
+        home: const DashboardPage(),
         debugShowCheckedModeBanner: false,
       ),
     );
