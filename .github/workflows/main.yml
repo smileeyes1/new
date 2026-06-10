@@ -11,44 +11,63 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      # ─────────────────────────────
+      # 1. Checkout code
+      # ─────────────────────────────
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       # ─────────────────────────────
-      # Java (Android requirement)
+      # 2. Setup Java (Android requirement)
       # ─────────────────────────────
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
+          distribution: temurin
           java-version: "17"
 
       # ─────────────────────────────
-      # Flutter SDK (FIXED)
+      # 3. Setup Flutter (PINNED VERSION FILE)
       # ─────────────────────────────
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
-          flutter-version: "3.24.5"
+          flutter-version-file: .flutter-version
           cache: true
 
+      # ─────────────────────────────
+      # 4. Verify environment
       # ─────────────────────────────
       - name: Flutter doctor
         run: flutter doctor -v
 
-      - name: Get dependencies
+      # ─────────────────────────────
+      # 5. Install dependencies
+      # ─────────────────────────────
+      - name: Install dependencies
         run: flutter pub get
 
+      # ─────────────────────────────
+      # 6. Static analysis (FAIL FAST)
+      # ─────────────────────────────
       - name: Analyze code
         run: flutter analyze
 
+      # ─────────────────────────────
+      # 7. Run tests
+      # ─────────────────────────────
       - name: Run tests
         run: flutter test
 
+      # ─────────────────────────────
+      # 8. Build release APK
+      # ─────────────────────────────
       - name: Build APK (Release)
         run: flutter build apk --release
 
+      # ─────────────────────────────
+      # 9. Upload artifact
+      # ─────────────────────────────
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
