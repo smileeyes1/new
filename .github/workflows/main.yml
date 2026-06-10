@@ -1,81 +1,75 @@
-engine:
-  mode: closed_loop
+name: Flutter Android Build (Release)
 
-  input:
-    - logs
-    - build_output
-    - git_diff
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
-  state:
-    current: IDLE
-    last_error: null
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-  failure_detection:
-    patterns:
-      - compile_error
-      - test_failure
-      - dependency_error
-      - runtime_crash
-
-  truth_source_priority:
-    order:
-      - build_output
-      - test_results
-      - static_analysis
-      - logs
-      - git_diff
-
-  loop:
-    - detect_failure
-    - if no_failure -> stay_idle
-    - analyze_root_cause
-    - generate_single_fix
-    - pre_apply_validation
-    - simulate_fix
-    - if pass -> apply
-    - else -> rollback
-    - update_state
-
-  pre_apply_validation:
-    required_checks:
-      - patch_is_isolated
-      - no_unrelated_files_modified
-      - no_api_contract_break
-      - dependency_stability_check
-
-  simulate:
     steps:
-      - dry_run_build
-      - run_tests
-      - static_analysis
+      # ─────────────────────────────
+      # 1. Checkout repository
+      # ─────────────────────────────
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  rollback:
-    strategy: git_restore
-    checkpoint: pre_patch_commit
+      # ─────────────────────────────
+      # 2. Setup Java (required for Android Gradle)
+      # ─────────────────────────────
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
 
-  success_criteria:
-    must_be_true:
-      - build_output_contains: "0 errors"
-      - test_suite_passed: true
-      - no_new_errors_after_patch: true
+      # ─────────────────────────────
+      # 3. Setup Flutter SDK
+      # ─────────────────────────────
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "stable"
+          cache: true
 
-  termination:
-    condition:
-      - success_criteria_met
-      - or max_cycles_reached
+      # ─────────────────────────────
+      # 4. Verify Flutter environment
+      # ─────────────────────────────
+      - name: Flutter doctor
+        run: flutter doctor -v
 
-    max_cycles: 3
+      # ─────────────────────────────
+      # 5. Get dependencies
+      # ─────────────────────────────
+      - name: Install dependencies
+        run: flutter pub get
 
-  state_transitions:
-    IDLE: [ANALYZING]
-    ANALYZING: [SIMULATING, ROLLBACK]
-    SIMULATING: [APPLYING, ROLLBACK]
-    APPLYING: [VALIDATING, ROLLBACK]
-    VALIDATING: [IDLE, ROLLBACK]
+      # ─────────────────────────────
+      # 6. Code analysis (IMPORTANT - stops bad builds early)
+      # ─────────────────────────────
+      - name: Analyze code
+        run: flutter analyze
 
-  rules:
-    - one_fix_only
-    - no_parallel_cycles
-    - must_have_rollback
-    - deterministic_execution_only
-    - no_partial_apply_allowed
+      # ─────────────────────────────
+      # 7. Run tests (if any)
+      # ─────────────────────────────
+      - name: Run tests
+        run: flutter test
+
+      # ─────────────────────────────
+      # 8. Build Release APK
+      # ─────────────────────────────
+      - name: Build APK (Release)
+        run: flutter build apk --release
+
+      # ─────────────────────────────
+      # 9. Upload artifact (optional but recommended)
+      # ─────────────────────────────
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
