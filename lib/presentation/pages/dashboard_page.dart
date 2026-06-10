@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teacher_zero_effort_app/presentation/viewmodels/teacher_viewmodel.dart';
+import 'package:teacher_zero_effort_app/presentation/pages/attendance_page.dart';
+import 'package:teacher_zero_effort_app/presentation/pages/grades_page.dart';
 import 'package:teacher_zero_effort_app/presentation/widgets/app_scaffold.dart';
 import 'package:teacher_zero_effort_app/presentation/widgets/teacher_widgets.dart';
 
@@ -15,7 +17,6 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   void initState() {
     super.initState();
-    // Initialize with demo teacher ID
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<TeacherViewModel>().setTeacherId('teacher_001');
     });
@@ -24,27 +25,27 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: 'لوحة التحكم',
+      title: '🏫 لوحة المعلم الفلسطيني',
       body: Consumer<TeacherViewModel>(
         builder: (context, viewModel, _) {
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Quick Actions
-                _buildQuickActions(context, viewModel),
+                // تحية يومية
+                _buildGreeting(),
                 const SizedBox(height: 24),
 
-                // Statistics
-                _buildStatistics(context, viewModel),
+                // الإجراءات السريعة الأساسية (الأكثر استخداماً)
+                _buildPrimaryActions(context),
                 const SizedBox(height: 24),
 
-                // Recent Announcements
-                _buildAnnouncementsSection(context, viewModel),
+                // الإجراءات الثانوية
+                _buildSecondaryActions(context),
                 const SizedBox(height: 24),
 
-                // Daily Reports
-                _buildDailyReportsSection(context, viewModel),
+                // ملخص سريع
+                _buildQuickSummary(viewModel),
               ],
             ),
           );
@@ -53,70 +54,49 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Widget _buildQuickActions(BuildContext context, TeacherViewModel viewModel) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'الإجراءات السريعة',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        const SizedBox(height: 12),
-        GridView.count(
-          crossAxisCount: 3,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
+  Widget _buildGreeting() {
+    final now = DateTime.now();
+    final greeting = now.hour < 12
+        ? 'صباح الخير'
+        : now.hour < 17
+            ? 'مساء الخير'
+            : 'تصبح على خير';
+
+    return Card(
+      color: Colors.blue.shade50,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
           children: [
-            QuickActionCard(
-              icon: Icons.book,
-              label: 'إضافة درس',
-              color: Colors.blue,
-              onTap: () => _navigateToAddLesson(context),
-            ),
-            QuickActionCard(
-              icon: Icons.people,
-              label: 'الحضور',
-              color: Colors.green,
-              onTap: () => _navigateToAttendance(context),
-            ),
-            QuickActionCard(
-              icon: Icons.grade,
-              label: 'الدرجات',
-              color: Colors.orange,
-              onTap: () => _navigateToGrades(context),
-            ),
-            QuickActionCard(
-              icon: Icons.assessment,
-              label: 'التقارير',
-              color: Colors.purple,
-              onTap: () => _navigateToReports(context),
-            ),
-            QuickActionCard(
-              icon: Icons.event,
-              label: 'الأنشطة',
-              color: Colors.teal,
-              onTap: () => _navigateToActivities(context),
-            ),
-            QuickActionCard(
-              icon: Icons.file_download,
-              label: 'تصدير',
-              color: Colors.indigo,
-              onTap: () => _showExportOptions(context),
+            const Text('👋', style: TextStyle(fontSize: 32)),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '$greeting معلمنا الفاضل',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  Text(
+                    'نحن هنا لتسهيل عملك اليومي',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
-      ],
+      ),
     );
   }
 
-  Widget _buildStatistics(BuildContext context, TeacherViewModel viewModel) {
+  Widget _buildPrimaryActions(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'الإحصائيات',
+          '⚡ الإجراءات الأساسية (تستخدمها كل يوم)',
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 12),
@@ -127,29 +107,29 @@ class _DashboardPageState extends State<DashboardPage> {
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
           children: [
-            StatisticCard(
-              title: 'عدد الطلاب',
-              value: '${viewModel.students.length}',
-              subtitle: 'طالب وطالبة',
-              color: Colors.blue,
-            ),
-            StatisticCard(
-              title: 'الدروس المسجلة',
-              value: '${viewModel.lessons.length}',
-              subtitle: 'درس هذا الشهر',
+            QuickActionCard(
+              icon: Icons.person_check,
+              label: 'تسجيل الحضور',
               color: Colors.green,
+              onTap: () => _navigateTo(context, const AttendancePage()),
             ),
-            StatisticCard(
-              title: 'الإعلانات',
-              value: '${viewModel.announcements.length}',
-              subtitle: 'إعلان جديد',
+            QuickActionCard(
+              icon: Icons.grade,
+              label: 'إدخال الدرجات',
               color: Colors.orange,
+              onTap: () => _navigateTo(context, const GradesPage()),
             ),
-            StatisticCard(
-              title: 'التقارير اليومية',
-              value: '${viewModel.dailyReports.length}',
-              subtitle: 'تقرير هذا الشهر',
+            QuickActionCard(
+              icon: Icons.assignment,
+              label: 'واجب منزلي',
               color: Colors.purple,
+              onTap: () => _showComingSoon(context),
+            ),
+            QuickActionCard(
+              icon: Icons.note_add,
+              label: 'تقرير يومي',
+              color: Colors.blue,
+              onTap: () => _showComingSoon(context),
             ),
           ],
         ),
@@ -157,157 +137,114 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Widget _buildAnnouncementsSection(BuildContext context, TeacherViewModel viewModel) {
-    if (viewModel.announcements.isEmpty) {
-      return const SizedBox();
-    }
-
+  Widget _buildSecondaryActions(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'الإعلانات الجديدة',
+          '📋 إجراءات أخرى',
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 12),
-        ...viewModel.announcements.take(3).map((announcement) => Card(
-          child: ListTile(
-            leading: Icon(
-              _getAnnouncementIcon(announcement.category),
-              color: _getAnnouncementColor(announcement.category),
-            ),
-            title: Text(announcement.title),
-            subtitle: Text(
-              announcement.content,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            trailing: announcement.isRequired
-                ? const Chip(
-              label: Text('مهم'),
-              backgroundColor: Colors.red,
-            )
-                : null,
-          ),
-        )),
-      ],
-    );
-  }
-
-  Widget _buildDailyReportsSection(BuildContext context, TeacherViewModel viewModel) {
-    if (viewModel.dailyReports.isEmpty) {
-      return const SizedBox();
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'التقارير اليومية الأخيرة',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        const SizedBox(height: 12),
-        ...viewModel.dailyReports.take(3).map((report) => Card(
-          child: ListTile(
-            leading: const Icon(Icons.calendar_today),
-            title: Text(
-              '${report.reportDate.day}/${report.reportDate.month}/${report.reportDate.year}',
-            ),
-            subtitle: Text(
-              'دروس: ${report.lessonsDelivered} | حضور: ${report.studentsPresent}',
-            ),
-          ),
-        )),
-      ],
-    );
-  }
-
-  IconData _getAnnouncementIcon(String category) {
-    switch (category) {
-      case 'circular':
-        return Icons.mail;
-      case 'notice':
-        return Icons.notification_important;
-      case 'urgent':
-        return Icons.warning;
-      case 'event':
-        return Icons.event;
-      default:
-        return Icons.info;
-    }
-  }
-
-  Color _getAnnouncementColor(String category) {
-    switch (category) {
-      case 'circular':
-        return Colors.blue;
-      case 'notice':
-        return Colors.orange;
-      case 'urgent':
-        return Colors.red;
-      case 'event':
-        return Colors.green;
-      default:
-        return Colors.grey;
-    }
-  }
-
-  void _navigateToAddLesson(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('الذهاب إلى إضافة درس')),
-    );
-  }
-
-  void _navigateToAttendance(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('الذهاب إلى الحضور')),
-    );
-  }
-
-  void _navigateToGrades(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('الذهاب إلى الدرجات')),
-    );
-  }
-
-  void _navigateToReports(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('الذهاب إلى التقارير')),
-    );
-  }
-
-  void _navigateToActivities(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('الذهاب إلى الأنشطة')),
-    );
-  }
-
-  void _showExportOptions(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('تصدير البيانات'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
           children: [
-            ListTile(
-              title: const Text('تصدير إلى Excel'),
-              leading: const Icon(Icons.table_chart),
-              onTap: () {
-                Navigator.pop(context);
-                context.read<TeacherViewModel>().exportData('excel');
-              },
+            _buildActionChip(
+              context,
+              'إضافة درس',
+              Icons.book,
+              Colors.indigo,
             ),
-            ListTile(
-              title: const Text('تصدير إلى PDF'),
-              leading: const Icon(Icons.picture_as_pdf),
-              onTap: () {
-                Navigator.pop(context);
-                context.read<TeacherViewModel>().exportData('pdf');
-              },
+            _buildActionChip(
+              context,
+              'الإعلانات',
+              Icons.notifications,
+              Colors.red,
+            ),
+            _buildActionChip(
+              context,
+              'التقارير',
+              Icons.assessment,
+              Colors.teal,
+            ),
+            _buildActionChip(
+              context,
+              'الطلاب',
+              Icons.groups,
+              Colors.cyan,
+            ),
+            _buildActionChip(
+              context,
+              'تصدير',
+              Icons.download,
+              Colors.lime,
+            ),
+            _buildActionChip(
+              context,
+              'المزيد',
+              Icons.more_horiz,
+              Colors.grey,
             ),
           ],
         ),
+      ],
+    );
+  }
+
+  Widget _buildActionChip(BuildContext context, String label, IconData icon, Color color) {
+    return ActionChip(
+      avatar: Icon(icon, color: Colors.white),
+      label: Text(label),
+      backgroundColor: color,
+      labelStyle: const TextStyle(color: Colors.white),
+      onPressed: () => _showComingSoon(context),
+    );
+  }
+
+  Widget _buildQuickSummary(TeacherViewModel viewModel) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '📊 ملخص سريع',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: StatisticCard(
+                title: 'عدد الطلاب',
+                value: viewModel.students.length.toString(),
+                subtitle: 'طالب وطالبة',
+                color: Colors.blue,
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: StatisticCard(
+                title: 'الإعلانات',
+                value: viewModel.announcements.length.toString(),
+                subtitle: 'إعلان جديد',
+                color: Colors.orange,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  void _navigateTo(BuildContext context, Widget page) {
+    Navigator.push(context, MaterialPageRoute(builder: (_) => page));
+  }
+
+  void _showComingSoon(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('🔄 قريباً... هذه الميزة قيد التطوير'),
+        duration: Duration(seconds: 2),
       ),
     );
   }
