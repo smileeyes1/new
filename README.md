@@ -1,7 +1,28 @@
-# Teacher Zero Effort App
+# تطبيق المعلم بلا جهد
 
-Mobile-first Flutter app.
+تطبيق Flutter متقدم موجه للمعلمين لتسهيل عملهم اليومي.
 
-## Build APK
-Push to ` generate:
-`app-release.apk`
+## المميزات
+- واجهة مستخدم سهلة وبديهية
+- إدارة الطلاب والدروس
+- تتبع التقدم والنتائج
+
+## المتطلبات
+- Flutter 3.0.0 فما أعلى
+- Dart 3.0.0 فما أعلى
+
+## البناء
+```bash
+flutter pub get
+flutter build apk --release
+```
+
+النتيجة: `app/outputs/app-release.apk`
+
+## التطوير
+```bash
+flutter run
+```
+
+## الترخيص
+جميع الحقوق محفوظة

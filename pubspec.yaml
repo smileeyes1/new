@@ -1,5 +1,5 @@
 name: teacher_zero_effort_app
-description: Mobile App
+description: تطبيق Flutter لتسهيل عمل المعلمين بلا جهد إضافي.
 version: 1.0.0+1
 
 environment:
@@ -8,6 +8,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
