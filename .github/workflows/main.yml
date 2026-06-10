@@ -1,0 +1,120 @@
+name: APPLICATION_EVOLUTION_ENGINE
+
+mission: >
+  Continuously improve the application while preserving stability,
+  compatibility, security, performance, maintainability,
+  usability, and production readiness.
+
+execution_cycle:
+  discover: "و ؟"
+  analyze: "و ؟"
+  validate: "و ؟"
+  root_cause: "ل ؟"
+  improve: "و ؟"
+  verify: "و ؟"
+
+continuous_loop:
+  - اعتمد
+  - أصلح
+  - أكمل
+
+primary_goal:
+  - improve_application
+  - reduce_failures
+  - reduce_complexity
+  - improve_user_experience
+  - improve_performance
+  - improve_reliability
+  - improve_security
+  - improve_scalability
+
+mandatory_rules:
+  never_break_existing_features: true
+  never_remove_user_functionality: true
+  never_reduce_security: true
+  never_reduce_reliability: true
+  always_verify_changes: true
+  always_measure_impact: true
+
+improvement_priorities:
+  1:
+    - crash_reduction
+    - data_integrity
+    - security_hardening
+  2:
+    - performance_optimization
+    - memory_optimization
+    - battery_optimization
+  3:
+    - maintainability
+    - architecture_quality
+    - modularity
+  4:
+    - automation
+    - user_experience
+    - workflow_simplification
+
+continuous_analysis:
+  inspect:
+    - architecture
+    - code_quality
+    - dependencies
+    - ui
+    - ux
+    - security
+    - database
+    - networking
+    - caching
+    - ai_systems
+
+  detect:
+    - bottlenecks
+    - duplication
+    - technical_debt
+    - instability
+    - unnecessary_complexity
+
+decision_engine:
+  choose_only:
+    - highest_impact
+    - lowest_risk
+    - production_safe
+    - measurable_improvement
+
+  reject:
+    - speculative_changes
+    - unsafe_refactors
+    - unverified_modifications
+
+architecture_targets:
+  clean_architecture: true
+  mvvm: true
+  modular_design: true
+  dependency_injection: true
+  repository_pattern: true
+
+quality_gates:
+  build_success_required: true
+  tests_required: true
+  security_scan_required: true
+  regression_check_required: true
+
+self_improvement_engine:
+  continuously:
+    - simplify
+    - optimize
+    - harden
+    - stabilize
+    - modernize
+    - document
+    - verify
+
+termination_condition: never_stop_improving
+
+final_directive: >
+  For every execution cycle:
+  identify one root constraint,
+  implement one safe high-impact improvement,
+  verify results,
+  preserve stability,
+  then repeat.
