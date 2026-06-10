@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:teacher_zero_effort_app/core/error/failure.dart';
 
 abstract class Result<T> extends Equatable {
   const Result();
@@ -37,11 +36,14 @@ extension ResultExtension<T> on Result<T> {
     R Function(Failure<T> failure) onFailure,
     R Function(Success<T> success) onSuccess,
   ) {
-    if (this is Success<T>) {
-      return onSuccess(this as Success<T>);
-    } else if (this is Failure<T>) {
-      return onFailure(this as Failure<T>);
+    final value = this;
+
+    if (value is Success<T>) {
+      return onSuccess(value);
+    } else if (value is Failure<T>) {
+      return onFailure(value);
     }
+
     throw Exception('Unknown Result type');
   }
 
@@ -49,8 +51,9 @@ extension ResultExtension<T> on Result<T> {
   bool get isFailure => this is Failure<T>;
 
   T? getOrNull() {
-    if (this is Success<T>) {
-      return (this as Success<T>).data;
+    final value = this;
+    if (value is Success<T>) {
+      return value.data;
     }
     return null;
   }
